@@ -252,7 +252,7 @@ export class Researchs implements WorldInterface {
     //    Laser
     this.laserResearch = new Research(
       "lasRes",
-      "Laser", "Sand can be fused to crystal.",
+      "激光", "沙子可以融合成水晶。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.laserAnt],
       this.game
@@ -261,7 +261,7 @@ export class Researchs implements WorldInterface {
     //    Refinery
     this.refineryResearch = new Research(
       "refRes",
-      "Refinery", "Soil can be refined to sand.",
+      "精炼厂", "土壤可以精制成沙子。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.refineryAnt],
       this.game
@@ -332,7 +332,7 @@ export class Researchs implements WorldInterface {
     allUpH.push(this.upCombined)
     const r4 = new Research(
       "R4",
-      "Twin", "Allow you to get more units for the same price.",
+      "双胞胎", "允许您以相同的价格获得更多的单位。",
       [new Cost(this.game.baseWorld.science, Decimal(7E3))],
       allUpH,
       this.game
@@ -343,7 +343,7 @@ export class Researchs implements WorldInterface {
     allUp.push(r4)
     const r2 = new Research(
       "R2",
-      "Teamwork 2", "Upgrade even your unit's production bonus.",
+      "团队合作2", "升级您的单位生产加成。",
       [new Cost(this.game.baseWorld.science, Decimal(500))],
       allUp,
       this.game
@@ -352,7 +352,7 @@ export class Researchs implements WorldInterface {
     //    Up basic
     this.up1 = new Research(
       "RUp1",
-      "Teamwork", "Give a production bonus based on how many times you have bought a unit.",
+      "团队合作", "根据您购买单位的次数提供生产加成。",
       [new Cost(this.game.baseWorld.science, Decimal(50))],
       [r2],
       this.game
@@ -361,7 +361,7 @@ export class Researchs implements WorldInterface {
     //    Hunter 2
     const hunting2 = new Research(
       "HuntR2",
-      "Advanced Hunting", "Equip an ants with better weapons.",
+      "高级狩猎", "蚂蚁装备更好的武器。",
       [new Cost(this.game.baseWorld.science, Decimal(4000))],
       [this.game.baseWorld.advancedHunter], this.game
     )
@@ -369,7 +369,7 @@ export class Researchs implements WorldInterface {
     //    Hunter
     const hunting = new Research(
       "HuntR1",
-      "Hunting", "Equip an ant with a weapon to get food.",
+      "狩猎", "用武器装备蚂蚁以获得食物。",
       [new Cost(this.game.baseWorld.science, Decimal(2000))],
       [this.game.baseWorld.hunter, hunting2, this.specialResearch], this.game
     )
@@ -377,7 +377,7 @@ export class Researchs implements WorldInterface {
     //    Wood
     const woodcutting = new Research(
       "WR1",
-      "Woodcutting", "Allow you to collect wood for future usage.",
+      "伐木", "允许您收集木材以备将来使用。",
       [new Cost(this.game.baseWorld.science, Decimal(1000))],
       [this.game.baseWorld.lumberjack, hunting], this.game
     )
@@ -385,7 +385,7 @@ export class Researchs implements WorldInterface {
     //    Fungus up
     const r3 = new Research(
       "R3",
-      "Fungus experiments", "Allow you to do experiments to increase fungus's food production.",
+      "真菌实验", "允许你通过做实验来增加真菌的食物生产。",
       [new Cost(this.game.baseWorld.science, Decimal(1000))],
       [this.game.baseWorld.fungus.upSpecial], this.game
     )
@@ -393,7 +393,7 @@ export class Researchs implements WorldInterface {
     //    Farming
     const r1 = new Research(
       "R1",
-      "Ant–fungus symbiosis", "Allow you to cultivate fungus. Fungus is a source of food.",
+      "蚂蚁的真菌共生", "让你培养真菌。 真菌是食物的来源。",
       [new Cost(this.game.baseWorld.science, Decimal(100))],
       [this.game.baseWorld.farmer, r3, woodcutting], this.game
     )
@@ -401,7 +401,7 @@ export class Researchs implements WorldInterface {
     //    Soil
     this.rDirt = new Research(
       "RDirt",
-      "Soil", "Allow you to collect soil for future usage.",
+      "土壤", "允许您收集土壤以备将来使用。",
       [new Cost(this.game.baseWorld.science, Decimal(50))],
       [this.game.baseWorld.soil, this.game.baseWorld.carpenter, r1, this.up1], this.game
     )

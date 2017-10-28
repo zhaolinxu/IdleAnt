@@ -4,7 +4,7 @@
   <clr-alert [clrAlertType]="'alert-warning'">
     <div class="alert-item">
       <span class="alert-text">
-        Will end in {{endTime()}}
+        结束时间： {{endTime()}} 
       </span>
     </div>
   </clr-alert>
@@ -15,12 +15,12 @@
 
 
 <div *ngIf="gen.produces.length >0">
-  <p *ngIf="gen.buyAction">You bought {{gen.buyAction.quantity | format}} times
-    <span *ngIf="gameService.game.research.up1.owned()"> earning a bonus of +{{gen.getBoost().times(100) | format}}% production</span>
+  <p *ngIf="gen.buyAction">你可以购买 {{gen.buyAction.quantity | format}} 次
+    <span *ngIf="gameService.game.research.up1.owned()"> 获得 +{{gen.getBoost().times(100) | format}}% 生产加成</span>
   </p>
   <div *ngIf="!gen.alwaysOn">
     <input type="range" min="0" max="100" [(ngModel)]="gen.percentage" (change)="onChange($event.target.value)">
-    <span>{{gen.percentage}} % operative</span>
+    <span>让 {{gen.percentage}} % 进行工作</span>
   </div>
 </div>
 
@@ -29,13 +29,13 @@
   <div class="row">
     <div *ngIf="gen.produces.length >0" class="col-xs-12 col-md-12 col-lg-6 col-xl-6">
       <h5>
-        <span class="text-capitalize">{{gen.name}}</span> produces:</h5>
+        <span class="text-capitalize">{{gen.name}}</span>生产：</h5>
       <table class="table table-compact">
         <thead>
           <tr>
-            <th class="w-33">Product</th>
-            <th class="w-33">One</th>
-            <th class="w-33">All</th>
+            <th class="w-33">生产</th>
+            <th class="w-33">1个</th>
+            <th class="w-33">全部</th>
           </tr>
         </thead>
         <tbody>
@@ -57,14 +57,14 @@
         <table class="table  table-compact">
           <thead>
             <tr>
-              <th class="w-33">Unit</th>
-              <th class="w-33">Quantity</th>
-              <th class="w-33">Total</th>
+              <th class="w-33">单位</th>
+              <th class="w-33">数量</th>
+              <th class="w-33">总共</th>
             </tr>
           </thead>
           <tfoot>
             <tr class="bg-info text-white">
-              <td>Total</td>
+              <td>总共</td>
               <td>{{gen.totalProducers | format}}</td>
               <td>{{gen.totalPerSec | format}}</td>
             </tr>

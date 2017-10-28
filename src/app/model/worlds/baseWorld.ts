@@ -129,39 +129,39 @@ export class BaseWorld implements WorldInterface {
       "蚁巢生产蚁后。")
   }
   declareJobs() {
-    this.geologist = new Unit(this.game, "geo", "Geologist", "Geologist yield crystal.")
+    this.geologist = new Unit(this.game, "geo", "地质学家", "地质学家生产水晶。")
     // this.geologist.types = [Type.Ant, Type.Mining]
     this.listJobs.push(this.geologist)
 
-    this.carpenter = new Unit(this.game, "car", "Carpenter", "carpenters yield soil.")
+    this.carpenter = new Unit(this.game, "car", "木匠", "木匠产生土壤。")
     // this.carpenter.types = [Type.Ant, Type.SoilG]
     this.listJobs.push(this.carpenter)
 
-    this.farmer = new Unit(this.game, "far", "Farmer", "Farmer yield fungus.")
+    this.farmer = new Unit(this.game, "far", "农民", "农民生产真菌。")
     // this.farmer.types = [Type.Ant, Type.Farmer]
     this.listJobs.push(this.farmer)
 
-    this.lumberjack = new Unit(this.game, "lum", "Lumberjack", "Lumberjack yield wood.")
+    this.lumberjack = new Unit(this.game, "lum", "伐木工", "伐木工人生产木材。")
     // this.lumberjack.types = [Type.Ant, Type.WoodG]
     this.listJobs.push(this.lumberjack)
 
 
-    this.composterAnt = new Unit(this.game, "com", "Composter Ant",
-      "Transform wood into soil.")
-    this.refineryAnt = new Unit(this.game, "ref", "Refinery Ant",
-      "Transform soil into sand.")
-    this.laserAnt = new Unit(this.game, "las", "Laser Ant",
-      "Transform sand into crystal.")
-    this.hydroAnt = new Unit(this.game, "hydroFarmer", "Hydroponic Ant",
-      "Transform crystal into fungus.")
-    this.planterAnt = new Unit(this.game, "planterAnt", "Planter Ant",
-      "Transform fungus into wood.")
+    this.composterAnt = new Unit(this.game, "com", "堆肥蚂蚁",
+      "将木材变成土壤。")
+    this.refineryAnt = new Unit(this.game, "ref", "精炼蚂蚁",
+      "将土壤变成沙子。")
+    this.laserAnt = new Unit(this.game, "las", "激光蚂蚁",
+      "将沙子变成水晶。")
+    this.hydroAnt = new Unit(this.game, "hydroFarmer", "水培蚂蚁",
+      "将水晶变成真菌。")
+    this.planterAnt = new Unit(this.game, "planterAnt", "播种机蚂蚁",
+      "将真菌变成木头。")
 
 
-    this.hunter = new Unit(this.game, "hunter", "Hunter",
-      "Hunter yield food.")
-    this.advancedHunter = new Unit(this.game, "advhunter", "Advanced Hunter",
-      "Advanced Hunter yield food.")
+    this.hunter = new Unit(this.game, "hunter", "猎人",
+      "猎人生产食物。")
+    this.advancedHunter = new Unit(this.game, "advhunter", "高级猎人",
+      "高级猎人生产更多食物。")
 
     this.level1 = [this.geologist, this.farmer, this.carpenter, this.lumberjack, this.hunter, this.advancedHunter]
 

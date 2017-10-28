@@ -145,7 +145,7 @@ export class BuyAction extends Action {
     cost: Cost[],
     public doNext: () => any = null
   ) {
-    super("actBuy", "Hire",
+    super("actBuy", "雇佣",
       (n => {
         this.unit.quantity = this.unit.quantity.plus(
           n.times(
@@ -155,7 +155,7 @@ export class BuyAction extends Action {
           this.doNext()
         return true
       }),
-      cost, "Get more units.", game, unit
+      cost, "获得更多的单位。", game, unit
     )
     unit.buyAction = this
   }
@@ -221,10 +221,10 @@ export class UpAction extends Action {
     costs: [Cost]
   ) {
     super("upA",
-      "Teamwork",
+      "团队合作",
       null,
       costs,
-      "Get a better production bonus.",
+      "获得更好的生产加成。",
       game, unit
     )
     this.unit.upAction = this
@@ -260,10 +260,10 @@ export class UpHire extends Action {
     costs: [Cost]
   ) {
     super("upH",
-      "Twin",
+      "双胞胎",
       null,
       costs,
-      "Get more units for the same price.",
+      "以相同的价格获得更多的单位。",
       game, unit
     )
     this.unit.upHire = this

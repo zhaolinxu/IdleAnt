@@ -27,18 +27,18 @@ export class Science implements WorldInterface {
   constructor(public game: GameModel) { }
 
   public declareStuff() {
-    this.student = new Unit(this.game, "scn", "Student",
-      "Student yield science.")
+    this.student = new Unit(this.game, "scn", "学生",
+      "学生生产科学。")
     // this.student.types = [Type.Ant, Type.Scientist]
 
-    this.scientist = new Unit(this.game, "scie2", "Scientist Ant",
-      "Transform crystal into science.")
+    this.scientist = new Unit(this.game, "scie2", "科学家蚂蚁",
+      "将水晶变成科学。")
 
-    this.university = new Unit(this.game, "univ", "University",
-      "University yield science.")
+    this.university = new Unit(this.game, "univ", "大学",
+      "大学生产科学。")
 
-    this.depEdu = new Unit(this.game, "depEdu", "Department of Education",
-      "Department of Education yield universities.")
+    this.depEdu = new Unit(this.game, "depEdu", "教育部门",
+      "教育部门建立大学。")
 
     this.listScience = [this.student, this.scientist, this.university, this.depEdu]
     this.game.lists.push(new TypeList("Science", this.listScience))
