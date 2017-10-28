@@ -16,7 +16,7 @@ webpackEmptyContext.id = "../../../../../src async recursive";
 /***/ "../../../../../src/app/action/action.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card card-block\">\n  <h3 class=\"card-title\"> {{action.name}}\n    <span *ngIf=\"!action.oneTime && action.showNumber\">({{action.quantity | format}})</span>\n  </h3>\n\n  <p class=\"card-text\">\n    <span>{{action.description}} &nbsp;</span>\n    <br/>\n    <span *ngIf=\"!action.oneTime\">Getting one will costs:</span>\n    <span *ngIf=\"action.oneTime\">Costs:</span>\n    <span *ngFor=\"let p of action.realPriceNow\" [ngClass]=\"{'notEnought': p.basePrice.greaterThan(p.unit.quantity)}\">\n      {{numberformat.formatShort(p.basePrice)}} {{p.unit.name}},\n    </span>\n    <br/>\n  </p>\n\n  <div *ngIf=\"action.maxBuy.greaterThanOrEqualTo(1)\">\n\n    <div class=\"form-group\" *ngIf=\"!action.oneTime\" class=\"toggle\">\n      <label>Get: </label>\n      <input type=\"number\" placeholder=\"1\" [(ngModel)]=\"required\" class=\"numIn\" min=\"1\">\n      <span>times</span>\n    </div>\n\n    <div class=\"form-group\">\n      <div class=\"btn-group w-100\" role=\"group\">\n\n        <button type=\"button\" class=\"btn btn-secondary w-100\" (click)=\"action.buy(getReqNum())\" [disabled]=\"!action.maxBuy.greaterThanOrEqualTo(1)\">\n          <span *ngIf=\"!action.oneTime\">{{getPriceString1()}}</span>\n          <span *ngIf=\"action.oneTime\">Get</span>\n        </button>\n        <button type=\"button \" class=\"btn btn-secondary w-100\" (click)=\"action.buy(action.maxBuy.div(2).ceil())\"\n          *ngIf=\"action.maxBuy.greaterThanOrEqualTo(3)\">\n          <span>{{getBuyStringHalf()}}</span>\n        </button>\n        <button type=\"button\" class=\"btn btn-secondary w-100\" (click)=\"action.buy(action.maxBuy)\" *ngIf=\"action.maxBuy.greaterThanOrEqualTo(2)\">\n          <span>{{getBuyStringMax()}}</span>\n        </button>\n      </div>\n    </div>\n\n  </div>\n\n  <div *ngIf=\"!action.maxBuy.greaterThanOrEqualTo(1) && !(action.oneTime && action.owned())\">\n    <div class=\"progress-block\" *ngFor=\"let cost of action.realPriceNow; trackBy:getPriceId\">\n      <label>{{cost.basePrice | format}}&nbsp;{{cost.unit.name}}</label>\n      <div class=\"progress-static\" [ngClass]=\"{'success': cost.unit.quantity.greaterThanOrEqualTo(cost.basePrice), 'danger': !cost.unit.quantity.greaterThanOrEqualTo(cost.basePrice)}\">\n        <div class=\"progress-meter\" max=\"100\"\n        attr.data-value=\"{{Math.min(cost.unit.quantity.times(100).div(cost.basePrice).floor().toNumber(),100)}}\">\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"card card-block\">\n  <h3 class=\"card-title\"> {{action.name}}\n    <span *ngIf=\"!action.oneTime && action.showNumber\">({{action.quantity | format}})</span>\n  </h3>\n\n  <p class=\"card-text\">\n    <span>{{action.description}} &nbsp;</span>\n    <br/>\n    <span *ngIf=\"!action.oneTime\">获取1个会花费：</span>\n    <span *ngIf=\"action.oneTime\">花费:</span>\n    <span *ngFor=\"let p of action.realPriceNow\" [ngClass]=\"{'notEnought': p.basePrice.greaterThan(p.unit.quantity)}\">\n      {{numberformat.formatShort(p.basePrice)}} {{p.unit.name}},\n    </span>\n    <br/>\n  </p>\n\n  <div *ngIf=\"action.maxBuy.greaterThanOrEqualTo(1)\">\n\n    <div class=\"form-group\" *ngIf=\"!action.oneTime\" class=\"toggle\">\n      <label>获取： </label>\n      <input type=\"number\" placeholder=\"1\" [(ngModel)]=\"required\" class=\"numIn\" min=\"1\">\n      <span>个</span>\n    </div>\n\n    <div class=\"form-group\">\n      <div class=\"btn-group w-100\" role=\"group\">\n\n        <button type=\"button\" class=\"btn btn-secondary w-100\" (click)=\"action.buy(getReqNum())\" [disabled]=\"!action.maxBuy.greaterThanOrEqualTo(1)\">\n          <span *ngIf=\"!action.oneTime\">{{getPriceString1()}}</span>\n          <span *ngIf=\"action.oneTime\">获取</span>\n        </button>\n        <button type=\"button \" class=\"btn btn-secondary w-100\" (click)=\"action.buy(action.maxBuy.div(2).ceil())\"\n          *ngIf=\"action.maxBuy.greaterThanOrEqualTo(3)\">\n          <span>{{getBuyStringHalf()}}</span>\n        </button>\n        <button type=\"button\" class=\"btn btn-secondary w-100\" (click)=\"action.buy(action.maxBuy)\" *ngIf=\"action.maxBuy.greaterThanOrEqualTo(2)\">\n          <span>{{getBuyStringMax()}}</span>\n        </button>\n      </div>\n    </div>\n\n  </div>\n\n  <div *ngIf=\"!action.maxBuy.greaterThanOrEqualTo(1) && !(action.oneTime && action.owned())\">\n    <div class=\"progress-block\" *ngFor=\"let cost of action.realPriceNow; trackBy:getPriceId\">\n      <label>{{cost.basePrice | format}}&nbsp;{{cost.unit.name}}</label>\n      <div class=\"progress-static\" [ngClass]=\"{'success': cost.unit.quantity.greaterThanOrEqualTo(cost.basePrice), 'danger': !cost.unit.quantity.greaterThanOrEqualTo(cost.basePrice)}\">\n        <div class=\"progress-meter\" max=\"100\"\n        attr.data-value=\"{{Math.min(cost.unit.quantity.times(100).div(cost.basePrice).floor().toNumber(),100)}}\">\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -652,7 +652,7 @@ var _a;
 /***/ "../../../../../src/app/lab/lab.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-container\">\n  <div class=\"content-area\">\n    <h1>Here, scientist discuss about things no one has seen before.</h1>\n    <div class=\"toggle-switch\">\n      <input type=\"checkbox\" id=\"toggle_1\" [(ngModel)]=\"resDone\">\n      <label for=\"toggle_1\">Show research done</label>\n    </div>\n    <span>Science: {{gameService.game.baseWorld.science.quantity | format}} - {{gameService.game.baseWorld.science.totalPerSec\n      | format}} /s\n    </span>\n    <div class=\"card-columns card-columns-3\">\n      <app-action [action]=\"res\" *ngFor=\"let res of gameService.game.resList | resPipe: resDone;trackBy:getRestId\"></app-action>\n    </div>\n\n  </div>\n</div>\n"
+module.exports = "<div class=\"content-container\">\n  <div class=\"content-area\">\n    <h1>在这里，科学家讨论以前没有人看过的事情。</h1>\n    <div class=\"toggle-switch\">\n      <input type=\"checkbox\" id=\"toggle_1\" [(ngModel)]=\"resDone\">\n      <label for=\"toggle_1\">显示已完成的研究</label>\n    </div>\n    <span>科学: {{gameService.game.baseWorld.science.quantity | format}} - {{gameService.game.baseWorld.science.totalPerSec\n      | format}} /秒\n    </span>\n    <div class=\"card-columns card-columns-3\">\n      <app-action [action]=\"res\" *ngFor=\"let res of gameService.game.resList | resPipe: resDone;trackBy:getRestId\"></app-action>\n    </div>\n\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1574,12 +1574,12 @@ var BuyAction = (function (_super) {
     __extends(BuyAction, _super);
     function BuyAction(game, unit, cost, doNext) {
         if (doNext === void 0) { doNext = null; }
-        var _this = _super.call(this, "actBuy", "Hire", (function (n) {
+        var _this = _super.call(this, "actBuy", "雇佣", (function (n) {
             _this.unit.quantity = _this.unit.quantity.plus(n.times(_this.unit.upHire ? _this.unit.upHire.quantity.plus(1) : Decimal(1)));
             if (_this.doNext)
                 _this.doNext();
             return true;
-        }), cost, "Get more units.", game, unit) || this;
+        }), cost, "获得更多的单位。", game, unit) || this;
         _this.doNext = doNext;
         unit.buyAction = _this;
         return _this;
@@ -1638,7 +1638,7 @@ var Research = (function (_super) {
 var UpAction = (function (_super) {
     __extends(UpAction, _super);
     function UpAction(game, unit, costs) {
-        var _this = _super.call(this, "upA", "Teamwork", null, costs, "Get a better production bonus.", game, unit) || this;
+        var _this = _super.call(this, "upA", "团队合作", null, costs, "获得更好的生产加成。", game, unit) || this;
         _this.unit = unit;
         _this.unit.upAction = _this;
         _this.unlocked = false;
@@ -1665,7 +1665,7 @@ var UpSpecial = (function (_super) {
 var UpHire = (function (_super) {
     __extends(UpHire, _super);
     function UpHire(game, unit, costs) {
-        var _this = _super.call(this, "upH", "Twin", null, costs, "Get more units for the same price.", game, unit) || this;
+        var _this = _super.call(this, "upH", "双胞胎", null, costs, "以相同的价格获得更多的单位。", game, unit) || this;
         _this.unit = unit;
         _this.unit.upHire = _this;
         _this.unit.buyAction.up = _this;
@@ -2446,25 +2446,25 @@ var BaseWorld = (function () {
         this.nestAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "G3", "蚁巢", "蚁巢生产蚁后。");
     };
     BaseWorld.prototype.declareJobs = function () {
-        this.geologist = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "geo", "Geologist", "Geologist yield crystal.");
+        this.geologist = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "geo", "地质学家", "地质学家生产水晶。");
         // this.geologist.types = [Type.Ant, Type.Mining]
         this.listJobs.push(this.geologist);
-        this.carpenter = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "car", "Carpenter", "carpenters yield soil.");
+        this.carpenter = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "car", "木匠", "木匠产生土壤。");
         // this.carpenter.types = [Type.Ant, Type.SoilG]
         this.listJobs.push(this.carpenter);
-        this.farmer = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "far", "Farmer", "Farmer yield fungus.");
+        this.farmer = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "far", "农民", "农民生产真菌。");
         // this.farmer.types = [Type.Ant, Type.Farmer]
         this.listJobs.push(this.farmer);
-        this.lumberjack = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "lum", "Lumberjack", "Lumberjack yield wood.");
+        this.lumberjack = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "lum", "伐木工", "伐木工人生产木材。");
         // this.lumberjack.types = [Type.Ant, Type.WoodG]
         this.listJobs.push(this.lumberjack);
-        this.composterAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "com", "Composter Ant", "Transform wood into soil.");
-        this.refineryAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "ref", "Refinery Ant", "Transform soil into sand.");
-        this.laserAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "las", "Laser Ant", "Transform sand into crystal.");
-        this.hydroAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "hydroFarmer", "Hydroponic Ant", "Transform crystal into fungus.");
-        this.planterAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "planterAnt", "Planter Ant", "Transform fungus into wood.");
-        this.hunter = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "hunter", "Hunter", "Hunter yield food.");
-        this.advancedHunter = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "advhunter", "Advanced Hunter", "Advanced Hunter yield food.");
+        this.composterAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "com", "堆肥蚂蚁", "将木材变成土壤。");
+        this.refineryAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "ref", "精炼蚂蚁", "将土壤变成沙子。");
+        this.laserAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "las", "激光蚂蚁", "将沙子变成水晶。");
+        this.hydroAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "hydroFarmer", "水培蚂蚁", "将水晶变成真菌。");
+        this.planterAnt = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "planterAnt", "播种机蚂蚁", "将真菌变成木头。");
+        this.hunter = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "hunter", "猎人", "猎人生产食物。");
+        this.advancedHunter = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "advhunter", "高级猎人", "高级猎人生产更多食物。");
         this.level1 = [this.geologist, this.farmer, this.carpenter, this.lumberjack, this.hunter, this.advancedHunter];
     };
     BaseWorld.prototype.initGenerators = function () {
@@ -3920,9 +3920,9 @@ var Researchs = (function () {
         //    Hydro
         this.hydroResearch = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("hydroRes", "Hydroponics", "Hydroponics is the art of growing plants without soil.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1E4))], [this.game.baseWorld.hydroAnt], this.game);
         //    Laser
-        this.laserResearch = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("lasRes", "Laser", "Sand can be fused to crystal.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1E4))], [this.game.baseWorld.laserAnt], this.game);
+        this.laserResearch = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("lasRes", "激光", "沙子可以融合成水晶。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1E4))], [this.game.baseWorld.laserAnt], this.game);
         //    Refinery
-        this.refineryResearch = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("refRes", "Refinery", "Soil can be refined to sand.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1E4))], [this.game.baseWorld.refineryAnt], this.game);
+        this.refineryResearch = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("refRes", "精炼厂", "土壤可以精制成沙子。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1E4))], [this.game.baseWorld.refineryAnt], this.game);
         //    Compost
         this.composterResearch = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("compRes", "Compost", "Wood can be degraded to fertile soil.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1E4))], [this.game.baseWorld.composterAnt], this.game);
         //    Experiment
@@ -3943,25 +3943,25 @@ var Researchs = (function () {
         //    Up Hire
         var allUpH = Array.from(this.game.unitMap.values()).filter(function (u) { return u.upHire; }).map(function (u) { return u.upHire; });
         allUpH.push(this.upCombined);
-        var r4 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("R4", "Twin", "Allow you to get more units for the same price.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(7E3))], allUpH, this.game);
+        var r4 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("R4", "双胞胎", "允许您以相同的价格获得更多的单位。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(7E3))], allUpH, this.game);
         //    Up 2
         var allUp = Array.from(this.game.unitMap.values()).filter(function (u) { return u.upAction; }).map(function (u) { return u.upAction; });
         allUp.push(r4);
-        var r2 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("R2", "Teamwork 2", "Upgrade even your unit's production bonus.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(500))], allUp, this.game);
+        var r2 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("R2", "团队合作2", "升级您的单位生产加成。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(500))], allUp, this.game);
         //    Up basic
-        this.up1 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("RUp1", "Teamwork", "Give a production bonus based on how many times you have bought a unit.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(50))], [r2], this.game);
+        this.up1 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("RUp1", "团队合作", "根据您购买单位的次数提供生产加成。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(50))], [r2], this.game);
         //    Hunter 2
-        var hunting2 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("HuntR2", "Advanced Hunting", "Equip an ants with better weapons.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(4000))], [this.game.baseWorld.advancedHunter], this.game);
+        var hunting2 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("HuntR2", "高级狩猎", "蚂蚁装备更好的武器。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(4000))], [this.game.baseWorld.advancedHunter], this.game);
         //    Hunter
-        var hunting = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("HuntR1", "Hunting", "Equip an ant with a weapon to get food.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(2000))], [this.game.baseWorld.hunter, hunting2, this.specialResearch], this.game);
+        var hunting = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("HuntR1", "狩猎", "用武器装备蚂蚁以获得食物。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(2000))], [this.game.baseWorld.hunter, hunting2, this.specialResearch], this.game);
         //    Wood
-        var woodcutting = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("WR1", "Woodcutting", "Allow you to collect wood for future usage.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1000))], [this.game.baseWorld.lumberjack, hunting], this.game);
+        var woodcutting = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("WR1", "伐木", "允许您收集木材以备将来使用。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1000))], [this.game.baseWorld.lumberjack, hunting], this.game);
         //    Fungus up
-        var r3 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("R3", "Fungus experiments", "Allow you to do experiments to increase fungus's food production.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1000))], [this.game.baseWorld.fungus.upSpecial], this.game);
+        var r3 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("R3", "真菌实验", "允许你通过做实验来增加真菌的食物生产。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1000))], [this.game.baseWorld.fungus.upSpecial], this.game);
         //    Farming
-        var r1 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("R1", "Ant–fungus symbiosis", "Allow you to cultivate fungus. Fungus is a source of food.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(100))], [this.game.baseWorld.farmer, r3, woodcutting], this.game);
+        var r1 = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("R1", "蚂蚁的真菌共生", "让你培养真菌。 真菌是食物的来源。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(100))], [this.game.baseWorld.farmer, r3, woodcutting], this.game);
         //    Soil
-        this.rDirt = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("RDirt", "Soil", "Allow you to collect soil for future usage.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(50))], [this.game.baseWorld.soil, this.game.baseWorld.carpenter, r1, this.up1], this.game);
+        this.rDirt = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("RDirt", "土壤", "允许您收集土壤以备将来使用。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(50))], [this.game.baseWorld.soil, this.game.baseWorld.carpenter, r1, this.up1], this.game);
     };
     Researchs.prototype.addWorld = function () {
     };
@@ -3995,11 +3995,11 @@ var Science = (function () {
         this.listScience = Array();
     }
     Science.prototype.declareStuff = function () {
-        this.student = new __WEBPACK_IMPORTED_MODULE_2__units_unit__["a" /* Unit */](this.game, "scn", "Student", "Student yield science.");
+        this.student = new __WEBPACK_IMPORTED_MODULE_2__units_unit__["a" /* Unit */](this.game, "scn", "学生", "学生生产科学。");
         // this.student.types = [Type.Ant, Type.Scientist]
-        this.scientist = new __WEBPACK_IMPORTED_MODULE_2__units_unit__["a" /* Unit */](this.game, "scie2", "Scientist Ant", "Transform crystal into science.");
-        this.university = new __WEBPACK_IMPORTED_MODULE_2__units_unit__["a" /* Unit */](this.game, "univ", "University", "University yield science.");
-        this.depEdu = new __WEBPACK_IMPORTED_MODULE_2__units_unit__["a" /* Unit */](this.game, "depEdu", "Department of Education", "Department of Education yield universities.");
+        this.scientist = new __WEBPACK_IMPORTED_MODULE_2__units_unit__["a" /* Unit */](this.game, "scie2", "科学家蚂蚁", "将水晶变成科学。");
+        this.university = new __WEBPACK_IMPORTED_MODULE_2__units_unit__["a" /* Unit */](this.game, "univ", "大学", "大学生产科学。");
+        this.depEdu = new __WEBPACK_IMPORTED_MODULE_2__units_unit__["a" /* Unit */](this.game, "depEdu", "教育部门", "教育部门建立大学。");
         this.listScience = [this.student, this.scientist, this.university, this.depEdu];
         this.game.lists.push(new __WEBPACK_IMPORTED_MODULE_5__typeList__["a" /* TypeList */]("Science", this.listScience));
         this.studentProduction = new __WEBPACK_IMPORTED_MODULE_1__production__["a" /* Production */](this.university, Decimal(0.2), false);
@@ -4369,7 +4369,7 @@ ResPipePipe = __decorate([
 /***/ "../../../../../src/app/unit/unit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 class=\"text-capitalize no-mg-top\">{{gen.name}}</h1>\n\n<div *ngIf=\"gen.isEnding()\">\n  <clr-alert [clrAlertType]=\"'alert-warning'\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        Will end in {{endTime()}}\n      </span>\n    </div>\n  </clr-alert>\n</div>\n\n<p>{{gen.description}}</p>\n<!-- <span>Owned: {{gen.quantity | format}}</span> -->\n\n\n<div *ngIf=\"gen.produces.length >0\">\n  <p *ngIf=\"gen.buyAction\">You bought {{gen.buyAction.quantity | format}} times\n    <span *ngIf=\"gameService.game.research.up1.owned()\"> earning a bonus of +{{gen.getBoost().times(100) | format}}% production</span>\n  </p>\n  <div *ngIf=\"!gen.alwaysOn\">\n    <input type=\"range\" min=\"0\" max=\"100\" [(ngModel)]=\"gen.percentage\" (change)=\"onChange($event.target.value)\">\n    <span>{{gen.percentage}} % operative</span>\n  </div>\n</div>\n\n<div *ngIf=\"gen.showTables\">\n\n  <div class=\"row\">\n    <div *ngIf=\"gen.produces.length >0\" class=\"col-xs-12 col-md-12 col-lg-6 col-xl-6\">\n      <h5>\n        <span class=\"text-capitalize\">{{gen.name}}</span> produces:</h5>\n      <table class=\"table table-compact\">\n        <thead>\n          <tr>\n            <th class=\"w-33\">Product</th>\n            <th class=\"w-33\">One</th>\n            <th class=\"w-33\">All</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let item of gen.produces | filterActive\" [ngClass]=\"{'bg-warning': item.efficiency.lessThan(0)}\">\n            <td class=\"w-33 text-capitalize\">\n              <a [routerLink]=\"['/main/unit/unit/'+item.product.id]\">{{item.product.name}}</a>\n            </td>\n            <td class=\"w-33\">{{item.getprodPerSec(false) | format}}</td>\n            <td class=\"w-33\">{{item.getprodPerSec().times(gen.quantity) | format}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n    <div class=\"col-xs-12 col-md-12 col-lg-6 col-xl-6\" *ngIf=\"gameService.game.research.bi.owned()\">\n      <div *ngIf=\"showProducers()\">\n        <h5>\n          <span class=\"text-capitalize\">{{gen.name}}</span> is made by:</h5>\n        <table class=\"table  table-compact\">\n          <thead>\n            <tr>\n              <th class=\"w-33\">Unit</th>\n              <th class=\"w-33\">Quantity</th>\n              <th class=\"w-33\">Total</th>\n            </tr>\n          </thead>\n          <tfoot>\n            <tr class=\"bg-info text-white\">\n              <td>Total</td>\n              <td>{{gen.totalProducers | format}}</td>\n              <td>{{gen.totalPerSec | format}}</td>\n            </tr>\n          </tfoot>\n          <tbody>\n            <tr *ngFor=\"let item of gen.producedBy | filterActive; trackBy:getUnitId\" [ngClass]=\"{'bg-warning': item.efficiency.lessThan(0)}\">\n              <td class=\"text-capitalize\">\n                <a [routerLink]=\"['/main/unit/unit/'+item.unit.id]\">{{item.unit.name}}</a>\n              </td>\n              <td>{{item.unit.quantity | format}}</td>\n              <td>{{item.getprodPerSec().times(item.unit.quantity) | format}}</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n</div>\n\n<div class=\"row\" *ngIf=\"gen.togableProductions\">\n  <div class=\"col-xs-12 col-md-12 col-lg-12 col-xl-12\">\n    <section class=\"form-block\">\n      <div class=\"form-group\">\n        <ul class=\"list-unstyled\">\n          <li *ngFor=\"let tp of gen.togableProductions | prodToglePipe\">\n            <div class=\"toggle-switch\">\n              <input type=\"checkbox\" [(ngModel)]=\"tp.uiModel\" [id]=\"tp.description\" (ngModelChange)=\"tp.turnOnOff()\"\n                (change)=\"onChange($event.target.value)\">\n              <label [for]=\"tp.description\">{{tp.description}}</label>\n            </div>\n          </li>\n        </ul>\n      </div>\n    </section>\n  </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"card-columns card-columns-2\">\n    <app-action [action]=\"act\" *ngFor=\"let act of gen.actions| filterMax; trackBy:getUnitId\"></app-action>\n  </div>\n</div>\n"
+module.exports = "<h1 class=\"text-capitalize no-mg-top\">{{gen.name}}</h1>\n\n<div *ngIf=\"gen.isEnding()\">\n  <clr-alert [clrAlertType]=\"'alert-warning'\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        结束时间： {{endTime()}} \n      </span>\n    </div>\n  </clr-alert>\n</div>\n\n<p>{{gen.description}}</p>\n<!-- <span>Owned: {{gen.quantity | format}}</span> -->\n\n\n<div *ngIf=\"gen.produces.length >0\">\n  <p *ngIf=\"gen.buyAction\">你可以购买 {{gen.buyAction.quantity | format}} 次\n    <span *ngIf=\"gameService.game.research.up1.owned()\"> 获得 +{{gen.getBoost().times(100) | format}}% 生产加成</span>\n  </p>\n  <div *ngIf=\"!gen.alwaysOn\">\n    <input type=\"range\" min=\"0\" max=\"100\" [(ngModel)]=\"gen.percentage\" (change)=\"onChange($event.target.value)\">\n    <span>让 {{gen.percentage}} % 进行工作</span>\n  </div>\n</div>\n\n<div *ngIf=\"gen.showTables\">\n\n  <div class=\"row\">\n    <div *ngIf=\"gen.produces.length >0\" class=\"col-xs-12 col-md-12 col-lg-6 col-xl-6\">\n      <h5>\n        <span class=\"text-capitalize\">{{gen.name}}</span>生产：</h5>\n      <table class=\"table table-compact\">\n        <thead>\n          <tr>\n            <th class=\"w-33\">生产</th>\n            <th class=\"w-33\">1个</th>\n            <th class=\"w-33\">全部</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let item of gen.produces | filterActive\" [ngClass]=\"{'bg-warning': item.efficiency.lessThan(0)}\">\n            <td class=\"w-33 text-capitalize\">\n              <a [routerLink]=\"['/main/unit/unit/'+item.product.id]\">{{item.product.name}}</a>\n            </td>\n            <td class=\"w-33\">{{item.getprodPerSec(false) | format}}</td>\n            <td class=\"w-33\">{{item.getprodPerSec().times(gen.quantity) | format}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n    <div class=\"col-xs-12 col-md-12 col-lg-6 col-xl-6\" *ngIf=\"gameService.game.research.bi.owned()\">\n      <div *ngIf=\"showProducers()\">\n        <h5>\n          <span class=\"text-capitalize\">{{gen.name}}</span> is made by:</h5>\n        <table class=\"table  table-compact\">\n          <thead>\n            <tr>\n              <th class=\"w-33\">单位</th>\n              <th class=\"w-33\">数量</th>\n              <th class=\"w-33\">总共</th>\n            </tr>\n          </thead>\n          <tfoot>\n            <tr class=\"bg-info text-white\">\n              <td>总共</td>\n              <td>{{gen.totalProducers | format}}</td>\n              <td>{{gen.totalPerSec | format}}</td>\n            </tr>\n          </tfoot>\n          <tbody>\n            <tr *ngFor=\"let item of gen.producedBy | filterActive; trackBy:getUnitId\" [ngClass]=\"{'bg-warning': item.efficiency.lessThan(0)}\">\n              <td class=\"text-capitalize\">\n                <a [routerLink]=\"['/main/unit/unit/'+item.unit.id]\">{{item.unit.name}}</a>\n              </td>\n              <td>{{item.unit.quantity | format}}</td>\n              <td>{{item.getprodPerSec().times(item.unit.quantity) | format}}</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n</div>\n\n<div class=\"row\" *ngIf=\"gen.togableProductions\">\n  <div class=\"col-xs-12 col-md-12 col-lg-12 col-xl-12\">\n    <section class=\"form-block\">\n      <div class=\"form-group\">\n        <ul class=\"list-unstyled\">\n          <li *ngFor=\"let tp of gen.togableProductions | prodToglePipe\">\n            <div class=\"toggle-switch\">\n              <input type=\"checkbox\" [(ngModel)]=\"tp.uiModel\" [id]=\"tp.description\" (ngModelChange)=\"tp.turnOnOff()\"\n                (change)=\"onChange($event.target.value)\">\n              <label [for]=\"tp.description\">{{tp.description}}</label>\n            </div>\n          </li>\n        </ul>\n      </div>\n    </section>\n  </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"card-columns card-columns-2\">\n    <app-action [action]=\"act\" *ngFor=\"let act of gen.actions| filterMax; trackBy:getUnitId\"></app-action>\n  </div>\n</div>\n"
 
 /***/ }),
 
