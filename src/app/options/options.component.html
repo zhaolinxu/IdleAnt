@@ -2,24 +2,23 @@
   <div class="content-area">
 
     <p>
-      Game autosave every 3 minutes. You can also maually save, load and export savegames. Save are stored
-      in localstorage.
+      游戏每3分钟自动保存。 您还可以手动保存，加载和导出保存游戏。 游戏存档存储在本地存储中，如果你没有备份存档，请不要清除浏览器缓存。
     </p>
-    <strong>Clear button delete everything !</strong>
+    <strong>警告：清除按钮将会删除你的所有游戏记录！</strong>
 
     <div class="form-group">
-      <button class="btn btn-success" (click)="save($event)">Save</button>
-      <button class="btn btn-primary" (click)="load($event)">Load</button>
-      <button class="btn btn-danger" (click)="clear($event)">Clear</button>
+      <button class="btn btn-success" (click)="save($event)">保存</button>
+      <button class="btn btn-primary" (click)="load($event)">加载</button>
+      <button class="btn btn-danger" (click)="clear($event)">清除</button>
     </div>
     <div class="form-group">
-      <h5>Export / Import Save</h5>
-      <label for="save">Save</label>
+      <h5>导出 / 导入存档</h5>
+      <label for="save">保存</label>
       <textarea ref-textarea class="form-control" rows="1" id="save" [(ngModel)]="stringSave"></textarea>
-      <button class="btn btn-success" (click)="export($event)">Export</button>
-      <button class="btn btn-primary" (click)="import($event)">Import</button>
+      <button class="btn btn-success" (click)="export($event)">导出</button>
+      <button class="btn btn-primary" (click)="import($event)">导入</button>
     </div>
 
-    <a href="https://scorzy.github.io/IdleAnt/changelog.txt" target="_blank">Changelog</a>
+    <a href="https://zhaolinxu.github.io/IdleAnt/changelog.txt" target="_blank">更新日志</a>
   </div>
 </div>

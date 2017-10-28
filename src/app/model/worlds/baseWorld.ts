@@ -72,10 +72,10 @@ export class BaseWorld implements WorldInterface {
     this.declareGenerators()
     this.declareJobs()
 
-    this.game.lists.push(new TypeList("Material", this.listMaterial))
-    this.game.lists.push(new TypeList("Jobs", this.level1))
-    this.game.lists.push(new TypeList("Advanced Jobs", this.level2))
-    this.game.lists.push(new TypeList("Ants", this.list))
+    this.game.lists.push(new TypeList("材料", this.listMaterial))
+    this.game.lists.push(new TypeList("工作", this.level1))
+    this.game.lists.push(new TypeList("高级 Jobs", this.level2))
+    this.game.lists.push(new TypeList("蚂蚁", this.list))
   }
 
   initStuff() {
@@ -84,7 +84,7 @@ export class BaseWorld implements WorldInterface {
   }
 
   declareMaterials() {
-    this.food = new Unit(this.game, "food", "Food", "Food is used to support almost all your units.")
+    this.food = new Unit(this.game, "food", "食物", "食物是用来生产几乎所有的单位。")
     this.food.unlocked = true
     this.listMaterial.push(this.food)
 

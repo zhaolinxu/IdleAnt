@@ -5,19 +5,19 @@
       <a href="javascript://" class="nav-link" routerLink="/main/unit">
         <!-- <clr-icon shape="vm-bug"></clr-icon> -->
 
-        <span class="title">Idle Ant</span>
+        <span class="title">蚂蚁放置</span>
       </a>
     </div>
     <div class="header-nav" [clr-nav-level]="1">
-      <a class="nav-link" class="nav-link nav-text" routerLinkActive="active" routerLink="/main/unit">Units</a>
+      <a class="nav-link" class="nav-link nav-text" routerLinkActive="active" routerLink="/main/unit">单位</a>
 
-      <a class="nav-link" class="nav-link nav-text" routerLinkActive="active" routerLink="/lab" *ngIf="gameService.game.baseWorld.science.unlocked">Laboratory</a>
+      <a class="nav-link" class="nav-link nav-text" routerLinkActive="active" routerLink="/lab" *ngIf="gameService.game.baseWorld.science.unlocked">实验室</a>
 
-      <a class="nav-link" class="nav-link nav-text" routerLinkActive="active" routerLink="/prestige" *ngIf="gameService.game.worldTabAv">Travel</a>
+      <a class="nav-link" class="nav-link nav-text" routerLinkActive="active" routerLink="/prestige" *ngIf="gameService.game.worldTabAv">旅行</a>
 
-      <a class="nav-link" class="nav-link nav-text" routerLinkActive="active" routerLink="/main/exp" *ngIf="gameService.game.expTabAv">Experience</a>
+      <a class="nav-link" class="nav-link nav-text" routerLinkActive="active" routerLink="/main/exp" *ngIf="gameService.game.expTabAv">经验</a>
 
-      <a class="nav-link" class="nav-link nav-text" routerLinkActive="active" routerLink="/world" *ngIf="gameService.game.homeTabAv">World</a>
+      <a class="nav-link" class="nav-link nav-text" routerLinkActive="active" routerLink="/world" *ngIf="gameService.game.homeTabAv">世界</a>
 
     </div>
     <div class="header-actions">
@@ -67,9 +67,9 @@
   <router-outlet></router-outlet>
 
   <clr-modal [(clrModalOpen)]="gameService.game.timeModalOpened">
-    <h3 class="modal-title">Time Warp</h3>
+    <h3 class="modal-title">时间扭曲</h3>
     <div class="modal-body actMinH" *ngIf="gameService.game.actMin && gameService.game.actHour">
-      <span> You can skip {{totTime()}}</span>
+      <span> 你可以跳过 {{totTime()}}</span>
       <app-action [action]="gameService.game.actMin"></app-action>
       <app-action [action]="gameService.game.actHour"></app-action>
     </div>
