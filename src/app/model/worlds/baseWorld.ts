@@ -88,28 +88,28 @@ export class BaseWorld implements WorldInterface {
     this.food.unlocked = true
     this.listMaterial.push(this.food)
 
-    this.crystal = new Unit(this.game, "cri", "Crystal", "Crystals are needed to get science.")
+    this.crystal = new Unit(this.game, "cri", "水晶", "水晶需要得到科学。")
     this.listMaterial.push(this.crystal)
 
-    this.soil = new Unit(this.game, "soil", "Soil", "Soil is used to make nests.")
+    this.soil = new Unit(this.game, "soil", "土壤", "土壤用来做巢。")
     this.listMaterial.push(this.soil)
 
-    this.science = new Unit(this.game, "sci", "Science", "Science is used to improve and unlock stuff.")
+    this.science = new Unit(this.game, "sci", "科学", "科学是用来改善和解锁的东西。")
     this.listMaterial.push(this.science)
 
-    this.fungus = new Unit(this.game, "fun", "Fungus", "Fungus is a source of food.")
+    this.fungus = new Unit(this.game, "fun", "真菌", "真菌是食物的来源。")
     this.listMaterial.push(this.fungus)
 
-    this.wood = new Unit(this.game, "wood", "Wood", "Wood is used to make better nest and machinery.")
+    this.wood = new Unit(this.game, "wood", "木头", "木材用来制作更好的巢和机械。")
     this.listMaterial.push(this.wood)
 
-    this.sand = new Unit(this.game, "sand", "Sand", "Sand can be used to make crystals.")
+    this.sand = new Unit(this.game, "sand", "沙子", "沙子可以用来制造水晶。")
     this.listMaterial.push(this.sand)
 
-    this.nectar = new Unit(this.game, "nectar", "Nectar", "Nectar is used to make honey.")
+    this.nectar = new Unit(this.game, "nectar", "花蜜", "花蜜用于制作蜂蜜。")
     this.listMaterial.push(this.nectar)
 
-    this.honey = new Unit(this.game, "honey", "Honey", "Honey is the main resource for bees.")
+    this.honey = new Unit(this.game, "honey", "蜂蜜", "蜂蜜是蜜蜂的主要来源。")
     this.listMaterial.push(this.honey)
 
     this.ice = new Unit(this.game, "ice", "Ice",
@@ -121,12 +121,12 @@ export class BaseWorld implements WorldInterface {
 
   }
   declareGenerators() {
-    this.littleAnt = new Unit(this.game, "G1", "Ant",
-      "Ant are the lowest class of worker. They continuously gather food.")
-    this.queenAnt = new Unit(this.game, "G2", "Queen",
-      "Queen produces ants.")
-    this.nestAnt = new Unit(this.game, "G3", "Nest",
-      "Nest produces queen.")
+    this.littleAnt = new Unit(this.game, "G1", "蚂蚁",
+      "蚂蚁是最低级的工人。 他们不断收集食物。")
+    this.queenAnt = new Unit(this.game, "G2", "蚁后",
+      "蚁后生产蚂蚁。")
+    this.nestAnt = new Unit(this.game, "G3", "蚁巢",
+      "蚁巢生产蚁后。")
   }
   declareJobs() {
     this.geologist = new Unit(this.game, "geo", "Geologist", "Geologist yield crystal.")
