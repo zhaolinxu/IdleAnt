@@ -288,7 +288,7 @@ export class Researchs implements WorldInterface {
     //    Prestige
     this.prestigeResearch = new Research(
       "prestigeRes",
-      "Travel", "Allow you to move to new worlds",
+      "旅行", "让你移动到新的世界",
       [new Cost(this.game.baseWorld.science, Decimal(1E7))],
       [this.hereAndNow, this.adaptation, this.evolution],
       this.game,
@@ -300,7 +300,7 @@ export class Researchs implements WorldInterface {
     listM = listM.concat(this.game.machines.listMachinery, [this.engineerRes])
     this.machineryRes = new Research(
       "machiRes",
-      "Machinery", "Unlock powerful machinery.",
+      "机器", "解锁功能强大的机器。",
       [new Cost(this.game.baseWorld.science, Decimal(1E6))],
       listM,
       this.game
@@ -309,7 +309,7 @@ export class Researchs implements WorldInterface {
     //    Special
     this.specialResearch = new Research(
       "speRes",
-      "Technology", "Allow you to research new technologies.",
+      "技术", "允许你研究新技术。",
       [new Cost(this.game.baseWorld.science, Decimal(3E3))],
       [this.composterResearch, this.refineryResearch, this.laserResearch, this.hydroResearch,
       this.planterResearch, this.experimentResearch,

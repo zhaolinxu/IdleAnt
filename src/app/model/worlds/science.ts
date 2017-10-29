@@ -41,7 +41,7 @@ export class Science implements WorldInterface {
       "教育部门建立大学。")
 
     this.listScience = [this.student, this.scientist, this.university, this.depEdu]
-    this.game.lists.push(new TypeList("Science", this.listScience))
+    this.game.lists.push(new TypeList("科学", this.listScience))
 
     this.studentProduction = new Production(this.university, Decimal(0.2), false)
     this.scientistProduction = new Production(this.university, Decimal(0.1), false)

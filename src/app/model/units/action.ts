@@ -239,7 +239,7 @@ export class UpSpecial extends Action {
 
   ) {
     super("upS",
-      "Experiment",
+      "实验",
       null,
       [
         new Cost(unit, Decimal(100), Decimal(10)),

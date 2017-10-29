@@ -27,9 +27,9 @@ export class PrestigeComponent implements OnInit {
       return "You are skipping this world!"
     else {
       if (!this.travelAv())
-        return "You cannot go to a new world yet"
+        return "你还不能去到一个新的世界"
       else
-        return "Here you can travel to a brave new world"
+        return "在这里，你可以到一个崭新的世界"
     }
   }
   travelAv(): boolean {

@@ -77,7 +77,7 @@ export class Machine implements WorldInterface {
     this.listMachinery.push(this.iceCollector)
     this.listMachinery.push(this.burningGlass)
 
-    this.game.lists.push(new TypeList("Machinery", this.listMachinery))
+    this.game.lists.push(new TypeList("机器", this.listMachinery))
   }
 
   public initStuff() {

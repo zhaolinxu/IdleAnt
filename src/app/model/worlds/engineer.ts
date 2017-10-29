@@ -45,31 +45,31 @@ export class Engineers implements WorldInterface {
   declareStuff() {
     this.listEnginer = new Array<Unit>()
 
-    this.composterEnginer = new Unit(this.game, "engCo", "Composter E.",
-      "Slowly build composter stations.")
-    this.laserEnginer = new Unit(this.game, "engLa", "Laser E.",
-      "Slowly build laser stations.")
-    this.hydroEnginer = new Unit(this.game, "engHy", "Hydro E.",
-      "Slowly build hydroponic farms.")
-    this.plantingEnginer = new Unit(this.game, "engSo", "Planting E.",
-      "Slowly build planting machines.")
-    this.refineryEnginery = new Unit(this.game, "engRef", "Refine E.",
-      "Slowly build refinery stations.")
+    this.composterEnginer = new Unit(this.game, "engCo", "堆肥工程师",
+      "慢慢地建立堆肥站。")
+    this.laserEnginer = new Unit(this.game, "engLa", "激光工程师",
+      "慢慢地建立激光站。")
+    this.hydroEnginer = new Unit(this.game, "engHy", "水培工程师",
+      "慢慢地建立水培农场。")
+    this.plantingEnginer = new Unit(this.game, "engSo", "种植工程师",
+      "慢慢地建立种植机。")
+    this.refineryEnginery = new Unit(this.game, "engRef", "精炼工程师",
+      "慢慢地建立精炼站。")
 
-    this.mineEnginer = new Unit(this.game, "engMi", "Mining E.",
-      "Slowly build mines.")
-    this.sandEnginer = new Unit(this.game, 'engSa', "Sand E.",
-      'Slowly build sand diggers.')
-    this.woodEnginer = new Unit(this.game, "engWo", "Wood E.",
-      "Slowly build logging machines.")
-    this.beeEnginer = new Unit(this.game, "engBee", "Bee E.",
-      "Slowly build honey makers.")
-    this.iceEngineer = new Unit(this.game, "engIce", "Ice E.",
-      "Slowly build water tanks.")
-    this.iceCompEngineer = new Unit(this.game, "engIceComp", "Compacting E.",
-      "Slowly build ice compacters.")
-    this.lensEnginer = new Unit(this.game, "lensEnginer", "Burning Lens E.",
-      "Slowly build burning lens.")
+    this.mineEnginer = new Unit(this.game, "engMi", "采矿工程师",
+      "慢慢建立矿井。")
+    this.sandEnginer = new Unit(this.game, 'engSa', "挖沙工程师",
+      '慢慢地建立沙挖掘机。')
+    this.woodEnginer = new Unit(this.game, "engWo", "伐木工程师",
+      "慢慢地建立伐木机。")
+    this.beeEnginer = new Unit(this.game, "engBee", "蜜蜂工程师",
+      "慢慢地建立蜂蜜制造商。")
+    this.iceEngineer = new Unit(this.game, "engIce", "冰块工程师",
+      "慢慢地建立水箱。")
+    this.iceCompEngineer = new Unit(this.game, "engIceComp", "压冰工程师",
+      "慢慢地建立冰压实机。")
+    this.lensEnginer = new Unit(this.game, "lensEnginer", "燃烧镜头工程师",
+      "慢慢地建立燃烧镜头。")
 
     this.sandEnginer.avabileBaseWorld = false
     this.mineEnginer.avabileBaseWorld = false
@@ -92,10 +92,10 @@ export class Engineers implements WorldInterface {
     this.listEnginer.push(this.iceEngineer)
     this.listEnginer.push(this.lensEnginer)
 
-    this.game.lists.push(new TypeList("Engineers", this.listEnginer))
+    this.game.lists.push(new TypeList("工程师", this.listEnginer))
 
-    this.composterDep = new Unit(this.game, "depaCo", "Composting Department",
-      "Yeild engineers.")
+    this.composterDep = new Unit(this.game, "depaCo", "堆肥部",
+      "产生工程师。")
     this.laserDep = new Unit(this.game, "depaLa", "Laser Department",
       "Yeild engineers.")
     this.hydroDep = new Unit(this.game, "depaHy", "Hydro Department",
