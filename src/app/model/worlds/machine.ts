@@ -37,30 +37,30 @@ export class Machine implements WorldInterface {
   constructor(public game: GameModel) { }
 
   public declareStuff() {
-    this.composterStation = new Unit(this.game, "composterStation", "Composter Station",
-      "Turn wood into soil.")
-    this.refineryStation = new Unit(this.game, "refineryStation", "Refinery Station",
-      "Turn soil into sand.")
-    this.laserStation = new Unit(this.game, "laserStation", "Laser Station",
-      "Yield crystal.")
-    this.hydroFarm = new Unit(this.game, "hydroFarm", "Hydroponic Farm",
-      "Yield fungus.")
-    this.plantingMachine = new Unit(this.game, "plantingMac", "Planting Machine",
-      "Yield wood.")
-    this.sandDigger = new Unit(this.game, "sandDigger", "Sand Digger",
-      "Yield sand.")
-    this.loggingMachine = new Unit(this.game, "loggingMachine", "Logging Machine",
-      "Yield wood.")
-    this.mine = new Unit(this.game, "mine", "Mine",
-      "Yield crystal.")
-    this.honeyMaker = new Unit(this.game, "honeyMaker", "Honey Maker",
-      "Automate the making of honey. Only bees know how it works.")
-    this.iceCompacter = new Unit(this.game, "iceC", "Ice Compacter",
-      "Ice Compacter is a machine that compacts ice into crystal.")
-    this.iceCollector = new Unit(this.game, "iceK", "Water Tank",
-      "A tank of water.")
-    this.burningGlass = new Unit(this.game, "burningGlass", "Burning Lens",
-      "A large convex lens used to concentrate sun's rays. This machine melts ice faster than anything else.")
+    this.composterStation = new Unit(this.game, "composterStation", "堆肥站",
+      "将木头转化为土壤。")
+    this.refineryStation = new Unit(this.game, "refineryStation", "精炼站",
+      "将土壤变成沙子。")
+    this.laserStation = new Unit(this.game, "laserStation", "激光站",
+      "生产水晶。")
+    this.hydroFarm = new Unit(this.game, "hydroFarm", "水培农场",
+      "生产真菌。")
+    this.plantingMachine = new Unit(this.game, "plantingMac", "种植机",
+      "生产木头。")
+    this.sandDigger = new Unit(this.game, "sandDigger", "沙挖掘机",
+      "生产沙子。")
+    this.loggingMachine = new Unit(this.game, "loggingMachine", "伐木机",
+      "生产木头。")
+    this.mine = new Unit(this.game, "mine", "矿井",
+      "生产水晶。")
+    this.honeyMaker = new Unit(this.game, "honeyMaker", "蜂蜜制造商",
+      "自动制作蜂蜜。 只有蜜蜂知道它是如何工作的。")
+    this.iceCompacter = new Unit(this.game, "iceC", "冰压缩机",
+      "冰压缩机是将冰块压成晶体的机器。")
+    this.iceCollector = new Unit(this.game, "iceK", "水箱",
+      "一个水箱。")
+    this.burningGlass = new Unit(this.game, "burningGlass", "燃烧镜头",
+      "用于聚集太阳光线的大凸透镜。 这台机器比其他任何东西更快地融化冰块。")
 
     this.listMachinery = new Array<Unit>()
 

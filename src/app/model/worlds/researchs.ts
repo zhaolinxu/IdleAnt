@@ -145,7 +145,7 @@ export class Researchs implements WorldInterface {
     //    Here and Now
     this.hereAndNow = new Research(
       "hereAndNow",
-      "Here and Now", "Get 10 experience.",
+      "此时此地", "获得10经验。",
       [new Cost(this.game.baseWorld.science, Decimal(1E9))],
       [this.timeWarp],
       this.game,
@@ -159,7 +159,7 @@ export class Researchs implements WorldInterface {
     //    University 4
     this.depEduRes = new Research(
       "depEduRes",
-      "Department of Education", "Unlock Department of Education.",
+      "教育部门", "解锁教育部。",
       [new Cost(this.game.baseWorld.science, Decimal(3E10))],
       [this.game.science.depEdu],
       this.game
@@ -168,7 +168,7 @@ export class Researchs implements WorldInterface {
     //    University 3
     this.advancedLesson = new Research(
       "advancedLesson",
-      "Advanced Lesson", "University also produces scientist.",
+      "高级课程", "大学也生产科学家。",
       [new Cost(this.game.baseWorld.science, Decimal(3E6))],
       [this.game.science.scientistProduction, this.depEduRes],
       this.game

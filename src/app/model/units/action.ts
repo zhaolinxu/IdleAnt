@@ -245,7 +245,7 @@ export class UpSpecial extends Action {
         new Cost(unit, Decimal(100), Decimal(10)),
         new Cost(unit.model.baseWorld.science, Decimal(100), Decimal(12))
       ],
-      "Do some experiment to increase the production.",
+      "做一些实验，以增加产量。",
       game, unit
     )
     this.unit.upSpecial = this

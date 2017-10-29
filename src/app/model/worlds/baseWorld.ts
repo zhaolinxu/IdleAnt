@@ -74,7 +74,7 @@ export class BaseWorld implements WorldInterface {
 
     this.game.lists.push(new TypeList("材料", this.listMaterial))
     this.game.lists.push(new TypeList("工作", this.level1))
-    this.game.lists.push(new TypeList("高级 Jobs", this.level2))
+    this.game.lists.push(new TypeList("高级工作", this.level2))
     this.game.lists.push(new TypeList("蚂蚁", this.list))
   }
 
@@ -88,7 +88,7 @@ export class BaseWorld implements WorldInterface {
     this.food.unlocked = true
     this.listMaterial.push(this.food)
 
-    this.crystal = new Unit(this.game, "cri", "水晶", "水晶需要得到科学。")
+    this.crystal = new Unit(this.game, "cri", "水晶", "水晶用来生产科学。")
     this.listMaterial.push(this.crystal)
 
     this.soil = new Unit(this.game, "soil", "土壤", "土壤用来做巢。")
