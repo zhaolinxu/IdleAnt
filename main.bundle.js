@@ -158,7 +158,7 @@ var _a;
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<clr-main-container>\n\n  <clr-header class=\"header-5\">\n    <div class=\"branding\">\n      <a href=\"javascript://\" class=\"nav-link\" routerLink=\"/main/unit\">\n        <!-- <clr-icon shape=\"vm-bug\"></clr-icon> -->\n\n        <span class=\"title\">蚂蚁放置</span>\n      </a>\n    </div>\n    <div class=\"header-nav\" [clr-nav-level]=\"1\">\n      <a class=\"nav-link\" class=\"nav-link nav-text\" routerLinkActive=\"active\" routerLink=\"/main/unit\">单位</a>\n\n      <a class=\"nav-link\" class=\"nav-link nav-text\" routerLinkActive=\"active\" routerLink=\"/lab\" *ngIf=\"gameService.game.baseWorld.science.unlocked\">实验室</a>\n\n      <a class=\"nav-link\" class=\"nav-link nav-text\" routerLinkActive=\"active\" routerLink=\"/prestige\" *ngIf=\"gameService.game.worldTabAv\">旅行</a>\n\n      <a class=\"nav-link\" class=\"nav-link nav-text\" routerLinkActive=\"active\" routerLink=\"/main/exp\" *ngIf=\"gameService.game.expTabAv\">经验</a>\n\n      <a class=\"nav-link\" class=\"nav-link nav-text\" routerLinkActive=\"active\" routerLink=\"/world\" *ngIf=\"gameService.game.homeTabAv\">世界</a>\n\n    </div>\n    <div class=\"header-actions\">\n        <a class=\"nav-link nav-icon\" href=\"https://zhaolinxu.github.io/IdleAnt/\" title=\"游戏不能直接刷新，想刷新页面请点这里\">\n        刷新页面\n      </a>\n      <a class=\"nav-link nav-icon\" href=\"javascript://\" (click)=\"opeTimeWarp()\" *ngIf=\"gameService.game.prestige.timeMaker.quantity.greaterThan(0)\">\n        <clr-icon shape=\"clock\"></clr-icon>\n      </a>\n\n      <a class=\"nav-link nav-icon\" href=\"javascript://\" (click)=\"gameService.game.pause = !gameService.game.pause\">\n        <clr-icon shape=\"play\" *ngIf=\"gameService.game.pause; else pauseB\"></clr-icon>\n        <ng-template #content #pauseB>\n          <clr-icon shape=\"pause\"></clr-icon>\n        </ng-template>\n      </a>\n\n      <a href=\"javascript://\" class=\"nav-link nav-icon\" routerLink=\"/options\">\n        <clr-icon shape=\"cog\"></clr-icon>\n      </a>\n\n    </div>\n  </clr-header>\n\n  <!-- Top Material Nav -->\n  <nav class=\"subnav\">\n    <ul class=\"nav navMat\">\n      <li class=\"nav-item\" class=\"matTab\" *ngFor=\"let g of gameService.game.baseWorld.listMaterial | filterMax\">\n        <a [routerLink]=\"['/main/unit/unit/'+g.id]\" class=\"nav-link matLink\" routerLinkActive=\"active\" [ngClass]=\"{'red': g.isEnding()}\">\n\n          <span style=\"display:block;\">\n            <clr-icon class=\"is-info\" shape=\"angle-double\" *ngIf=\"g.showUp\"></clr-icon>\n            <clr-icon class=\"alert-icon is-error\" shape=\"exclamation-triangle\" *ngIf=\"g.isEnding()\"></clr-icon>\n            <span class=\"first\">{{g.name}}</span>\n          </span>\n\n          <span class=\"perSecTab small\">\n            <span *ngIf=\"g.totalPerSec.abs().greaterThan(0.001)\">\n              {{g.totalPerSec | format}}/s\n            </span>\n          </span>\n          <span class=\"small\">{{g.quantity | format}}</span>\n\n        </a>\n      </li>\n    </ul>\n  </nav>\n\n  <router-outlet></router-outlet>\n\n  <clr-modal [(clrModalOpen)]=\"gameService.game.timeModalOpened\">\n    <h3 class=\"modal-title\">时间扭曲</h3>\n    <div class=\"modal-body actMinH\" *ngIf=\"gameService.game.actMin && gameService.game.actHour\">\n      <span> 你可以跳过 {{totTime()}}</span>\n      <app-action [action]=\"gameService.game.actMin\"></app-action>\n      <app-action [action]=\"gameService.game.actHour\"></app-action>\n    </div>\n  </clr-modal>\n\n</clr-main-container>\n"
+module.exports = "<clr-main-container>\n\n  <clr-header class=\"header-5\">\n    <div class=\"branding\">\n      <a href=\"javascript://\" class=\"nav-link\" routerLink=\"/main/unit\">\n        <!-- <clr-icon shape=\"vm-bug\"></clr-icon> -->\n\n        <span class=\"title\">蚂蚁放置</span>\n      </a>\n    </div>\n    <div class=\"header-nav\" [clr-nav-level]=\"1\">\n      <a class=\"nav-link\" class=\"nav-link nav-text\" routerLinkActive=\"active\" routerLink=\"/main/unit\">单位</a>\n\n      <a class=\"nav-link\" class=\"nav-link nav-text\" routerLinkActive=\"active\" routerLink=\"/lab\" *ngIf=\"gameService.game.baseWorld.science.unlocked\">实验室</a>\n\n      <a class=\"nav-link\" class=\"nav-link nav-text\" routerLinkActive=\"active\" routerLink=\"/prestige\" *ngIf=\"gameService.game.worldTabAv\">旅行</a>\n\n      <a class=\"nav-link\" class=\"nav-link nav-text\" routerLinkActive=\"active\" routerLink=\"/main/exp\" *ngIf=\"gameService.game.expTabAv\">经验</a>\n\n      <a class=\"nav-link\" class=\"nav-link nav-text\" routerLinkActive=\"active\" routerLink=\"/world\" *ngIf=\"gameService.game.homeTabAv\">世界</a>\n\n    </div>\n    <div class=\"header-actions\">\n<a class=\"nav-link nav-icon\" href=\"https://zhaolinxu.github.io/IdleAnt/\" title=\"游戏不能直接刷新，想刷新页面请点这里\">\n        刷新页面\n      </a>\n      <clr-dropdown>\n        <button class=\"nav-icon\" clrDropdownTrigger>\n          <clr-icon shape=\"tools\"></clr-icon>\n          <clr-icon shape=\"caret down\"></clr-icon>\n        </button>\n        <clr-dropdown-menu *clrIfOpen clrPosition=\"bottom-right\">\n          <a clrDropdownItem (click)=\"all100()\">All 100%</a>\n\n          <clr-dropdown *ngFor=\"let list of gameService.game.lists | filterListNotEmpty; trackBy:getListId\">\n            <button type=\"button\" clrDropdownTrigger>{{list.type}}</button>\n            <clr-dropdown-menu clrPosition=\"left-top\">\n              <a clrDropdownItem (click)=\"list.all100()\">100%</a>\n              <a clrDropdownItem (click)=\"list.all0()\">0%</a>\n            </clr-dropdown-menu>\n          </clr-dropdown>\n\n\n        </clr-dropdown-menu>\n        </clr-dropdown>\n\n        <a class=\"nav-link nav-icon\" href=\"javascript://\" (click)=\"opeTimeWarp()\" *ngIf=\"gameService.game.prestige.timeMaker.quantity.greaterThan(0)\">\n          <clr-icon shape=\"clock\"></clr-icon>\n        </a>\n\n        <a class=\"nav-link nav-icon\" href=\"javascript://\" (click)=\"gameService.game.pause = !gameService.game.pause\">\n          <clr-icon shape=\"play\" *ngIf=\"gameService.game.pause; else pauseB\"></clr-icon>\n          <ng-template #content #pauseB>\n            <clr-icon shape=\"pause\"></clr-icon>\n          </ng-template>\n        </a>\n\n        <a href=\"javascript://\" class=\"nav-link nav-icon\" routerLink=\"/options\">\n          <clr-icon shape=\"cog\"></clr-icon>\n        </a>\n\n    </div>\n  </clr-header>\n\n  <!-- Top Material Nav -->\n  <nav class=\"subnav\">\n    <ul class=\"nav navMat\">\n      <li class=\"nav-item\" class=\"matTab\" *ngFor=\"let g of gameService.game.baseWorld.listMaterial | filterMax\">\n        <a [routerLink]=\"['/main/unit/unit/'+g.id]\" class=\"nav-link matLink\" routerLinkActive=\"active\" [ngClass]=\"{'red': g.isEnding()}\">\n\n          <span style=\"display:block;\">\n            <clr-icon class=\"is-info\" shape=\"angle-double\" *ngIf=\"g.showUp\"></clr-icon>\n            <clr-icon class=\"alert-icon is-error\" shape=\"exclamation-triangle\" *ngIf=\"g.isEnding()\"></clr-icon>\n            <span class=\"first\">{{g.name}}</span>\n          </span>\n\n          <span class=\"perSecTab small\">\n            <span *ngIf=\"g.totalPerSec.abs().greaterThan(0.001)\">\n              {{g.totalPerSec | format}}/s\n            </span>\n          </span>\n          <span class=\"small\">{{g.quantity | format}}</span>\n\n        </a>\n      </li>\n    </ul>\n  </nav>\n\n  <router-outlet></router-outlet>\n\n  <clr-modal [(clrModalOpen)]=\"gameService.game.timeModalOpened\">\n    <h3 class=\"modal-title\">时间扭曲</h3>\n    <div class=\"modal-body actMinH\" *ngIf=\"gameService.game.actMin && gameService.game.actHour\">\n      <span> 你可以跳过 {{totTime()}}</span>\n      <app-action [action]=\"gameService.game.actMin\"></app-action>\n      <app-action [action]=\"gameService.game.actHour\"></app-action>\n    </div>\n  </clr-modal>\n\n</clr-main-container>\n"
 
 /***/ }),
 
@@ -217,6 +217,10 @@ var AppComponent = (function () {
     AppComponent.prototype.totTime = function () {
         __WEBPACK_IMPORTED_MODULE_2_moment__["locale"]('en');
         return __WEBPACK_IMPORTED_MODULE_2_moment__["duration"](this.gameService.game.prestige.time.quantity.toNumber()).humanize();
+    };
+    AppComponent.prototype.all100 = function () {
+        this.gameService.game.all.forEach(function (u) { return u.percentage = 100; });
+        this.gameService.game.isChanged = true;
     };
     return AppComponent;
 }());
@@ -496,7 +500,9 @@ var GameService = (function () {
         var now = new Date().getTime();
         var delta = now - this.last;
         if (delta > this.interval) {
-            this.game.longUpdate(now - this.last);
+            if (delta > 1000)
+                this.game.isChanged = true;
+            this.game.longUpdate(delta);
             this.game.prestige.time.quantity = Decimal.min(this.game.prestige.time.quantity.plus(this.game.prestige.timeMaker.quantity.times(0.1).times(delta / 1000)), this.game.prestige.timeBank.quantity.plus(4).times(3600));
             this.last = now;
         }
@@ -737,7 +743,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".nav-text,\n.nav-link,\n.nav-group-content,\n.nav-group-trigger {\n  height: 24px !important;\n  line-height: 24px; }\n\n.clr-vertical-nav {\n  width: 320px !important;\n  padding-top: 12px;\n  height: calc(100vh - 108px) !important;\n  display: block !important;\n  overflow-y: scroll; }\n\n.resName {\n  display: inline-block;\n  width: 50%; }\n\n.perSec {\n  width: 25%;\n  display: inline-block; }\n\n.content-area {\n  max-height: calc(100vh - 108px) !important; }\n\n.unit-group {\n  margin-left: -21px !important; }\n\n.clr-treenode-link.active {\n  background-color: #fafafa; }\n\n.experience {\n  margin-left: 30px !important; }\n\n.clr-treenode-link {\n  height: auto; }\n\n:host /deep/ .nav-content {\n  min-height: 500px;\n  display: block !important;\n  overflow-y: hidden  !important; }\n\n:host /deep/ .clr-treenode-content {\n  line-height: 25px !important; }\n", ""]);
+exports.push([module.i, ".nav-text,\n.nav-link,\n.nav-group-content,\n.nav-group-trigger {\n  height: 24px !important;\n  line-height: 24px; }\n\n.clr-vertical-nav {\n  width: 320px !important;\n  padding-top: 12px;\n  height: calc(100vh - 108px) !important;\n  display: block !important;\n  overflow-y: scroll;\n  padding-bottom: 15px; }\n\n.resName {\n  display: inline-block;\n  width: 50%; }\n\n.perSec {\n  width: 25%;\n  display: inline-block; }\n\n.content-area {\n  max-height: calc(100vh - 108px) !important; }\n\n.unit-group {\n  margin-left: -21px !important; }\n\n.clr-treenode-link.active {\n  background-color: #fafafa; }\n\n.experience {\n  margin-left: 30px !important; }\n\n.clr-treenode-link {\n  height: auto; }\n\n:host /deep/ .nav-content {\n  min-height: 500px;\n  display: block !important;\n  overflow-y: hidden  !important; }\n\n:host /deep/ .clr-treenode-content {\n  line-height: 25px !important; }\n", ""]);
 
 // exports
 
@@ -1030,8 +1036,7 @@ var GameModel = (function () {
         var unitZero = null;
         var unl = this.all.filter(function (u) { return u.unlocked; });
         // console.log(this.timeToEnd + " " + dif)
-        if (this.isChanged || dif > this.timeToEnd) {
-            // console.log("long")
+        if (this.isChanged || dif > this.timeToEnd || dif > 1000) {
             //  reload max time
             this.timeToEnd = Number.POSITIVE_INFINITY;
             this.lists.forEach(function (l) { return l.isEnding = false; });
@@ -1094,13 +1099,13 @@ var GameModel = (function () {
         else {
             // console.log("short")
             this.timeToEnd = this.timeToEnd - dif;
-            unl.filter(function (u) { return u.endIn > 0; }).forEach(function (u) { return u.endIn = u.endIn - dif; });
         }
+        unl.filter(function (u) { return u.endIn > 0; }).forEach(function (u) { return u.endIn = u.endIn - dif; });
         //  Update resource
         if (!this.pause || forceUp) {
             if (maxTime > Number.EPSILON)
                 this.update(maxTime);
-            if (unitZero) {
+            if (unitZero && unitZero.quantity.lessThan(Number.EPSILON)) {
                 unitZero.producedBy.filter(function (p) { return p.efficiency.lessThan(0); }).forEach(function (p) { return p.unit.percentage = 0; });
                 // fix for infestatiion world
                 if (unitZero === this.infestation.poisonousPlant) {
@@ -1421,6 +1426,14 @@ var TypeList = (function () {
     TypeList.prototype.getId = function () {
         return this.type;
     };
+    TypeList.prototype.all100 = function () {
+        this.list.forEach(function (u) { return u.percentage = 100; });
+        this.list[0].game.isChanged = true;
+    };
+    TypeList.prototype.all0 = function () {
+        this.list.forEach(function (u) { return u.percentage = 0; });
+        this.list[0].game.isChanged = true;
+    };
     return TypeList;
 }());
 
@@ -1653,7 +1666,7 @@ var UpSpecial = (function (_super) {
         var _this = _super.call(this, "upS", "Experiment", null, [
             new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](unit, Decimal(100), Decimal(10)),
             new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](unit.model.baseWorld.science, Decimal(100), Decimal(12))
-        ], "Do some experiment to increase the production.", game, unit) || this;
+        ], "做一些实验，以增加产量。", game, unit) || this;
         _this.unit = unit;
         _this.unit.upSpecial = _this;
         _this.unlocked = false;
@@ -1691,6 +1704,7 @@ var TimeWarp = (function (_super) {
     function TimeWarp(game, timeUnits, timeName) {
         var _this = _super.call(this, "actWarp", timeName, (function (n) {
             game.longUpdate(n.times(timeUnits).times(1000).toNumber(), true);
+            _this.game.isChanged = true;
             return true;
         }), [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](game.prestige.time, timeUnits, Decimal(1))], "Time warp by " + timeName, game) || this;
         _this.timeUnits = timeUnits;
@@ -2232,8 +2246,9 @@ var World = (function () {
         worldRet.level = Decimal.random().times(Decimal(1 + max - min)).floor().plus(min).toNumber();
         // worldRet.level = 1000
         var linear = 1 / 4;
+        var linearExp = 1 / 2;
         var toUnlockMultiplier = Decimal(worldRet.level + 1 / linear).times(linear);
-        var expMultiplier = Decimal.pow(1.00135, worldRet.level).times(Decimal(worldRet.level + 1 / linear).times(linear));
+        var expMultiplier = Decimal.pow(1.00138, worldRet.level).times(Decimal(worldRet.level + 1 / linearExp).times(linearExp));
         worldRet.toUnlock.forEach(function (t) { return t.basePrice = t.basePrice.times(toUnlockMultiplier).floor(); });
         worldRet.unlockedUnits.forEach(function (t) { return t[1] = Decimal.max(t[1].times(toUnlockMultiplier.times(2)).floor(), 0); });
         worldRet.experience = worldRet.experience.times(expMultiplier).plus(0.5).floor();
@@ -2408,7 +2423,7 @@ var BaseWorld = (function () {
         this.declareJobs();
         this.game.lists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("材料", this.listMaterial));
         this.game.lists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("工作", this.level1));
-        this.game.lists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("高级 Jobs", this.level2));
+        this.game.lists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("高级工作", this.level2));
         this.game.lists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("蚂蚁", this.list));
     };
     BaseWorld.prototype.initStuff = function () {
@@ -2419,7 +2434,7 @@ var BaseWorld = (function () {
         this.food = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "food", "食物", "食物是用来生产几乎所有的单位。");
         this.food.unlocked = true;
         this.listMaterial.push(this.food);
-        this.crystal = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "cri", "水晶", "水晶需要得到科学。");
+        this.crystal = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "cri", "水晶", "水晶用来生产科学。");
         this.listMaterial.push(this.crystal);
         this.soil = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "soil", "土壤", "土壤用来做巢。");
         this.listMaterial.push(this.soil);
@@ -3433,18 +3448,18 @@ var Machine = (function () {
         this.price3 = Decimal(3E4);
     }
     Machine.prototype.declareStuff = function () {
-        this.composterStation = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "composterStation", "Composter Station", "Turn wood into soil.");
-        this.refineryStation = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "refineryStation", "Refinery Station", "Turn soil into sand.");
-        this.laserStation = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "laserStation", "Laser Station", "Yield crystal.");
-        this.hydroFarm = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "hydroFarm", "Hydroponic Farm", "Yield fungus.");
-        this.plantingMachine = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "plantingMac", "Planting Machine", "Yield wood.");
-        this.sandDigger = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "sandDigger", "Sand Digger", "Yield sand.");
-        this.loggingMachine = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "loggingMachine", "Logging Machine", "Yield wood.");
-        this.mine = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "mine", "Mine", "Yield crystal.");
-        this.honeyMaker = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "honeyMaker", "Honey Maker", "Automate the making of honey. Only bees know how it works.");
-        this.iceCompacter = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "iceC", "Ice Compacter", "Ice Compacter is a machine that compacts ice into crystal.");
-        this.iceCollector = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "iceK", "Water Tank", "A tank of water.");
-        this.burningGlass = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "burningGlass", "Burning Lens", "A large convex lens used to concentrate sun's rays. This machine melts ice faster than anything else.");
+        this.composterStation = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "composterStation", "堆肥站", "将木头转化为土壤。");
+        this.refineryStation = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "refineryStation", "精炼站", "将土壤变成沙子。");
+        this.laserStation = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "laserStation", "激光站", "生产水晶。");
+        this.hydroFarm = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "hydroFarm", "水培农场", "生产真菌。");
+        this.plantingMachine = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "plantingMac", "种植机", "生产木头。");
+        this.sandDigger = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "sandDigger", "沙挖掘机", "生产沙子。");
+        this.loggingMachine = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "loggingMachine", "伐木机", "生产木头。");
+        this.mine = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "mine", "矿井", "生产水晶。");
+        this.honeyMaker = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "honeyMaker", "蜂蜜制造商", "自动制作蜂蜜。 只有蜜蜂知道它是如何工作的。");
+        this.iceCompacter = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "iceC", "冰压缩机", "冰压缩机是将冰块压成晶体的机器。");
+        this.iceCollector = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "iceK", "水箱", "一个水箱。");
+        this.burningGlass = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "burningGlass", "燃烧镜头", "用于聚集太阳光线的大凸透镜。 这台机器比其他任何东西更快地融化冰块。");
         this.listMachinery = new Array();
         this.listMachinery.push(this.composterStation);
         this.listMachinery.push(this.refineryStation);
@@ -3885,15 +3900,15 @@ var Researchs = (function () {
             _this.game.longUpdate(3600 * 4000, true);
         });
         //    Here and Now
-        this.hereAndNow = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("hereAndNow", "Here and Now", "Get 10 experience.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1E9))], [this.timeWarp], this.game, function () {
+        this.hereAndNow = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("hereAndNow", "此时此地", "获得10经验。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1E9))], [this.timeWarp], this.game, function () {
             _this.game.prestige.experience.quantity = _this.game.prestige.experience.quantity.plus(10);
             _this.game.maxLevel = _this.game.maxLevel.plus(10);
             _this.game.expTabAv = true;
         });
         //    University 4
-        this.depEduRes = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("depEduRes", "Department of Education", "Unlock Department of Education.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(3E10))], [this.game.science.depEdu], this.game);
+        this.depEduRes = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("depEduRes", "教育部门", "解锁教育部。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(3E10))], [this.game.science.depEdu], this.game);
         //    University 3
-        this.advancedLesson = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("advancedLesson", "Advanced Lesson", "University also produces scientist.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(3E6))], [this.game.science.scientistProduction, this.depEduRes], this.game);
+        this.advancedLesson = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("advancedLesson", "高级课程", "大学也生产科学家。", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(3E6))], [this.game.science.scientistProduction, this.depEduRes], this.game);
         //    University 2
         this.publicLesson = new __WEBPACK_IMPORTED_MODULE_0__units_action__["a" /* Research */]("publicLesson", "Public Lesson", "University also produces students.", [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](this.game.baseWorld.science, Decimal(1E5))], [this.game.science.studentProduction, this.advancedLesson], this.game);
         //    University
@@ -4046,8 +4061,8 @@ var Science = (function () {
         this.student.addProductor(this.studentProduction);
         this.scientist.addProductor(this.scientistProduction);
         this.university.togableProductions = [
-            new __WEBPACK_IMPORTED_MODULE_0__units_togableProductions__["a" /* TogableProduction */]("Generate Studentes", [this.studentProduction]),
-            new __WEBPACK_IMPORTED_MODULE_0__units_togableProductions__["a" /* TogableProduction */]("Generate Scientist", [this.scientistProduction])
+            new __WEBPACK_IMPORTED_MODULE_0__units_togableProductions__["a" /* TogableProduction */]("产生学生", [this.studentProduction]),
+            new __WEBPACK_IMPORTED_MODULE_0__units_togableProductions__["a" /* TogableProduction */]("产生科学家", [this.scientistProduction])
         ];
         //  Dep
         this.depEdu.actions.push(new __WEBPACK_IMPORTED_MODULE_3__units_action__["b" /* BuyAction */](this.game, this.depEdu, [
@@ -4369,7 +4384,7 @@ ResPipePipe = __decorate([
 /***/ "../../../../../src/app/unit/unit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 class=\"text-capitalize no-mg-top\">{{gen.name}}</h1>\n\n<div *ngIf=\"gen.isEnding()\">\n  <clr-alert [clrAlertType]=\"'alert-warning'\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        结束时间： {{endTime()}} \n      </span>\n    </div>\n  </clr-alert>\n</div>\n\n<p>{{gen.description}}</p>\n<!-- <span>Owned: {{gen.quantity | format}}</span> -->\n\n\n<div *ngIf=\"gen.produces.length >0\">\n  <p *ngIf=\"gen.buyAction\">你可以购买 {{gen.buyAction.quantity | format}} 次\n    <span *ngIf=\"gameService.game.research.up1.owned()\"> 获得 +{{gen.getBoost().times(100) | format}}% 生产加成</span>\n  </p>\n  <div *ngIf=\"!gen.alwaysOn\">\n    <input type=\"range\" min=\"0\" max=\"100\" [(ngModel)]=\"gen.percentage\" (change)=\"onChange($event.target.value)\">\n    <span>让 {{gen.percentage}} % 进行工作</span>\n  </div>\n</div>\n\n<div *ngIf=\"gen.showTables\">\n\n  <div class=\"row\">\n    <div *ngIf=\"gen.produces.length >0\" class=\"col-xs-12 col-md-12 col-lg-6 col-xl-6\">\n      <h5>\n        <span class=\"text-capitalize\">{{gen.name}}</span>生产：</h5>\n      <table class=\"table table-compact\">\n        <thead>\n          <tr>\n            <th class=\"w-33\">生产</th>\n            <th class=\"w-33\">1个</th>\n            <th class=\"w-33\">全部</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let item of gen.produces | filterActive\" [ngClass]=\"{'bg-warning': item.efficiency.lessThan(0)}\">\n            <td class=\"w-33 text-capitalize\">\n              <a [routerLink]=\"['/main/unit/unit/'+item.product.id]\">{{item.product.name}}</a>\n            </td>\n            <td class=\"w-33\">{{item.getprodPerSec(false) | format}}</td>\n            <td class=\"w-33\">{{item.getprodPerSec().times(gen.quantity) | format}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n    <div class=\"col-xs-12 col-md-12 col-lg-6 col-xl-6\" *ngIf=\"gameService.game.research.bi.owned()\">\n      <div *ngIf=\"showProducers()\">\n        <h5>\n          <span class=\"text-capitalize\">{{gen.name}}</span> is made by:</h5>\n        <table class=\"table  table-compact\">\n          <thead>\n            <tr>\n              <th class=\"w-33\">单位</th>\n              <th class=\"w-33\">数量</th>\n              <th class=\"w-33\">总共</th>\n            </tr>\n          </thead>\n          <tfoot>\n            <tr class=\"bg-info text-white\">\n              <td>总共</td>\n              <td>{{gen.totalProducers | format}}</td>\n              <td>{{gen.totalPerSec | format}}</td>\n            </tr>\n          </tfoot>\n          <tbody>\n            <tr *ngFor=\"let item of gen.producedBy | filterActive; trackBy:getUnitId\" [ngClass]=\"{'bg-warning': item.efficiency.lessThan(0)}\">\n              <td class=\"text-capitalize\">\n                <a [routerLink]=\"['/main/unit/unit/'+item.unit.id]\">{{item.unit.name}}</a>\n              </td>\n              <td>{{item.unit.quantity | format}}</td>\n              <td>{{item.getprodPerSec().times(item.unit.quantity) | format}}</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n</div>\n\n<div class=\"row\" *ngIf=\"gen.togableProductions\">\n  <div class=\"col-xs-12 col-md-12 col-lg-12 col-xl-12\">\n    <section class=\"form-block\">\n      <div class=\"form-group\">\n        <ul class=\"list-unstyled\">\n          <li *ngFor=\"let tp of gen.togableProductions | prodToglePipe\">\n            <div class=\"toggle-switch\">\n              <input type=\"checkbox\" [(ngModel)]=\"tp.uiModel\" [id]=\"tp.description\" (ngModelChange)=\"tp.turnOnOff()\"\n                (change)=\"onChange($event.target.value)\">\n              <label [for]=\"tp.description\">{{tp.description}}</label>\n            </div>\n          </li>\n        </ul>\n      </div>\n    </section>\n  </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"card-columns card-columns-2\">\n    <app-action [action]=\"act\" *ngFor=\"let act of gen.actions| filterMax; trackBy:getUnitId\"></app-action>\n  </div>\n</div>\n"
+module.exports = "<h1 class=\"text-capitalize no-mg-top\">{{gen.name}}</h1>\n\n<div *ngIf=\"gen.isEnding()\">\n  <clr-alert [clrAlertType]=\"'alert-warning'\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        结束时间： {{endTime()}} \n      </span>\n    </div>\n  </clr-alert>\n</div>\n\n<p>{{gen.description}}</p>\n<!-- <span>Owned: {{gen.quantity | format}}</span> -->\n\n\n<div *ngIf=\"gen.produces.length >0\">\n  <p *ngIf=\"gen.buyAction\">你可以购买 {{gen.buyAction.quantity | format}} 次\n    <span *ngIf=\"gameService.game.research.up1.owned()\"> 获得 +{{gen.getBoost().times(100) | format}}% 生产加成</span>\n  </p>\n  <div *ngIf=\"!gen.alwaysOn\">\n    <input type=\"range\" min=\"0\" max=\"100\" [(ngModel)]=\"gen.percentage\" (change)=\"onChange($event.target.value)\">\n    <span>让 {{gen.percentage}} % 进行工作</span>\n  </div>\n</div>\n\n<div *ngIf=\"gen.showTables\">\n\n  <div class=\"row\">\n    <div *ngIf=\"gen.produces.length >0\" class=\"col-xs-12 col-md-12 col-lg-6 col-xl-6\">\n      <h5>\n        <span class=\"text-capitalize\">{{gen.name}}</span>生产：</h5>\n      <table class=\"table table-compact\">\n        <thead>\n          <tr>\n            <th class=\"w-33\">生产</th>\n            <th class=\"w-33\">1个</th>\n            <th class=\"w-33\">全部</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let item of gen.produces | filterActive\" [ngClass]=\"{'bg-warning': item.efficiency.lessThan(0)}\">\n            <td class=\"w-33 text-capitalize\">\n              <a [routerLink]=\"['/main/unit/unit/'+item.product.id]\">{{item.product.name}}</a>\n            </td>\n            <td class=\"w-33\">{{item.getprodPerSec(false) | format}}</td>\n            <td class=\"w-33\">{{item.getprodPerSec().times(gen.quantity) | format}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n    <div class=\"col-xs-12 col-md-12 col-lg-6 col-xl-6\" *ngIf=\"gameService.game.research.bi.owned()\">\n      <div *ngIf=\"showProducers()\">\n        <h5>\n          <span class=\"text-capitalize\">{{gen.name}}</span>产量来自：</h5>\n        <table class=\"table  table-compact\">\n          <thead>\n            <tr>\n              <th class=\"w-33\">单位</th>\n              <th class=\"w-33\">数量</th>\n              <th class=\"w-33\">总共</th>\n            </tr>\n          </thead>\n          <tfoot>\n            <tr class=\"bg-info text-white\">\n              <td>总共</td>\n              <td>{{gen.totalProducers | format}}</td>\n              <td>{{gen.totalPerSec | format}}</td>\n            </tr>\n          </tfoot>\n          <tbody>\n            <tr *ngFor=\"let item of gen.producedBy | filterActive; trackBy:getUnitId\" [ngClass]=\"{'bg-warning': item.efficiency.lessThan(0)}\">\n              <td class=\"text-capitalize\">\n                <a [routerLink]=\"['/main/unit/unit/'+item.unit.id]\">{{item.unit.name}}</a>\n              </td>\n              <td>{{item.unit.quantity | format}}</td>\n              <td>{{item.getprodPerSec().times(item.unit.quantity) | format}}</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n</div>\n\n<div class=\"row\" *ngIf=\"gen.togableProductions\">\n  <div class=\"col-xs-12 col-md-12 col-lg-12 col-xl-12\">\n    <section class=\"form-block\">\n      <div class=\"form-group\">\n        <ul class=\"list-unstyled\">\n          <li *ngFor=\"let tp of gen.togableProductions | prodToglePipe\">\n            <div class=\"toggle-switch\">\n              <input type=\"checkbox\" [(ngModel)]=\"tp.uiModel\" [id]=\"tp.description\" (ngModelChange)=\"tp.turnOnOff()\"\n                (change)=\"onChange($event.target.value)\">\n              <label [for]=\"tp.description\">{{tp.description}}</label>\n            </div>\n          </li>\n        </ul>\n      </div>\n    </section>\n  </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"card-columns card-columns-2\">\n    <app-action [action]=\"act\" *ngFor=\"let act of gen.actions| filterMax; trackBy:getUnitId\"></app-action>\n  </div>\n</div>\n"
 
 /***/ }),
 
