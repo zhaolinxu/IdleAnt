@@ -225,7 +225,7 @@ export class Prestige implements WorldInterface {
     //#region Efficiency
     this.effList = new Array<Unit>()
     const names = [
-      "Composter", "Refinery", "Laser", "Hydroponics", "Planting"
+      "堆肥", "精炼", "激光", "水培", "种植"
     ]
     const effMatrix = [
       [

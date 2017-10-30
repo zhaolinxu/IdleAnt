@@ -305,7 +305,7 @@ export class TimeWarp extends Action {
         return true
       }),
       [new Cost(game.prestige.time, timeUnits, Decimal(1))],
-      "Time warp by " + timeName, game
+      "时间扭曲通过 " + timeName, game
     )
     this.initialize()
   }
