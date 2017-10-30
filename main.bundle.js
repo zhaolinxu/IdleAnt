@@ -1699,7 +1699,7 @@ var TimeWarp = (function (_super) {
             game.longUpdate(n.times(timeUnits).times(1000).toNumber(), true);
             _this.game.isChanged = true;
             return true;
-        }), [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](game.prestige.time, timeUnits, Decimal(1))], "Time warp by " + timeName, game) || this;
+        }), [new __WEBPACK_IMPORTED_MODULE_1__cost__["a" /* Cost */](game.prestige.time, timeUnits, Decimal(1))], "时间扭曲通过 " + timeName, game) || this;
         _this.timeUnits = timeUnits;
         _this.timeName = timeName;
         _this.initialize();
@@ -3738,7 +3738,7 @@ var Prestige = (function () {
         //#region Efficiency
         this.effList = new Array();
         var names = [
-            "Composter", "Refinery", "Laser", "Hydroponics", "Planting"
+            "堆肥", "精炼", "激光", "水培", "种植"
         ];
         var effMatrix = [
             [
