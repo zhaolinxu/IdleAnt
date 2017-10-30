@@ -32,26 +32,26 @@ export class Bee implements WorldInterface {
 
   declareStuff() {
 
-    this.foragingBee = new Unit(this.game, "forBee", "Foraging Bee",
-      "Foraging Bee yields nectar.")
+    this.foragingBee = new Unit(this.game, "forBee", "觅食蜜蜂",
+      "觅食蜜蜂产出花蜜。")
 
-    this.queenBee = new Unit(this.game, "qBee", "Queen Bee",
-      "Yields Foraging Bee.")
+    this.queenBee = new Unit(this.game, "qBee", "蜂后",
+      "产生觅食蜜蜂。")
 
-    this.hiveBee = new Unit(this.game, "hBee", "Hive Bee",
-      "Hives yields queens and instructs foraging bees to become workers.")
+    this.hiveBee = new Unit(this.game, "hBee", "蜂巢",
+      "蜂巢产生皇后，并指示觅食的蜜蜂成为工人。")
 
-    this.workerBee = new Unit(this.game, "worBee", "Worker Bee",
-      "Worker Bee converts nectar to honey.")
+    this.workerBee = new Unit(this.game, "worBee", "工蜂",
+      "工蜜蜂将花蜜转成蜂蜜。")
 
-    this.scientistBee = new Unit(this.game, "scBee", "Scientist Bee",
-      "Scientist bee study honey properties.")
+    this.scientistBee = new Unit(this.game, "scBee", "科学家蜜蜂",
+      "科学家蜜蜂研究蜂蜜属性。")
 
-    this.foodBee = new Unit(this.game, "foodBee", "Food Bee",
-      "Converts honey to food.")
+    this.foodBee = new Unit(this.game, "foodBee", "食品蜜蜂",
+      "将蜂蜜转化为食物。")
 
-    this.universityBee = new Unit(this.game, "universityBee", "University of Bee",
-      "Instruct new Scientist Bee")
+    this.universityBee = new Unit(this.game, "universityBee", "蜜蜂大学",
+      "指导新的科学家蜜蜂")
 
     this.listBee.push(this.hiveBee)
     this.listBee.push(this.queenBee)
@@ -196,7 +196,7 @@ export class Bee implements WorldInterface {
     //  Research
     this.universityResBee2 = new Research(
       "uniResBee2",
-      "Department of Bee Engineering", "Bee university also yield bee engineers.",
+      "蜜蜂工程系", "蜜蜂大学还产生蜜蜂工程师。",
       [new Cost(this.game.baseWorld.science, Decimal(7E7))],
       [this.engineersProd],
       this.game
@@ -205,7 +205,7 @@ export class Bee implements WorldInterface {
     //  Research
     this.universityResBee = new Research(
       "universityResBee",
-      "University of Bee", "Get an university of bee.",
+      "蜜蜂大学", "获得一所蜜蜂大学",
       [new Cost(this.game.baseWorld.science, Decimal(6E6))],
       [this.universityBee, this.universityResBee2],
       this.game
@@ -214,7 +214,7 @@ export class Bee implements WorldInterface {
     //  Research
     this.advancedBee = new Research(
       "advBee",
-      "Advanced Bee", "More jobs for bees.",
+      "高级蜜蜂", "蜜蜂更多的工作种类。",
       [new Cost(this.game.baseWorld.science, Decimal(1E3))],
       [this.scientistBee, this.foodBee, this.universityResBee],
       this.game
@@ -223,7 +223,7 @@ export class Bee implements WorldInterface {
     //    Bee
     this.beeResearch = new Research(
       "beeRes",
-      "Bee", "Unlock Bee !",
+      "蜜蜂", "解锁蜜蜂！",
       [new Cost(this.game.baseWorld.science, Decimal(0))],
       [this.game.baseWorld.nectar, this.foragingBee, this.workerBee, this.game.baseWorld.honey, this.advancedBee],
       this.game
@@ -234,7 +234,7 @@ export class Bee implements WorldInterface {
   addWorld() {
 
     World.worldPrefix.push(
-      new World(this.game, "Apian", "",
+      new World(this.game, "蜜蜂的", "",
         [this.game.machines.honeyMaker, this.game.engineers.beeEnginer],
         [],
         [
@@ -249,7 +249,7 @@ export class Bee implements WorldInterface {
     )
 
     World.worldSuffix.push(
-      new World(this.game, "of Bee", "",
+      new World(this.game, "蜜蜂", "",
         [this.game.machines.honeyMaker, this.game.engineers.beeEnginer],
         [],
         [

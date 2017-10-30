@@ -54,8 +54,8 @@ export class Researchs implements WorldInterface {
     //    Bi
     this.bi = new Research(
       "biResea",
-      "Business Intelligence",
-      "See who produce or consume your resources.",
+      "商业智能",
+      "查看资源的生产者或消耗者。",
       [new Cost(this.game.baseWorld.science, Decimal(2E3))],
       [],
       this.game
@@ -64,8 +64,8 @@ export class Researchs implements WorldInterface {
     // //   Devolution
     // this.devolution = new Research(
     //   "devoluti",
-    //   "De-Evolution",
-    //   "Revert the effect of evolution.",
+    //   "反进化",
+    //   "还原进化的影响。",
     //   [new Cost(this.game.baseWorld.science, Decimal(1))],
     //   [],
     //   this.game,
@@ -78,8 +78,8 @@ export class Researchs implements WorldInterface {
     //    Evolution
     this.evolution = new Research(
       "evolution",
-      "Evolution",
-      "Increase the resources need to travel to a new world (x5) and also increase the experience you will gain (x3).",
+      "进化",
+      "增加旅游到新世界的资源（x5），并增加你将获得的经验（x3）。",
       [new Cost(this.game.baseWorld.science, Decimal(1E10))],
       [],
       this.game,
@@ -107,7 +107,7 @@ export class Researchs implements WorldInterface {
     //    Escape
     this.escape = new Research(
       "escapism",
-      "Escapism", "Reduce the resources need to travel to a new world by 50%.",
+      "逃避", "降低50％前往一个新的世界的资源需求。",
       [new Cost(this.game.baseWorld.science, Decimal(5E10))],
       [],
       this.game,
@@ -120,7 +120,7 @@ export class Researchs implements WorldInterface {
     //    Adaptation
     this.adaptation = new Research(
       "adaptation",
-      "Adaptation", "Reduce the resources need to travel to a new world by 50%.",
+      "适应", "降低50％前往一个新的世界的资源需求。",
       [new Cost(this.game.baseWorld.science, Decimal(5E8))],
       [this.escape],
       this.game,
@@ -133,7 +133,7 @@ export class Researchs implements WorldInterface {
     //  Time Warp
     this.timeWarp = new Research(
       "timeWarp",
-      "Time warp", "4 hour of update. Use it use it wisely.",
+      "时间扭曲", "4小时更新。 明智地使用它。",
       [new Cost(this.game.baseWorld.science, Decimal(1))],
       [],
       this.game,
@@ -177,7 +177,7 @@ export class Researchs implements WorldInterface {
     //    University 2
     this.publicLesson = new Research(
       "publicLesson",
-      "Public Lesson", "University also produces students.",
+      "公共课", "大学还生产学生。",
       [new Cost(this.game.baseWorld.science, Decimal(1E5))],
       [this.game.science.studentProduction, this.advancedLesson],
       this.game
@@ -186,7 +186,7 @@ export class Researchs implements WorldInterface {
     //    University
     this.universityRes = new Research(
       "University",
-      "University", "Unlock university.",
+      "大学", "解锁大学。",
       [new Cost(this.game.baseWorld.science, Decimal(6E4))],
       [this.game.science.university, this.publicLesson],
       this.game
@@ -195,7 +195,7 @@ export class Researchs implements WorldInterface {
     //    Scientific Method
     this.scientificMethod = new Research(
       "scientificMethod",
-      "Scientific Method", "Science production +100%",
+      "科学方法", "科学生产 +100%",
       [new Cost(this.game.baseWorld.science, Decimal(4E3))],
       [this.universityRes],
       this.game
@@ -214,7 +214,7 @@ export class Researchs implements WorldInterface {
     const deps: Array<Unlocable> = this.game.engineers.listDep
     this.departmentRes = new Research(
       "departementsRes",
-      "Departments", "Departments yeild engineers.",
+      "部门", "部门产生工程师。",
       [new Cost(this.game.baseWorld.science, Decimal(1E11))],
       deps,
       this.game
@@ -225,7 +225,7 @@ export class Researchs implements WorldInterface {
     // //eng.push(this.stageRes)
     this.engineerRes = new Research(
       "engineerRes",
-      "Engineer", "Engineer will slowly build machinery.",
+      "工程师", "工程师将慢慢建造机器。",
       [new Cost(this.game.baseWorld.science, Decimal(3E6))],
       eng.concat(this.departmentRes),
       this.game
@@ -234,7 +234,7 @@ export class Researchs implements WorldInterface {
     //    Planter
     this.planterResearch = new Research(
       "planRes",
-      "Planting", "Tree planting is the process of transplanting tree seedlings.",
+      "种植", "植树是移植树苗的过程。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.planterAnt],
       this.game
@@ -243,7 +243,7 @@ export class Researchs implements WorldInterface {
     //    Hydro
     this.hydroResearch = new Research(
       "hydroRes",
-      "Hydroponics", "Hydroponics is the art of growing plants without soil.",
+      "水培", "水培是无土栽培植物的艺术。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.hydroAnt],
       this.game
@@ -270,7 +270,7 @@ export class Researchs implements WorldInterface {
     //    Compost
     this.composterResearch = new Research(
       "compRes",
-      "Compost", "Wood can be degraded to fertile soil.",
+      "堆肥", "木材可以降解成肥沃的土壤。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.composterAnt],
       this.game
@@ -279,7 +279,7 @@ export class Researchs implements WorldInterface {
     //    Experiment
     this.experimentResearch = new Research(
       "experimentRes",
-      "Experiment", "Unlock scientist Ant",
+      "实验", "解锁科学家蚂蚁",
       [new Cost(this.game.baseWorld.science, Decimal(800))],
       [this.game.science.scientist, this.scientificMethod],
       this.game
@@ -321,7 +321,7 @@ export class Researchs implements WorldInterface {
     //    Up Combined
     this.upCombined = new Research(
       "upComb",
-      "Combined bonus", "This is the ultimate bonus: multiply unit's bonus per hire bonus.",
+      "综合加成", "这是最终的加成：单位的加成乘以每个雇用的加成。",
       [new Cost(this.game.baseWorld.science, Decimal(1E10))],
       [],
       this.game

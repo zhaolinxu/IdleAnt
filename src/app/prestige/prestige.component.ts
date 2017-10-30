@@ -24,7 +24,7 @@ export class PrestigeComponent implements OnInit {
   skipWorld() { this.skip = true }
   getTitle() {
     if (this.skip)
-      return "You are skipping this world!"
+      return "你正在跳过这个世界！"
     else {
       if (!this.travelAv())
         return "你还不能去到一个新的世界"

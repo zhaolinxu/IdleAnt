@@ -33,24 +33,24 @@ export class Infestation implements WorldInterface {
 
     this.listInfestation = new Array<Unit>()
 
-    this.poisonousPlant = new Unit(this.game, "poisPlant", "Poisonous Plant",
-      "This plant may kill them all.")
-    this.poisonousPlant2 = new Unit(this.game, "poisPlant2", "Old Poisonous Plant",
-      "Process poisonus plants!.")
-    this.disinfestationAnt = new Unit(this.game, "defAnt", "Disinfestation Ant",
-      "Destroy poisonus plants.")
-    this.flametrowerAnt = new Unit(this.game, "flameAnt", "Flamethrower Ant",
-      "Burn poisonus plants.")
-    this.weedkiller = new Unit(this.game, "weedkiller", "Weedkiller",
-      "Destroy poisonus plants efficently.")
-    this.chemistAnt = new Unit(this.game, "chemistAnt", "Chemist Ant",
-      "Proces weedkiller.")
-    this.disinfestationBeetle = new Unit(this.game, "disinfestationBeetle", "Disinfestation Beetle",
-      "Beetle are also good at killing plants.")
-    this.flametrowerBeetle = new Unit(this.game, "flametrowerBeetle", "Flamethrower Beetle",
-      "A beetle with a flametrower.")
-    this.chemistBee = new Unit(this.game, "chemistBee", "Chemist Bee",
-      "A chemist bee.")
+    this.poisonousPlant = new Unit(this.game, "poisPlant", "有毒植物",
+      "这种植物可以把他们全部杀死。")
+    this.poisonousPlant2 = new Unit(this.game, "poisPlant2", "老有毒植物",
+      "处理有毒植物！")
+    this.disinfestationAnt = new Unit(this.game, "defAnt", "消灭蚂蚁",
+      "摧毁有毒植物。")
+    this.flametrowerAnt = new Unit(this.game, "flameAnt", "火焰蚂蚁",
+      "烧掉有毒植物。")
+    this.weedkiller = new Unit(this.game, "weedkiller", "除草剂",
+      "有效地破坏有毒植物。")
+    this.chemistAnt = new Unit(this.game, "chemistAnt", "化学家蚂蚁",
+      "处理除草剂。")
+    this.disinfestationBeetle = new Unit(this.game, "disinfestationBeetle", "杀虫甲壳虫",
+      "甲壳虫也擅长杀死植物。")
+    this.flametrowerBeetle = new Unit(this.game, "flametrowerBeetle", "火焰喷射器甲壳虫",
+      "具有火焰喷射器的甲虫。")
+    this.chemistBee = new Unit(this.game, "chemistBee", "化学家蜜蜂",
+      "化学家蜜蜂。")
 
     this.poisonousPlant2.alwaysOn = true
 
@@ -64,12 +64,12 @@ export class Infestation implements WorldInterface {
     this.listInfestation.push(this.flametrowerBeetle)
     this.listInfestation.push(this.chemistBee)
 
-    this.game.lists.push(new TypeList("Infestation", this.listInfestation))
+    this.game.lists.push(new TypeList("侵扰", this.listInfestation))
 
     //    Weedkiller
     this.weedkillerRes = new Research(
       "weedkillerRes",
-      "Weedkiller", "Weedkiller will slowly kill poisonus plants.",
+      "除草剂", "除草剂会慢慢杀死有毒植物。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.weedkiller, this.chemistAnt],
       this.game
@@ -78,7 +78,7 @@ export class Infestation implements WorldInterface {
     //    Flame
     this.flametrowerRes = new Research(
       "flametrowerRes",
-      "Flamethrower", "Burn poisonus plants.",
+      "喷火器", "烧掉有毒植物。",
       [new Cost(this.game.baseWorld.science, Decimal(1E3))],
       [this.flametrowerAnt, this.flametrowerBeetle],
       this.game
@@ -87,7 +87,7 @@ export class Infestation implements WorldInterface {
     //    Disinfestation
     this.basicDisinfestationRes = new Research(
       "basicDisinfestationRes",
-      "Disinfestation", "Unlock basic disinfestation units.",
+      "杀虫", "解锁基本灭虫单位。",
       [new Cost(this.game.baseWorld.science, Decimal(100))],
       [
         this.disinfestationAnt, this.disinfestationBeetle,
@@ -192,7 +192,7 @@ export class Infestation implements WorldInterface {
 
   public addWorld() {
     World.worldPrefix.push(
-      new World(this.game, "Infested", "",
+      new World(this.game, "被感染的", "",
         [],
         [],
         [],
@@ -210,7 +210,7 @@ export class Infestation implements WorldInterface {
 
     World.worldSuffix.push(
 
-      new World(this.game, "of Infestation", "",
+      new World(this.game, "为患", "",
         [this.basicDisinfestationRes],
         [],
         [],

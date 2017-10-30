@@ -12,7 +12,7 @@
           </div>
         </clr-alert>
       </div>
-      <p> You need the travel research and: </p>
+      <p> 您需要旅行研究： </p>
       <table class="nowrap" style="width:100%">
         <tbody>
           <tr *ngFor="let cost of gameService.game.world.toUnlock">
@@ -36,7 +36,7 @@
       </table>
       <div *ngIf="this.gameService.game.world.toUnlockMax.length >0">
 
-        <p>You must have less than:</p>
+        <p>你的有毒植物必须少于：</p>
         <table class="nowrap" style="width:100%">
           <tbody>
             <tr *ngFor="let cost of gameService.game.world.toUnlockMax">
@@ -59,15 +59,14 @@
           </tbody>
         </table>
       </div>
-      <button class="btn btn-warning-outline" (click)="skipWorld()">Skip</button>
+      <button class="btn btn-warning-outline" (click)="skipWorld()">跳过</button>
       <p> 通过跳过你将能够改变世界，但你不会得到 {{gameService.game.getExperience()
         | format}} 经验。</p>
     </div>
 
     <div *ngIf="travelAv()">
       <div *ngIf="!skip">
-        <p> By going away you will earn {{gameService.game.getExperience() | format}} experience. High level
-          worlds will yeild more experience but require more resource. </p>
+        <p>离开你将获得 {{gameService.game.getExperience() | format}} 个经验。 高层次的世界将会产生更多的经验，但需要更多的资源。</p>
       </div>
       <div *ngIf="skip">
         <p> 如果选择跳过这个世界，你将不会获得任何经验！ 如果你想改变主意，请切换到 “旅行” 之外的另一个选项卡。
@@ -79,7 +78,7 @@
           <span class="nowrap">{{cost.basePrice | format}}&nbsp;{{cost.unit.name}},</span>
         </span>
         <div *ngIf="this.gameService.game.world.toUnlockMax.length >0">
-          and less than:
+          并且要低于:
           <span *ngFor="let cost of gameService.game.world.toUnlockMax">
             <span class="nowrap">{{cost.basePrice | format}}&nbsp;{{cost.unit.name}},</span>
           </span>
@@ -112,14 +111,14 @@
                     {{p[0].name}}: {{p[0].description }}
                   </span>
                   <span *ngIf="p[1].greaterThan(0)">
-                    Start with {{p[1] | format }} {{p[0].name}}
+                    开局拥有 {{p[1] | format }} {{p[0].name}}
                   </span>
                 </li>
                 <li *ngFor="let p of world.prodMod">
                   生产加成： {{p[0].name}} x {{p[1] }}
                 </li>
                 <li *ngFor="let p of world.unitMod">
-                    {{p[0].name}} yield and consume x{{p[1]}} more resources
+                    {{p[0].name}} 产量和消耗 x{{p[1]}} 的资源
                   <!-- {{p[0].name}} production x {{p[1] }} -->
                  </li>
                 <li *ngFor="let p of world.unitPrice"> {{p[0].name}} price x {{p[1] }} </li>

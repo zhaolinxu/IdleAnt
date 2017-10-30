@@ -21,7 +21,7 @@
 
     </div>
     <div class="header-actions">
-<a class="nav-link nav-icon" href="https://zhaolinxu.github.io/IdleAnt/" title="游戏不能直接刷新，想刷新页面请点这里">
+<a class="nav-link nav-icon" href="https://zhaolinxu.github.io/IdleAnt/" title="游戏不能直接刷新，想刷新页面请先“导出存档”并备份，然后点这里，！">
         刷新页面
       </a>
       <clr-dropdown>
@@ -30,7 +30,7 @@
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a clrDropdownItem (click)="all100()">All 100%</a>
+          <a clrDropdownItem (click)="all100()">全部 100%</a>
 
           <clr-dropdown *ngFor="let list of gameService.game.lists | filterListNotEmpty; trackBy:getListId">
             <button type="button" clrDropdownTrigger>{{list.type}}</button>

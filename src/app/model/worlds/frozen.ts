@@ -36,16 +36,16 @@ export class Frozen implements WorldInterface {
 
 
     const iceResearch2 = new Research(
-      "iceRes2", "Flametrower",
-      "Use fire to melt ice.",
+      "iceRes2", "喷火器",
+      "用火融化冰。",
       [new Cost(this.game.baseWorld.science, Decimal(800))],
       [this.iceMelter],
       this.game
     )
 
     this.iceResearch = new Research(
-      "iceRes", "Ice",
-      "Ice",
+      "iceRes", "冰",
+      "冰",
       [new Cost(this.game.baseWorld.science, Decimal(30))],
       [this.iceAnt, this.iceDrillAnt, iceResearch2],
       this.game
@@ -104,7 +104,7 @@ export class Frozen implements WorldInterface {
   public addWorld() {
     World.worldPrefix.push(
 
-      new World(this.game, "Cold", "",
+      new World(this.game, "寒冷", "",
         [],
         [
           [this.game.baseWorld.food, Decimal(0.6)],
@@ -116,7 +116,7 @@ export class Frozen implements WorldInterface {
         [[this.iceResearch, Decimal(0)]],
         Decimal(3)
       ),
-      new World(this.game, "Freezing", "",
+      new World(this.game, "冻结", "",
         [
           this.game.machines.iceCollector,
           this.game.machines.iceCompacter,

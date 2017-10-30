@@ -4,17 +4,17 @@
     <p>
       游戏每3分钟自动保存。 您还可以手动保存，加载和导出保存游戏。 游戏存档存储在本地存储中，如果你没有备份存档，请不要清除浏览器缓存。
     </p>
-    <strong>警告：清除按钮将会删除你的所有游戏记录！</strong>
+    <strong>警告：重置按钮将会删除你的所有游戏记录，从零开始游戏！</strong>
 
     <div class="form-group">
       <button class="btn btn-success" (click)="save($event)">保存</button>
       <button class="btn btn-primary" (click)="load($event)">加载</button>
-      <button class="btn btn-danger" (click)="clear($event)">清除</button>
+      <button class="btn btn-danger" (click)="clear($event)">重置</button>
     </div>
     <div class="form-group">
       <h5>导出 / 导入存档</h5>
       <label for="save">保存</label>
-      <textarea ref-textarea class="form-control" rows="1" id="save" [(ngModel)]="stringSave"></textarea>
+      <textarea ref-textarea class="form-control" rows="7" id="save" [(ngModel)]="stringSave"></textarea>
       <button class="btn btn-success" (click)="export($event)">导出</button>
       <button class="btn btn-primary" (click)="import($event)">导入</button>
     </div>

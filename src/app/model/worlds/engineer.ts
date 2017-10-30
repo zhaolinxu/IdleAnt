@@ -94,31 +94,31 @@ export class Engineers implements WorldInterface {
 
     this.game.lists.push(new TypeList("工程师", this.listEnginer))
 
-    this.composterDep = new Unit(this.game, "depaCo", "堆肥部",
+    this.composterDep = new Unit(this.game, "depaCo", "堆肥部门",
       "产生工程师。")
-    this.laserDep = new Unit(this.game, "depaLa", "Laser Department",
-      "Yeild engineers.")
-    this.hydroDep = new Unit(this.game, "depaHy", "Hydro Department",
-      "Yeild engineers.")
-    this.plantingDep = new Unit(this.game, "depaSo", "Planting Department",
-      "Yeild engineers.")
-    this.refineryDep = new Unit(this.game, "depaRef", "Refine Department",
-      "Yeild engineers.")
+    this.laserDep = new Unit(this.game, "depaLa", "激光部门",
+      "产生工程师。")
+    this.hydroDep = new Unit(this.game, "depaHy", "水培部门",
+      "产生工程师。")
+    this.plantingDep = new Unit(this.game, "depaSo", "种植部门",
+      "产生工程师。")
+    this.refineryDep = new Unit(this.game, "depaRef", "精炼部门",
+      "产生工程师。")
 
-    this.mineDep = new Unit(this.game, "depaMi", "Mining Department",
-      "Yeild engineers.")
-    this.sandDep = new Unit(this.game, 'depaSa', "Sand Department",
-      'Yeild engineers.')
-    this.woodDep = new Unit(this.game, "depaWo", "Wood Department",
-      "Yeild engineers.")
-    this.beeDep = new Unit(this.game, "depaBee", "Bee Department",
-      "Yeild engineers.")
-    this.iceDep = new Unit(this.game, "depaIce", "Ice Department",
-      "Yeild engineers.")
-    this.iceCompDep = new Unit(this.game, "depaIceComp", "Compacting Department",
-      "Yeild engineers.")
-    this.lensDep = new Unit(this.game, "depaEnginer", "Burning Lens Department",
-      "Yeild engineers.")
+    this.mineDep = new Unit(this.game, "depaMi", "采矿部门",
+      "产生工程师。")
+    this.sandDep = new Unit(this.game, 'depaSa', "挖沙部门",
+      '产生工程师。')
+    this.woodDep = new Unit(this.game, "depaWo", "伐木部门",
+      "产生工程师。")
+    this.beeDep = new Unit(this.game, "depaBee", "蜜蜂部门",
+      "产生工程师。")
+    this.iceDep = new Unit(this.game, "depaIce", "采冰部门",
+      "产生工程师。")
+    this.iceCompDep = new Unit(this.game, "depaIceComp", "压缩部门",
+      "产生工程师。")
+    this.lensDep = new Unit(this.game, "depaEnginer", "燃烧镜头部门",
+      "产生工程师。")
 
     this.sandDep.avabileBaseWorld = false
     this.mineDep.avabileBaseWorld = false

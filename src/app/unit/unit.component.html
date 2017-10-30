@@ -15,7 +15,7 @@
 
 
 <div *ngIf="gen.produces.length >0">
-  <p *ngIf="gen.buyAction">你可以购买 {{gen.buyAction.quantity | format}} 次
+  <p *ngIf="gen.buyAction">你已购买 {{gen.buyAction.quantity | format}} 次
     <span *ngIf="gameService.game.research.up1.owned()"> 获得 +{{gen.getBoost().times(100) | format}}% 生产加成</span>
   </p>
   <div *ngIf="!gen.alwaysOn">

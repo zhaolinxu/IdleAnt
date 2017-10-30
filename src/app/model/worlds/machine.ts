@@ -243,7 +243,7 @@ export class Machine implements WorldInterface {
 
   public addWorld() {
     World.worldPrefix.push(
-      new World(this.game, "Mechanized", "",
+      new World(this.game, "机械化", "",
         [], [], [], [], [],
         [
           [this.composterStation, Decimal(0.2)],
@@ -256,7 +256,7 @@ export class Machine implements WorldInterface {
       ))
 
     World.worldSuffix.push(
-      new World(this.game, "of Machine", "",
+      new World(this.game, "机器", "",
         [], [], [], [], [],
         [
           [this.composterStation, Decimal(0.2)],

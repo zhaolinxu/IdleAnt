@@ -28,20 +28,20 @@ export class Forest implements WorldInterface {
   declareStuff() {
     this.listForest = new Array<Unit>()
 
-    this.larva = new Unit(this.game, "larva", "Larva",
-      "Larva is the juvenile form of many insect.")
-    this.beetle = new Unit(this.game, "beetle", "Beetle",
-      "Yield various resources.")
-    this.ambrosiaBeetle = new Unit(this.game, "ambrosiaBeetle", "Ambrosia beetle",
-      "Ambrosia beetle yield wood.")
-    this.beetleNest = new Unit(this.game, "beetleNest", "Beetle Nest",
-      "Beetle Nest yield larvae.")
-    this.ladybird = new Unit(this.game, "ladybird", "Ladybird",
-      "Ladybird yield science.")
-    this.beetleColony = new Unit(this.game, "beetleColony", "Beetle Colony",
-      "Beetle Colony yield nest.")
-    this.powderpostBeetle = new Unit(this.game, "powder", "Powderpost Beetle",
-      "Powderpost beetles are a group of woodboring beetles.")
+    this.larva = new Unit(this.game, "larva", "幼虫",
+      "幼虫是许多昆虫的少年形式。")
+    this.beetle = new Unit(this.game, "beetle", "甲虫",
+      "甲虫生产各种资源。")
+    this.ambrosiaBeetle = new Unit(this.game, "ambrosiaBeetle", "豚草甲虫",
+      "豚草甲虫产木材。")
+    this.beetleNest = new Unit(this.game, "beetleNest", "甲壳虫巢",
+      "甲壳虫巢生产幼虫。")
+    this.ladybird = new Unit(this.game, "ladybird", "瓢虫",
+      "瓢虫生产科学。")
+    this.beetleColony = new Unit(this.game, "beetleColony", "甲虫殖民地",
+      "甲壳虫殖民地生产虫巢。")
+    this.powderpostBeetle = new Unit(this.game, "powder", "粉虱甲虫",
+      "粉虱甲虫是一群木材甲虫。")
 
     this.listForest.push(this.beetleColony)
     this.listForest.push(this.beetleNest)
@@ -51,39 +51,39 @@ export class Forest implements WorldInterface {
     this.listForest.push(this.ambrosiaBeetle)
     this.listForest.push(this.ladybird)
 
-    this.game.lists.push(new TypeList("Beetle", this.listForest))
+    this.game.lists.push(new TypeList("甲虫", this.listForest))
 
     this.beetleWoodProduction = new Production(this.beetle, Decimal(0.8), false)
     this.beetleSoilProduction = new Production(this.beetle, Decimal(0.4), false)
     this.beetleCrystalProduction = new Production(this.beetle, Decimal(0.2), false)
 
-    const beetleWood = new Research("beetleWood", "Woodcutting training",
-      "Beetle also produces wood",
+    const beetleWood = new Research("beetleWood", "伐木训练",
+      "甲虫也生产木材",
       [new Cost(this.game.baseWorld.science, Decimal(100))],
       [this.beetleWoodProduction],
       this.game
     )
-    const beetleSoil = new Research("beetleSoil", "Soil training",
-      "Beetle also produces soil",
+    const beetleSoil = new Research("beetleSoil", "土壤训练",
+      "甲虫也生产土壤",
       [new Cost(this.game.baseWorld.science, Decimal(1E3))],
       [this.beetleSoilProduction],
       this.game
     )
-    const beetleCrystal = new Research("beetleCrystal", "Mining training",
-      "Beetle also produces crystal",
+    const beetleCrystal = new Research("beetleCrystal", "采矿培训",
+      "甲虫也产生水晶",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.beetleCrystalProduction],
       this.game
     )
 
     const advancedBeetle = new Research("advBeetle",
-      "Advanced Beetle Jobs", "More beetle jobs",
+      "高级甲虫作业", "更多的甲虫工作",
       [new Cost(this.game.baseWorld.science, Decimal(3E3))],
       [this.ambrosiaBeetle, this.ladybird],
       this.game
     )
     this.beetleResearch = new Research("beetleRes",
-      "Beetle", "Unlock Beetle",
+      "甲虫", "解锁甲壳虫",
       [new Cost(this.game.baseWorld.science, Decimal(600))],
       [this.larva, advancedBeetle, beetleWood, beetleSoil, beetleCrystal],
       this.game
@@ -217,7 +217,7 @@ export class Forest implements WorldInterface {
   addWorld() {
 
     World.worldTypes.push(
-      new World(this.game, "Forest", "A forest",
+      new World(this.game, "森林", "一片森林",
         [
           this.game.engineers.woodEnginer, this.game.machines.loggingMachine,
           this.game.infestation.disinfestationBeetle, this.game.infestation.flametrowerBeetle
@@ -232,7 +232,7 @@ export class Forest implements WorldInterface {
     )
 
     World.worldSuffix.push(
-      new World(this.game, "Of Beetle", "",
+      new World(this.game, "甲虫", "",
         [
           this.game.infestation.disinfestationBeetle, this.game.infestation.flametrowerBeetle
         ],

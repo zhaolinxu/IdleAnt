@@ -386,7 +386,7 @@ export class BaseWorld implements WorldInterface {
         [],
         []
       ),
-      new World(this.game, "Mine", "A mine",
+      new World(this.game, "Mine", "一个矿井",
         [this.game.machines.mine, this.game.engineers.mineEnginer],
         [
           [this.game.baseWorld.crystal, Decimal(1.2)],
@@ -399,25 +399,25 @@ export class BaseWorld implements WorldInterface {
 
     World.worldPrefix.push(
       new World(this.game, "", "", [], [], []),
-      new World(this.game, "Hot", "",
+      new World(this.game, "炎热", "",
         [],
         [[this.game.baseWorld.food, Decimal(2)]],
         [], [], [], [],
         Decimal(2)
       ),
-      new World(this.game, "Arid", "",
+      new World(this.game, "干旱", "",
         [],
         [[this.game.baseWorld.fungus, Decimal(0.5)]],
         [], [], [], [],
         Decimal(3)
       ),
-      new World(this.game, "Wooded", "",
+      new World(this.game, "树木繁茂", "",
         [this.game.engineers.woodEnginer, this.game.machines.loggingMachine],
         [[this.game.baseWorld.wood, Decimal(2)]],
         [], [], [], [],
         Decimal(1.5)
       ),
-      new World(this.game, "Crystallized", "",
+      new World(this.game, "结晶", "",
         [this.game.machines.mine, this.game.engineers.mineEnginer],
         [
           [this.game.baseWorld.crystal, Decimal(1.5)],
@@ -426,7 +426,7 @@ export class BaseWorld implements WorldInterface {
         ],
         []
       ),
-      new World(this.game, "Dying", "",
+      new World(this.game, "垂死的", "",
         [],
         [
           [this.food, Decimal(0.5)],
@@ -438,7 +438,7 @@ export class BaseWorld implements WorldInterface {
         [], [], [], [],
         Decimal(4.5)
       ),
-      new World(this.game, "Rainy", "",
+      new World(this.game, "多雨的", "",
         [],
         [
           [this.wood, Decimal(1.5)],
@@ -446,7 +446,7 @@ export class BaseWorld implements WorldInterface {
         ], [], [], [], [],
         Decimal(1.5)
       ),
-      new World(this.game, "Foggy", "",
+      new World(this.game, "有雾", "",
         [],
         [
           [this.wood, Decimal(0.7)],
@@ -454,14 +454,14 @@ export class BaseWorld implements WorldInterface {
         ], [], [], [], [],
         Decimal(3)
       ),
-      new World(this.game, "Technological", "",
+      new World(this.game, "技术", "",
         [],
         [
           [this.science, Decimal(1.5)]
         ], [], [], [], [],
         Decimal(1.5)
       ),
-      new World(this.game, "Starving", "",
+      new World(this.game, "饥饿", "",
         [],
         [
           [this.food, Decimal(0.3)]
@@ -473,7 +473,7 @@ export class BaseWorld implements WorldInterface {
     World.worldSuffix.push(
 
       new World(this.game, "", "", [], [], []),
-      new World(this.game, "of Fungus", "",
+      new World(this.game, "的真菌", "",
         [],
         [[this.game.baseWorld.fungus, Decimal(2)]],
         [new Cost(this.game.baseWorld.fungus, Decimal(1E7))],
@@ -481,25 +481,25 @@ export class BaseWorld implements WorldInterface {
         Decimal(3.5)
       ),
 
-      new World(this.game, "of Ant", "",
+      new World(this.game, "的蚂蚁", "",
         [], [], [],
         [[this.littleAnt, Decimal(2)]],
         [], [],
         Decimal(2)
       ),
-      new World(this.game, "of Scientist", "",
+      new World(this.game, "的科学家", "",
         [], [], [],
         [[this.game.science.scientist, Decimal(2)]],
         [], [],
         Decimal(2)
       ),
-      new World(this.game, "of Farming", "",
+      new World(this.game, "的农民", "",
         [], [], [],
         [[this.farmer, Decimal(2)]],
         [], [],
         Decimal(2)
       ),
-      new World(this.game, "of Crystall", "",
+      new World(this.game, "的水晶", "",
         [this.game.machines.mine, this.game.engineers.mineEnginer],
         [[this.crystal, Decimal(2)]],
         [], [], [], [],

@@ -50,7 +50,7 @@ export class Beach implements WorldInterface {
     //    lobster
     this.lobsterRes = new Research(
       "lobsterRes",
-      "Lobsters", "Unlock lobsters.",
+      "龙虾", "解锁龙虾。",
       [new Cost(this.game.baseWorld.science, Decimal(1E5))],
       [this.lobster],
       this.game
@@ -59,7 +59,7 @@ export class Beach implements WorldInterface {
     //    shrimp
     this.shrimpRes = new Research(
       "shrimpRes",
-      "Shrimps", "Unlock shrimps.",
+      " 虾", "解锁虾。",
       [new Cost(this.game.baseWorld.science, Decimal(2E3))],
       [this.shrimp],
       this.game
@@ -68,7 +68,7 @@ export class Beach implements WorldInterface {
     //    Crab Jobs
     this.crabJobRes = new Research(
       "crabJobRes",
-      "Crab Jobs", "Unlock more jobs for your crab.",
+      "螃蟹作业", "为您的螃蟹解锁更多的工作。",
       [new Cost(this.game.baseWorld.science, Decimal(1.5E3))],
       [this.crabFarmer, this.crabScientist],
       this.game
@@ -77,7 +77,7 @@ export class Beach implements WorldInterface {
     //    Research
     this.seaRes = new Research(
       "seaRes",
-      "Sea Helpers", "Unlock Sea Helpers.",
+      "海上助手", "解锁海上助手。",
       [new Cost(this.game.baseWorld.science, Decimal(30))],
       [this.crab, this.crabQueen, this.crabJobRes, this.shrimpRes, this.lobsterRes],
       this.game
@@ -203,7 +203,7 @@ export class Beach implements WorldInterface {
   addWorld() {
 
     World.worldTypes.push(
-      new World(this.game, "Beach", "A beach",
+      new World(this.game, "海滩", "一个海滩",
         [this.game.machines.sandDigger, this.game.engineers.sandEnginer],
         [],
         [new Cost(this.game.beach.crabNest, Decimal(50))],
@@ -214,7 +214,7 @@ export class Beach implements WorldInterface {
       ))
 
     World.worldPrefix.push(
-      new World(this.game, "Coastal", "",
+      new World(this.game, "海岸", "",
         [this.game.machines.sandDigger, this.game.engineers.sandEnginer],
         [[this.game.baseWorld.sand, Decimal(1.5)], [this.game.baseWorld.fungus, Decimal(0.7)]],
         [new Cost(this.game.beach.crabNest, Decimal(50))],
