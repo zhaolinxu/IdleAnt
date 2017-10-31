@@ -28,16 +28,16 @@ export class Beach implements WorldInterface {
 
   declareStuff() {
     const beachList = new Array<Unit>()
-    this.crab = new Unit(this.game, "crab", "Crab", "Crab yield sand.")
-    this.crabFarmer = new Unit(this.game, "crabF", "Farmer Crab", "Farmer Crab yield fungus.")
-    this.crabQueen = new Unit(this.game, "CrabQ", "Crab Queen", "Crab Queen yield crab.")
-    this.crabNest = new Unit(this.game, "CrabN", "Crab Nest", "Crab Nest yield crab queens.")
-    this.shrimp = new Unit(this.game, "shrimp", "Shrimp",
-      "Shrimp yield sand and crystal.")
-    this.lobster = new Unit(this.game, "lobster", "Lobster",
-      "Lobster yield sand, and crystal for food.")
-    this.crabScientist = new Unit(this.game, "crabScientist", "Scientist Crab",
-      "Scientist Crab will get science for sand.")
+    this.crab = new Unit(this.game, "crab", "螃蟹", "螃蟹生产沙子。")
+    this.crabFarmer = new Unit(this.game, "crabF", "农民蟹", "农民螃蟹产生真菌。")
+    this.crabQueen = new Unit(this.game, "CrabQ", "皇后蟹", "皇后蟹生产螃蟹。")
+    this.crabNest = new Unit(this.game, "CrabN", "螃蟹巢", "螃蟹巢产量皇后蟹。")
+    this.shrimp = new Unit(this.game, "shrimp", "虾",
+      "虾生产砂和水晶。")
+    this.lobster = new Unit(this.game, "lobster", "龙虾",
+      "龙虾生产沙子，以水晶为食。")
+    this.crabScientist = new Unit(this.game, "crabScientist", "科学家蟹",
+      "科学家蟹将从沙子里面获得科学。")
 
     beachList.push(this.crabNest)
     beachList.push(this.crabQueen)
@@ -83,7 +83,7 @@ export class Beach implements WorldInterface {
       this.game
     )
     this.seaRes.avabileBaseWorld = false
-    this.game.lists.push(new TypeList("Beach", beachList))
+    this.game.lists.push(new TypeList("海滩", beachList))
 
   }
   initStuff() {

@@ -61,7 +61,7 @@ export class Bee implements WorldInterface {
     this.listBee.push(this.scientistBee)
     this.listBee.push(this.foodBee)
 
-    this.game.lists.push(new TypeList("Bee", this.listBee))
+    this.game.lists.push(new TypeList("蜜蜂", this.listBee))
 
     this.engineersProd = new Production(this.universityBee, Decimal(0.1), false)
   }

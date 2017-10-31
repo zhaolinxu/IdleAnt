@@ -112,8 +112,8 @@ export class BaseWorld implements WorldInterface {
     this.honey = new Unit(this.game, "honey", "蜂蜜", "蜂蜜是蜜蜂的主要来源。")
     this.listMaterial.push(this.honey)
 
-    this.ice = new Unit(this.game, "ice", "Ice",
-      "Ice")
+    this.ice = new Unit(this.game, "ice", "冰",
+      "冰")
     this.listMaterial.push(this.ice)
 
     //    Fungus

@@ -23,12 +23,12 @@ export class Frozen implements WorldInterface {
   public declareStuff() {
     this.listFreezig = new Array<Unit>()
 
-    this.iceAnt = new Unit(this.game, "iceA", "Ice Provisioner",
-      "Collect Ice.")
-    this.iceDrillAnt = new Unit(this.game, "iceDrill", "Ice Drilling",
-      "Equip an ant with an ice drill to destroy ice.")
-    this.iceMelter = new Unit(this.game, "iceMelter", "Ice Melter",
-      "Equip an ant with a flamethrower to destroy ice.")
+    this.iceAnt = new Unit(this.game, "iceA", "制冰机",
+      "收集冰块。")
+    this.iceDrillAnt = new Unit(this.game, "iceDrill", "冰钻",
+      "用冰钻装备蚂蚁以摧毁冰块。")
+    this.iceMelter = new Unit(this.game, "iceMelter", "冰熔化器",
+      "用火焰喷射器装备蚂蚁以摧毁冰块。")
 
     this.listFreezig.push(this.iceAnt)
     this.listFreezig.push(this.iceDrillAnt)
