@@ -141,7 +141,7 @@ export class Engineers implements WorldInterface {
     this.listDep.push(this.iceDep)
     this.listDep.push(this.lensDep)
 
-    this.game.lists.push(new TypeList("Departments", this.listDep))
+    this.game.lists.push(new TypeList("部门", this.listDep))
   }
   initStuff() {
 

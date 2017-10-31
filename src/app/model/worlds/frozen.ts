@@ -52,7 +52,7 @@ export class Frozen implements WorldInterface {
     )
     this.iceResearch.avabileBaseWorld = false
 
-    this.game.lists.push(new TypeList("Freezing", this.listFreezig))
+    this.game.lists.push(new TypeList("冻结", this.listFreezig))
   }
 
   public initStuff() {
