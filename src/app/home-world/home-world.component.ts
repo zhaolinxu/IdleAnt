@@ -1,5 +1,7 @@
 import { GameService } from '../game.service';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from '@angular/core';
+
+declare let preventScroll
 
 @Component({
   selector: 'app-home-world',
@@ -8,13 +10,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeWorldComponent implements OnInit {
-
+  @HostBinding('class.content-container') className = 'content-container';
   constructor(
     public gameService: GameService
   ) {
   }
 
   ngOnInit() {
+    preventScroll()
   }
 
 }

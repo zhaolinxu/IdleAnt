@@ -4,7 +4,17 @@ import { Production } from '../model/production';
 import { Cost } from '../model/cost';
 import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Logger } from 'codelyzer/util/logger';
-import { Component, OnDestroy, OnInit, Pipe, PipeTransform, OnChanges, AfterViewChecked, ChangeDetectionStrategy } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Pipe,
+  PipeTransform,
+} from '@angular/core';
 import { GameService } from '../game.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
@@ -12,11 +22,15 @@ import { Unit } from '../model/units/unit';
 import * as numberformat from 'swarm-numberformat';
 import { Base } from '../model/units/base';
 
+declare let preventScroll
+
 @Component({
   selector: 'app-unit',
   templateUrl: './main-nav.component.html',
   styleUrls: ['./main-nav.component.scss']
-}) export class MainNavComponent implements OnInit, OnDestroy {
+})
+export class MainNavComponent implements OnInit, OnDestroy {
+  @HostBinding('class.content-container') className = 'content-container';
 
   mioId = ""
   paramsSub: any
@@ -52,6 +66,8 @@ import { Base } from '../model/units/base';
         return;
       }
     });
+
+    preventScroll()
   }
 
   ngOnDestroy() {

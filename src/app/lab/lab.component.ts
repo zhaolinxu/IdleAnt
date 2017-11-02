@@ -1,6 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { GameService } from '../game.service';
 import { Research } from '../model/units/action';
+
+declare let preventScroll
 
 @Component({
   selector: 'app-lab',
@@ -8,6 +10,7 @@ import { Research } from '../model/units/action';
   styleUrls: ['./lab.component.scss']
 })
 export class LabComponent implements OnInit, OnDestroy {
+  @HostBinding('class.content-container') className = 'content-container';
 
   resDone = false
 
@@ -15,6 +18,8 @@ export class LabComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.gameService.game.isLab = true
+
+    preventScroll()
   }
 
   ngOnDestroy() {

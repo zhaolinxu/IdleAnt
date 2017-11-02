@@ -1,4 +1,4 @@
-<div class="card card-block">
+<div class="card-block">
   <h3 class="card-title"> {{action.name}}
     <span *ngIf="!action.oneTime && action.showNumber">({{action.quantity | format}})</span>
   </h3>
@@ -45,8 +45,7 @@
     <div class="progress-block" *ngFor="let cost of action.realPriceNow; trackBy:getPriceId">
       <label>{{cost.basePrice | format}}&nbsp;{{cost.unit.name}}</label>
       <div class="progress-static" [ngClass]="{'success': cost.unit.quantity.greaterThanOrEqualTo(cost.basePrice), 'danger': !cost.unit.quantity.greaterThanOrEqualTo(cost.basePrice)}">
-        <div class="progress-meter" max="100"
-        attr.data-value="{{Math.min(cost.unit.quantity.times(100).div(cost.basePrice).floor().toNumber(),100)}}">
+        <div class="progress-meter" max="100" attr.data-value="{{Math.min(cost.unit.quantity.times(100).div(cost.basePrice).floor().toNumber(),100)}}">
         </div>
       </div>
     </div>
