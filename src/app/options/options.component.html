@@ -12,7 +12,7 @@
   <div class="form-group">
     <h5>导出 / 导入存档</h5>
     <label for="save">保存</label>
-    <textarea ref-textarea class="form-control" rows="1" id="save" [(ngModel)]="stringSave"></textarea>
+    <textarea ref-textarea class="form-control" rows="6" id="save" [(ngModel)]="stringSave"></textarea>
     <button class="btn btn-success" (click)="export($event)">导出</button>
     <button class="btn btn-primary" (click)="import($event)">导入</button>
   </div>
