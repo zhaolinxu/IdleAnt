@@ -51,7 +51,6 @@ export class Infestation implements WorldInterface {
       "具有火焰喷射器的甲虫。")
     this.chemistBee = new Unit(this.game, "chemistBee", "化学家蜜蜂",
       "化学家蜜蜂。")
-
     this.poisonousPlant2.alwaysOn = true
 
     this.listInfestation.push(this.poisonousPlant2)
