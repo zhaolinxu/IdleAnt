@@ -1722,7 +1722,7 @@ var UpHire = (function (_super) {
     __extends(UpHire, _super);
     function UpHire(game, unit, costs) {
         var _this = _super.call(this, "upH", "双胞胎", function (n) {
-            _this.unit.quantity = _this.unit.quantity.plus(_this.unit.buyAction.quantity);
+            _this.unit.quantity = _this.unit.quantity.plus(_this.unit.buyAction.quantity.times(n));
             return true;
         }, costs, "以相同的价格获得更多的单位。", game, unit) || this;
         _this.unit = unit;
@@ -3657,13 +3657,11 @@ var Machine = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__production__ = __webpack_require__("../../../../../src/app/model/production.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__units_unit__ = __webpack_require__("../../../../../src/app/model/units/unit.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__units_action__ = __webpack_require__("../../../../../src/app/model/units/action.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__cost__ = __webpack_require__("../../../../../src/app/model/cost.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__typeList__ = __webpack_require__("../../../../../src/app/model/typeList.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__units_unit__ = __webpack_require__("../../../../../src/app/model/units/unit.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__units_action__ = __webpack_require__("../../../../../src/app/model/units/action.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cost__ = __webpack_require__("../../../../../src/app/model/cost.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__typeList__ = __webpack_require__("../../../../../src/app/model/typeList.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Prestige; });
-
 
 
 
@@ -3688,15 +3686,15 @@ var Prestige = (function () {
     Prestige.prototype.initStuff = function () {
         var _this = this;
         var expIncrement = Decimal(1.3);
-        this.experience = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "exp", "经验", "经验。 改变世界的时候体验升级不复位。", true);
+        this.experience = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "exp", "经验", "经验。 改变世界的时候体验升级不复位。", true);
         this.expLists = new Array();
         this.expAnt = new Array();
         //#region Ants Power
-        this.pAntPower = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pap", "蚂蚁能力", "蚂蚁产生更多的30％的食物。", true);
-        this.pAntGeo = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pAntGeo", "地质学家能力", "地质学家生产加成30％的水晶。", true);
-        this.pAntHunter1 = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "phunt1", "猎人能力", "猎人产生并消耗30％的资源。", true);
-        this.pAntHunter2 = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "phunt2", "高级猎人能力", "高级猎人的产量和消耗的资源多达30％。", true);
-        this.pAntFungus = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "paf", "农民能力", "农民产生并消耗30％更多的资源。", true);
+        this.pAntPower = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pap", "蚂蚁能力", "蚂蚁产生更多的30％的食物。", true);
+        this.pAntGeo = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pAntGeo", "地质学家能力", "地质学家生产加成30％的水晶。", true);
+        this.pAntHunter1 = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "phunt1", "猎人能力", "猎人产生并消耗30％的资源。", true);
+        this.pAntHunter2 = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "phunt2", "高级猎人能力", "高级猎人的产量和消耗的资源多达30％。", true);
+        this.pAntFungus = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "paf", "农民能力", "农民产生并消耗30％更多的资源。", true);
         this.expAnt.push(this.pAntPower);
         this.expAnt.push(this.pAntGeo);
         this.expAnt.push(this.pAntHunter1);
@@ -3704,7 +3702,7 @@ var Prestige = (function () {
         this.expAnt.push(this.pAntFungus);
         this.expAnt.forEach(function (p) {
             _this.allPrestigeUp.push(p);
-            p.actions.push(new __WEBPACK_IMPORTED_MODULE_2__units_action__["b" /* BuyAction */](_this.game, p, [new __WEBPACK_IMPORTED_MODULE_3__cost__["a" /* Cost */](_this.experience, Decimal(15), expIncrement)]));
+            p.actions.push(new __WEBPACK_IMPORTED_MODULE_1__units_action__["b" /* BuyAction */](_this.game, p, [new __WEBPACK_IMPORTED_MODULE_2__cost__["a" /* Cost */](_this.experience, Decimal(15), expIncrement)]));
             p.unlocked = true;
         });
         this.game.baseWorld.littleAnt.prestigeBonusProduction.push(this.pAntPower);
@@ -3712,20 +3710,20 @@ var Prestige = (function () {
         this.game.baseWorld.hunter.prestigeBonusProduction.push(this.pAntHunter1);
         this.game.baseWorld.advancedHunter.prestigeBonusProduction.push(this.pAntHunter2);
         this.game.baseWorld.farmer.prestigeBonusProduction.push(this.pAntFungus);
-        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("蚂蚁", this.expAnt));
+        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_3__typeList__["a" /* TypeList */]("蚂蚁", this.expAnt));
         //#endregion
         //#region Ants in next world
-        this.pAntNext = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pan", "蚂蚁跟随者", "开始新的世界时，拥有5个蚂蚁。", true);
-        this.pGeologistNext = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pgn", "地质学家追随者", "开始新的世界时，拥有5个地质学家。", true);
-        this.pScientistNext = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "psn", "科学家追随者", "开始新的世界时，拥有5个科学家。", true);
-        this.pFarmerNext = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pfn", "农民追随者", "开始新的世界时，拥有5个农民。", true);
-        this.pCarpenterNext = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pcarn", "木匠跟随者", "开始新的世界时，拥有5个木匠。", true);
-        this.pLumberjackNext = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "plumn", "伐木工追随者", "开始新的世界时，拥有5个伐木工人。", true);
+        this.pAntNext = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pan", "蚂蚁跟随者", "开始新的世界时，拥有5个蚂蚁。", true);
+        this.pGeologistNext = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pgn", "地质学家追随者", "开始新的世界时，拥有5个地质学家。", true);
+        this.pScientistNext = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "psn", "科学家追随者", "开始新的世界时，拥有5个科学家。", true);
+        this.pFarmerNext = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pfn", "农民追随者", "开始新的世界时，拥有5个农民。", true);
+        this.pCarpenterNext = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pcarn", "木匠跟随者", "开始新的世界时，拥有5个木匠。", true);
+        this.pLumberjackNext = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "plumn", "伐木工追随者", "开始新的世界时，拥有5个伐木工人。", true);
         this.expFollower = [this.pAntNext, this.pGeologistNext, this.pScientistNext,
             this.pFarmerNext, this.pCarpenterNext, this.pLumberjackNext];
         this.expFollower.forEach(function (n) {
             _this.allPrestigeUp.push(n);
-            n.actions.push(new __WEBPACK_IMPORTED_MODULE_2__units_action__["b" /* BuyAction */](_this.game, n, [new __WEBPACK_IMPORTED_MODULE_3__cost__["a" /* Cost */](_this.experience, Decimal(10), expIncrement)]));
+            n.actions.push(new __WEBPACK_IMPORTED_MODULE_1__units_action__["b" /* BuyAction */](_this.game, n, [new __WEBPACK_IMPORTED_MODULE_2__cost__["a" /* Cost */](_this.experience, Decimal(10), expIncrement)]));
         });
         this.game.baseWorld.littleAnt.prestigeBonusStart = this.pAntNext;
         this.game.baseWorld.geologist.prestigeBonusStart = this.pGeologistNext;
@@ -3733,32 +3731,32 @@ var Prestige = (function () {
         this.game.baseWorld.farmer.prestigeBonusStart = this.pFarmerNext;
         this.game.baseWorld.carpenter.prestigeBonusStart = this.pCarpenterNext;
         this.game.baseWorld.lumberjack.prestigeBonusStart = this.pLumberjackNext;
-        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("蚂蚁关注者", this.expFollower));
+        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_3__typeList__["a" /* TypeList */]("蚂蚁关注者", this.expFollower));
         //#endregion
         //#region  Machinery
         this.expMachinery = new Array();
-        this.pMachineryPower = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pMach", "机器能力", "机器的产量和消耗更多的30％的资源。", true);
-        this.pMachineryPower.actions.push(new __WEBPACK_IMPORTED_MODULE_2__units_action__["b" /* BuyAction */](this.game, this.pMachineryPower, [new __WEBPACK_IMPORTED_MODULE_3__cost__["a" /* Cost */](this.experience, Decimal(20), expIncrement)]));
+        this.pMachineryPower = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pMach", "机器能力", "机器的产量和消耗更多的30％的资源。", true);
+        this.pMachineryPower.actions.push(new __WEBPACK_IMPORTED_MODULE_1__units_action__["b" /* BuyAction */](this.game, this.pMachineryPower, [new __WEBPACK_IMPORTED_MODULE_2__cost__["a" /* Cost */](this.experience, Decimal(20), expIncrement)]));
         this.expMachinery.push(this.pMachineryPower);
         this.game.machines.listMachinery.forEach(function (m) { return m.prestigeBonusProduction.push(_this.pMachineryPower); });
-        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("机器", this.expMachinery));
+        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_3__typeList__["a" /* TypeList */]("机器", this.expMachinery));
         //#endregion
         //#region Technology
         this.expTech = new Array();
-        this.pComposter = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pComposter", "堆肥", "堆肥单元产生并消耗30％更多的资源。", true);
-        this.pRefinery = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pRefinery", "精炼", "精炼单元产生并消耗30％更多的资源。", true);
-        this.pLaser = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pLaser", "激光", "激光单元产生并消耗30％更多的资源。", true);
-        this.pHydro = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pHydro", "水培", "水培单元产生并消耗30％更多的资源。", true);
-        this.pPlanter = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "pPlanter", "种植", "种植单元产生并消耗30％更多的资源。", true);
+        this.pComposter = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pComposter", "堆肥", "堆肥单元产生并消耗30％更多的资源。", true);
+        this.pRefinery = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pRefinery", "精炼", "精炼单元产生并消耗30％更多的资源。", true);
+        this.pLaser = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pLaser", "激光", "激光单元产生并消耗30％更多的资源。", true);
+        this.pHydro = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pHydro", "水培", "水培单元产生并消耗30％更多的资源。", true);
+        this.pPlanter = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "pPlanter", "种植", "种植单元产生并消耗30％更多的资源。", true);
         this.expTech.push(this.pComposter);
         this.expTech.push(this.pRefinery);
         this.expTech.push(this.pLaser);
         this.expTech.push(this.pHydro);
         this.expTech.push(this.pPlanter);
         this.expTech.forEach(function (p) {
-            p.actions.push(new __WEBPACK_IMPORTED_MODULE_2__units_action__["b" /* BuyAction */](_this.game, p, [new __WEBPACK_IMPORTED_MODULE_3__cost__["a" /* Cost */](_this.experience, Decimal(30), expIncrement)]));
+            p.actions.push(new __WEBPACK_IMPORTED_MODULE_1__units_action__["b" /* BuyAction */](_this.game, p, [new __WEBPACK_IMPORTED_MODULE_2__cost__["a" /* Cost */](_this.experience, Decimal(30), expIncrement)]));
         });
-        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("技术", this.expTech));
+        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_3__typeList__["a" /* TypeList */]("技术", this.expTech));
         this.game.machines.composterStation.prestigeBonusProduction.push(this.pComposter);
         this.game.baseWorld.composterAnt.prestigeBonusProduction.push(this.pComposter);
         this.game.machines.refineryStation.prestigeBonusProduction.push(this.pRefinery);
@@ -3780,15 +3778,15 @@ var Prestige = (function () {
         ];
         supplyMaterials.forEach(function (sm) { return sm.prestigeBonusQuantityValue = Decimal(100); });
         this.supplyList = supplyMaterials.map(function (sm) {
-            return new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](_this.game, "supp_" + sm.id, sm.name + "供给", "开始新的世界时，有100 " + sm.name + "。", true);
+            return new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](_this.game, "supp_" + sm.id, sm.name + "供给", "开始新的世界时，有100 " + sm.name + "。", true);
         });
         this.supplyList.forEach(function (n) {
             _this.allPrestigeUp.push(n);
-            n.actions.push(new __WEBPACK_IMPORTED_MODULE_2__units_action__["b" /* BuyAction */](_this.game, n, [new __WEBPACK_IMPORTED_MODULE_3__cost__["a" /* Cost */](_this.experience, Decimal(12), expIncrement)]));
+            n.actions.push(new __WEBPACK_IMPORTED_MODULE_1__units_action__["b" /* BuyAction */](_this.game, n, [new __WEBPACK_IMPORTED_MODULE_2__cost__["a" /* Cost */](_this.experience, Decimal(12), expIncrement)]));
         });
         for (var i = 0; i < supplyMaterials.length; i++)
             supplyMaterials[i].prestigeBonusStart = this.supplyList[i];
-        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("供给", this.supplyList));
+        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_3__typeList__["a" /* TypeList */]("供给", this.supplyList));
         //#endregion
         //#region Efficiency
         this.effList = new Array();
@@ -3813,8 +3811,8 @@ var Prestige = (function () {
             ]
         ];
         var _loop_1 = function (i) {
-            var eff = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this_1.game, "eff" + names[i], names[i], names[i] + " 单位消耗的资源减少5％。 最大-50％。", true);
-            var ba = new __WEBPACK_IMPORTED_MODULE_2__units_action__["b" /* BuyAction */](this_1.game, eff, [new __WEBPACK_IMPORTED_MODULE_3__cost__["a" /* Cost */](this_1.experience, Decimal(50), expIncrement)]);
+            var eff = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this_1.game, "eff" + names[i], names[i], names[i] + " 单位消耗的资源减少5％。 最大-50％。", true);
+            var ba = new __WEBPACK_IMPORTED_MODULE_1__units_action__["b" /* BuyAction */](this_1.game, eff, [new __WEBPACK_IMPORTED_MODULE_2__cost__["a" /* Cost */](this_1.experience, Decimal(50), expIncrement)]);
             ba.limit = Decimal(10);
             eff.actions.push(ba);
             effMatrix[i].forEach(function (u) { return u.forEach(function (u2) { return u2.produces
@@ -3830,13 +3828,13 @@ var Prestige = (function () {
         for (var i = 0; i < 5; i++) {
             _loop_1(i);
         }
-        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("效率", this.effList));
+        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_3__typeList__["a" /* TypeList */]("效率", this.effList));
         //#endregion
         //#region Efficiency 2
         this.effListEng = new Array();
         this.game.engineers.listEnginer.forEach(function (eng) {
-            var eff = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](_this.game, "effEng" + eng.id, eng.name, eng.name + " 消耗资源减少5％。 最大-50％。", true);
-            var ba = new __WEBPACK_IMPORTED_MODULE_2__units_action__["b" /* BuyAction */](_this.game, eff, [new __WEBPACK_IMPORTED_MODULE_3__cost__["a" /* Cost */](_this.experience, Decimal(50), expIncrement)]);
+            var eff = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](_this.game, "effEng" + eng.id, eng.name, eng.name + " 消耗资源减少5％。 最大-50％。", true);
+            var ba = new __WEBPACK_IMPORTED_MODULE_1__units_action__["b" /* BuyAction */](_this.game, eff, [new __WEBPACK_IMPORTED_MODULE_2__cost__["a" /* Cost */](_this.experience, Decimal(50), expIncrement)]);
             ba.limit = Decimal(10);
             eff.actions.push(ba);
             eng.produces.filter(function (p) { return p.efficiency.lessThanOrEqualTo(0); })
@@ -3847,24 +3845,24 @@ var Prestige = (function () {
             });
             _this.effListEng.push(eff);
         });
-        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("工程", this.effListEng));
+        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_3__typeList__["a" /* TypeList */]("工程", this.effListEng));
         //#endregion
         //#region Time
-        this.time = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "ptime", "时间", "时间可以用来去未来。 一个时间单位对应于一秒钟。", true);
-        this.timeMaker = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "ptimeMaker", "时间发生器", "时间发生器以现实生活速度的1/10生成时间。 它不受暂停和时间扭曲的影响。", true);
+        this.time = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "ptime", "时间", "时间可以用来去未来。 一个时间单位对应于一秒钟。", true);
+        this.timeMaker = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "ptimeMaker", "时间发生器", "时间发生器以现实生活速度的1/10生成时间。 它不受暂停和时间扭曲的影响。", true);
         this.timeMaker.percentage = 100;
         this.timeMaker.alwaysOn = true;
-        this.timeBank = new __WEBPACK_IMPORTED_MODULE_1__units_unit__["a" /* Unit */](this.game, "ptimeBank", "时间银行", "时间银行将最长存储时间增加1小时。 基地储存4小时。", true);
-        this.timeMaker.actions.push(new __WEBPACK_IMPORTED_MODULE_2__units_action__["b" /* BuyAction */](this.game, this.timeMaker, [new __WEBPACK_IMPORTED_MODULE_3__cost__["a" /* Cost */](this.experience, Decimal(25), expIncrement)]));
-        this.timeBank.actions.push(new __WEBPACK_IMPORTED_MODULE_2__units_action__["b" /* BuyAction */](this.game, this.timeBank, [new __WEBPACK_IMPORTED_MODULE_3__cost__["a" /* Cost */](this.experience, Decimal(100), expIncrement)]));
-        this.game.actMin = new __WEBPACK_IMPORTED_MODULE_2__units_action__["c" /* TimeWarp */](this.game, Decimal(60), "Minutes");
-        this.game.actHour = new __WEBPACK_IMPORTED_MODULE_2__units_action__["c" /* TimeWarp */](this.game, Decimal(3600), "Hours");
+        this.timeBank = new __WEBPACK_IMPORTED_MODULE_0__units_unit__["a" /* Unit */](this.game, "ptimeBank", "时间银行", "时间银行将最长存储时间增加1小时。 基地储存4小时。", true);
+        this.timeMaker.actions.push(new __WEBPACK_IMPORTED_MODULE_1__units_action__["b" /* BuyAction */](this.game, this.timeMaker, [new __WEBPACK_IMPORTED_MODULE_2__cost__["a" /* Cost */](this.experience, Decimal(25), expIncrement)]));
+        this.timeBank.actions.push(new __WEBPACK_IMPORTED_MODULE_1__units_action__["b" /* BuyAction */](this.game, this.timeBank, [new __WEBPACK_IMPORTED_MODULE_2__cost__["a" /* Cost */](this.experience, Decimal(100), expIncrement)]));
+        this.game.actMin = new __WEBPACK_IMPORTED_MODULE_1__units_action__["c" /* TimeWarp */](this.game, Decimal(60), "Minutes");
+        this.game.actHour = new __WEBPACK_IMPORTED_MODULE_1__units_action__["c" /* TimeWarp */](this.game, Decimal(3600), "Hours");
         this.time.actions.push(this.game.actMin);
         this.time.actions.push(this.game.actHour);
-        this.time.actions.push(new __WEBPACK_IMPORTED_MODULE_2__units_action__["c" /* TimeWarp */](this.game, Decimal(3600 * 24), "Days"));
-        this.time.addProductor(new __WEBPACK_IMPORTED_MODULE_0__production__["a" /* Production */](this.timeMaker, Decimal(0.1)));
+        this.time.actions.push(new __WEBPACK_IMPORTED_MODULE_1__units_action__["c" /* TimeWarp */](this.game, Decimal(3600 * 24), "Days"));
+        // this.time.addProductor(new Production(this.timeMaker, Decimal(0.1)))
         this.timeList = [this.time, this.timeMaker, this.timeBank];
-        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_4__typeList__["a" /* TypeList */]("时间管理", this.timeList));
+        this.expLists.push(new __WEBPACK_IMPORTED_MODULE_3__typeList__["a" /* TypeList */]("时间管理", this.timeList));
         //#endregion
         this.expLists.map(function (l) { return l.list; }).forEach(function (al) { return al.forEach(function (l) {
             l.unlocked = true;
