@@ -280,7 +280,7 @@ export class Prestige implements WorldInterface {
     this.game.engineers.listEnginer.forEach(eng => {
 
       const eff = new Unit(this.game, "effEng" + eng.id, eng.name,
-        eng.name + " 消耗资源减少5％。 最大-50％。", true)
+        eng.name + " 资源消耗减少5％。 最多减少50％。", true)
 
       const ba = new BuyAction(this.game, eff,
         [new Cost(this.experience, Decimal(50), expIncrement)])
