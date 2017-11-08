@@ -37,7 +37,7 @@ export class Infestation implements WorldInterface {
       "这种植物可以把他们全部杀死。")
     this.poisonousPlant2 = new Unit(this.game, "poisPlant2", "老有毒植物",
       "处理有毒植物！")
-    this.disinfestationAnt = new Unit(this.game, "defAnt", "消灭蚂蚁",
+    this.disinfestationAnt = new Unit(this.game, "defAnt", "消灭者蚂蚁",
       "摧毁有毒植物。")
     this.flametrowerAnt = new Unit(this.game, "flameAnt", "火焰蚂蚁",
       "烧掉有毒植物。")

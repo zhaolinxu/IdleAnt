@@ -319,12 +319,12 @@ export class Prestige implements WorldInterface {
     this.timeBank.actions.push(new BuyAction(this.game, this.timeBank,
       [new Cost(this.experience, Decimal(100), expIncrement)]))
 
-    this.game.actMin = new TimeWarp(this.game, Decimal(60), "Minutes")
-    this.game.actHour = new TimeWarp(this.game, Decimal(3600), "Hours")
+    this.game.actMin = new TimeWarp(this.game, Decimal(60), "分钟")
+    this.game.actHour = new TimeWarp(this.game, Decimal(3600), "小时")
 
     this.time.actions.push(this.game.actMin)
     this.time.actions.push(this.game.actHour)
-    this.time.actions.push(new TimeWarp(this.game, Decimal(3600 * 24), "Days"))
+    this.time.actions.push(new TimeWarp(this.game, Decimal(3600 * 24), "天"))
 
     // this.time.addProductor(new Production(this.timeMaker, Decimal(0.1)))
 
