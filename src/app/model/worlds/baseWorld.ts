@@ -84,7 +84,7 @@ export class BaseWorld implements WorldInterface {
   }
 
   declareMaterials() {
-    this.food = new Unit(this.game, "food", "食物", "食物是用来生产几乎所有的单位。")
+    this.food = new Unit(this.game, "food", "食物", "食物被用来生产几乎所有单位。")
     this.food.unlocked = true
     this.listMaterial.push(this.food)
 
@@ -94,19 +94,19 @@ export class BaseWorld implements WorldInterface {
     this.soil = new Unit(this.game, "soil", "土壤", "土壤用来做巢。")
     this.listMaterial.push(this.soil)
 
-    this.science = new Unit(this.game, "sci", "科学", "科学是用来改善和解锁的东西。")
+    this.science = new Unit(this.game, "sci", "科学", "科学用来改进和解锁很多东西。")
     this.listMaterial.push(this.science)
 
     this.fungus = new Unit(this.game, "fun", "真菌", "真菌是食物的来源。")
     this.listMaterial.push(this.fungus)
 
-    this.wood = new Unit(this.game, "wood", "木头", "木材用来制作更好的巢和机械。")
+    this.wood = new Unit(this.game, "wood", "木头", "木材用来制作更好的巢和机器。")
     this.listMaterial.push(this.wood)
 
     this.sand = new Unit(this.game, "sand", "沙子", "沙子可以用来制造水晶。")
     this.listMaterial.push(this.sand)
 
-    this.nectar = new Unit(this.game, "nectar", "花蜜", "花蜜用于制作蜂蜜。")
+    this.nectar = new Unit(this.game, "nectar", "花蜜", "花蜜用来制作蜂蜜。")
     this.listMaterial.push(this.nectar)
 
     this.honey = new Unit(this.game, "honey", "蜂蜜", "蜂蜜是蜜蜂的主要来源。")
