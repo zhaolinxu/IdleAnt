@@ -133,7 +133,7 @@ export class Researchs implements WorldInterface {
     //  Time Warp
     this.timeWarp = new Research(
       "timeWarp",
-      "时间扭曲", "4小时更新。 明智地使用它。",
+      "时间扭曲", "4小时更新。明智地使用它。",
       [new Cost(this.game.baseWorld.science, Decimal(1))],
       [],
       this.game,
@@ -393,7 +393,7 @@ export class Researchs implements WorldInterface {
     //    Farming
     const r1 = new Research(
       "R1",
-      "蚂蚁的真菌共生", "让你培养真菌。 真菌是食物的来源。",
+      "蚂蚁的真菌共生", "让你培养真菌。真菌是食物的来源。",
       [new Cost(this.game.baseWorld.science, Decimal(100))],
       [this.game.baseWorld.farmer, r3, woodcutting], this.game
     )

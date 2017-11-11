@@ -69,7 +69,7 @@ export class Prestige implements WorldInterface {
     const expIncrement = Decimal(1.3)
 
     this.experience = new Unit(this.game, "exp", "经验",
-      "经验。 改变世界的时候体验升级不复位。", true)
+      "经验。改变世界时经验升级不复位。", true)
     this.expLists = new Array<TypeList>()
     this.expAnt = new Array<Unit>()
 
@@ -248,7 +248,7 @@ export class Prestige implements WorldInterface {
     for (let i = 0; i < 5; i++) {
 
       const eff = new Unit(this.game, "eff" + names[i], names[i],
-        names[i] + " 单位消耗的资源减少5％。 最大-50％。", true)
+        names[i] + " 单位消耗的资源减少5％。最大-50％。", true)
 
       const ba = new BuyAction(this.game, eff,
         [new Cost(this.experience, Decimal(50), expIncrement)])
@@ -280,7 +280,7 @@ export class Prestige implements WorldInterface {
     this.game.engineers.listEnginer.forEach(eng => {
 
       const eff = new Unit(this.game, "effEng" + eng.id, eng.name,
-        eng.name + " 资源消耗减少5％。 最多减少50％。", true)
+        eng.name + " 资源消耗减少5％最多减少50％。", true)
 
       const ba = new BuyAction(this.game, eff,
         [new Cost(this.experience, Decimal(50), expIncrement)])
@@ -302,16 +302,16 @@ export class Prestige implements WorldInterface {
     //#endregion
 
     //#region Time
-    this.time = new Unit(this.game, "ptime", "时间",
-      "时间可以用来去未来。 一个时间单位对应于一秒钟。", true)
+    this.time = new Unit(this.game, "ptime", "秒",
+      "花费时间可以去往未来。一时间单位对应一秒钟。", true)
 
     this.timeMaker = new Unit(this.game, "ptimeMaker", "时间发生器",
-      "时间发生器以现实生活速度的1/10生成时间。 它不受暂停和时间扭曲的影响。", true)
+      "时间发生器以现实速度的1/10产生时间。它不受暂停和时间扭曲的影响。", true)
     this.timeMaker.percentage = 100
     this.timeMaker.alwaysOn = true
 
     this.timeBank = new Unit(this.game, "ptimeBank", "时间银行",
-      "时间银行将最长存储时间增加1小时。 基地储存4小时。", true)
+      "时间银行将最长存储时间增加1小时。基地储存4小时。", true)
 
     this.timeMaker.actions.push(new BuyAction(this.game, this.timeMaker,
       [new Cost(this.experience, Decimal(25), expIncrement)]))

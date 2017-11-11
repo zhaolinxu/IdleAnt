@@ -57,7 +57,7 @@ export class UnitComponent implements OnInit, OnDestroy {
   }
 
   endTime(): string {
-    moment.locale('en');
+    moment.locale('zh-CN');
     return moment.duration(this.gen.endIn).humanize()
   }
   getUnitId(index, base: Base) {

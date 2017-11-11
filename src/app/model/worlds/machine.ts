@@ -54,13 +54,13 @@ export class Machine implements WorldInterface {
     this.mine = new Unit(this.game, "mine", "矿井",
       "生产水晶。")
     this.honeyMaker = new Unit(this.game, "honeyMaker", "蜂蜜制造商",
-      "自动制作蜂蜜。 只有蜜蜂知道它是如何工作的。")
+      "自动制作蜂蜜。只有蜜蜂知道它是如何工作的。")
     this.iceCompacter = new Unit(this.game, "iceC", "冰压缩机",
       "冰压缩机是将冰块压成晶体的机器。")
     this.iceCollector = new Unit(this.game, "iceK", "水箱",
       "一个水箱。")
     this.burningGlass = new Unit(this.game, "burningGlass", "燃烧镜头",
-      "用于聚集太阳光线的大凸透镜。 这台机器比其他任何东西更快地融化冰块。")
+      "用于聚集太阳光线的大凸透镜。这台机器能比其他任何东西更快地融化冰块。")
 
     this.listMachinery = new Array<Unit>()
 
