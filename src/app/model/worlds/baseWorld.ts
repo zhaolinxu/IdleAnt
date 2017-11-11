@@ -133,7 +133,7 @@ export class BaseWorld implements WorldInterface {
     // this.geologist.types = [Type.Ant, Type.Mining]
     this.listJobs.push(this.geologist)
 
-    this.carpenter = new Unit(this.game, "car", "木匠", "木匠产生土壤。")
+    this.carpenter = new Unit(this.game, "car", "木匠", "木匠生产土壤。")
     // this.carpenter.types = [Type.Ant, Type.SoilG]
     this.listJobs.push(this.carpenter)
 

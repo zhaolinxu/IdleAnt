@@ -75,15 +75,15 @@ export class Prestige implements WorldInterface {
 
     //#region Ants Power
     this.pAntPower = new Unit(this.game, "pap", "蚂蚁能力",
-      "蚂蚁产生更多的30％的食物。", true)
+      "蚂蚁生产更多的30％的食物。", true)
     this.pAntGeo = new Unit(this.game, "pAntGeo", "地质学家能力",
       "地质学家生产加成30％的水晶。", true)
     this.pAntHunter1 = new Unit(this.game, "phunt1", "猎人能力",
-      "猎人产生并消耗30％的资源。", true)
+      "猎人生产并消耗30％的资源。", true)
     this.pAntHunter2 = new Unit(this.game, "phunt2", "高级猎人能力",
       "高级猎人的产量和消耗的资源多达30％。", true)
     this.pAntFungus = new Unit(this.game, "paf", "农民能力",
-      "农民产生并消耗30％更多的资源。", true)
+      "农民生产并消耗30％更多的资源。", true)
 
     this.expAnt.push(this.pAntPower)
     this.expAnt.push(this.pAntGeo)
@@ -157,15 +157,15 @@ export class Prestige implements WorldInterface {
     //#region Technology
     this.expTech = new Array<Unit>()
     this.pComposter = new Unit(this.game, "pComposter", "堆肥",
-      "堆肥单元产生并消耗30％更多的资源。", true)
+      "堆肥单元生产并消耗30％更多的资源。", true)
     this.pRefinery = new Unit(this.game, "pRefinery", "精炼",
-      "精炼单元产生并消耗30％更多的资源。", true)
+      "精炼单元生产并消耗30％更多的资源。", true)
     this.pLaser = new Unit(this.game, "pLaser", "激光",
-      "激光单元产生并消耗30％更多的资源。", true)
+      "激光单元生产并消耗30％更多的资源。", true)
     this.pHydro = new Unit(this.game, "pHydro", "水培",
-      "水培单元产生并消耗30％更多的资源。", true)
+      "水培单元生产并消耗30％更多的资源。", true)
     this.pPlanter = new Unit(this.game, "pPlanter", "种植",
-      "种植单元产生并消耗30％更多的资源。", true)
+      "种植单元生产并消耗30％更多的资源。", true)
 
     this.expTech.push(this.pComposter)
     this.expTech.push(this.pRefinery)
@@ -306,7 +306,7 @@ export class Prestige implements WorldInterface {
       "花费时间可以去往未来。一时间单位对应一秒钟。", true)
 
     this.timeMaker = new Unit(this.game, "ptimeMaker", "时间发生器",
-      "时间发生器以现实速度的1/10产生时间。它不受暂停和时间扭曲的影响。", true)
+      "时间发生器以现实速度的1/10生产时间。它不受暂停和时间扭曲的影响。", true)
     this.timeMaker.percentage = 100
     this.timeMaker.alwaysOn = true
 

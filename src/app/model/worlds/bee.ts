@@ -36,10 +36,10 @@ export class Bee implements WorldInterface {
       "觅食蜜蜂产出花蜜。")
 
     this.queenBee = new Unit(this.game, "qBee", "蜂后",
-      "产生觅食蜜蜂。")
+      "生产觅食蜜蜂。")
 
     this.hiveBee = new Unit(this.game, "hBee", "蜂巢",
-      "蜂巢产生皇后，并指示觅食的蜜蜂成为工人。")
+      "蜂巢生产皇后，并指示觅食的蜜蜂成为工人。")
 
     this.workerBee = new Unit(this.game, "worBee", "工蜂",
       "工蜜蜂将花蜜转成蜂蜜。")
@@ -196,7 +196,7 @@ export class Bee implements WorldInterface {
     //  Research
     this.universityResBee2 = new Research(
       "uniResBee2",
-      "蜜蜂工程系", "蜜蜂大学还产生蜜蜂工程师。",
+      "蜜蜂工程系", "蜜蜂大学还生产蜜蜂工程师。",
       [new Cost(this.game.baseWorld.science, Decimal(7E7))],
       [this.engineersProd],
       this.game

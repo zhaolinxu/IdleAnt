@@ -70,7 +70,7 @@ export class Forest implements WorldInterface {
       this.game
     )
     const beetleCrystal = new Research("beetleCrystal", "采矿培训",
-      "甲虫也产生水晶",
+      "甲虫也生产水晶",
       [new Cost(this.game.baseWorld.science, Decimal(1E6))],
       [this.beetleCrystalProduction],
       this.game

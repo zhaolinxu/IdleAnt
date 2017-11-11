@@ -214,7 +214,7 @@ export class Researchs implements WorldInterface {
     const deps: Array<Unlocable> = this.game.engineers.listDep
     this.departmentRes = new Research(
       "departementsRes",
-      "部门", "部门产生工程师。",
+      "部门", "部门生产工程师。",
       [new Cost(this.game.baseWorld.science, Decimal(1E11))],
       deps,
       this.game
