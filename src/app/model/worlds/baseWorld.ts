@@ -122,7 +122,7 @@ export class BaseWorld implements WorldInterface {
   }
   declareGenerators() {
     this.littleAnt = new Unit(this.game, "G1", "蚂蚁",
-      "蚂蚁是最低级的工人。 他们不断收集食物。")
+      "蚂蚁是最低级的工人。它们不断收集食物。")
     this.queenAnt = new Unit(this.game, "G2", "蚁后",
       "蚁后生产蚂蚁。")
     this.nestAnt = new Unit(this.game, "G3", "蚁巢",

@@ -10,7 +10,7 @@
         </div>
       </clr-alert>
     </div>
-    <p> 您需要旅行研究： </p>
+    <p> 您需要旅行研究：</p>
     <table class="nowrap" style="width:100%">
       <tbody>
         <tr *ngFor="let cost of gameService.game.world.toUnlock">
@@ -67,7 +67,7 @@
       <p>离开你将获得 {{gameService.game.getExperience() | format}} 个经验。 高层次的世界将会产生更多的经验，但需要更多的资源。 </p>
     </div>
     <div *ngIf="skip">
-      <p> 如果选择跳过这个世界，你将不会获得任何经验！ 如果你想改变主意，请切换到 “旅行” 之外的另一个选项卡。
+      <p> 如果选择跳过这个世界，你将不会获得任何经验！如果你想改变主意，请切换到 “旅行” 之外的另一个选项卡。
       </p>
     </div>
     <div>
