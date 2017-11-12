@@ -47,7 +47,7 @@ export class Infestation implements WorldInterface {
       "处理除草剂。")
     this.disinfestationBeetle = new Unit(this.game, "disinfestationBeetle", "杀虫甲壳虫",
       "甲壳虫也擅长杀灭植物。")
-    this.flametrowerBeetle = new Unit(this.game, "flametrowerBeetle", "火焰喷射器甲壳虫",
+    this.flametrowerBeetle = new Unit(this.game, "flametrowerBeetle", "火焰甲壳虫",
       "配有火焰喷射器的甲虫。")
     this.chemistBee = new Unit(this.game, "chemistBee", "化学家蜜蜂",
       "化学家蜜蜂。")
