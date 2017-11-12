@@ -17,5 +17,10 @@
     <button class="btn btn-primary" (click)="import($event)">导入</button>
   </div>
 
+  <div class="toggle-switch">
+    <input type="checkbox" id="toggle_1" [(ngModel)]="gameService.game.hideSaveNotification">
+    <label for="toggle_1">隐藏成功保存通知</label>
+  </div><br/>
+  <span>版本号: {{gameService.game.gameVersion}}</span>
   <a href="http://likexia.gitee.io/idleant/changelog.txt" target="_blank">更新日志</a>
 </div>

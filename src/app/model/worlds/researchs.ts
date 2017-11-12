@@ -89,21 +89,6 @@ export class Researchs implements WorldInterface {
       }
     )
 
-    //    Missing
-    // this.missing = new Research(
-    //   "missing",
-    //   "Missing", "Get 50% of missing world travel requirement.",
-    //   [new Cost(this.game.baseWorld.science, Decimal(2E11))],
-    //   [],
-    //   this.game,
-    //   () => {
-    //     this.game.world.toUnlock.filter(t => t.basePrice.greaterThan(t.unit.quantity))
-    //       .forEach(t => t.unit.quantity = t.unit.quantity.plus(
-    //         t.basePrice.minus(t.unit.quantity).div(2)
-    //       ))
-    //   }
-    // )
-
     //    Escape
     this.escape = new Research(
       "escapism",
@@ -201,15 +186,6 @@ export class Researchs implements WorldInterface {
       this.game
     )
     this.game.baseWorld.science.bonusProduction.push([this.scientificMethod, Decimal(1)])
-
-    // //    Stage
-    // this.stageRes = new Research(
-    //   "stageRes",
-    //   "Stage", "Stage.",
-    //   [new Cost(this.game.baseWorld.science, Decimal(3E6))],
-    //   this.game.machines.stageList,
-    //   this.game
-    // )
 
     const deps: Array<Unlocable> = this.game.engineers.listDep
     this.departmentRes = new Research(

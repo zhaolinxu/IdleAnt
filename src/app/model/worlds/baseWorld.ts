@@ -100,7 +100,7 @@ export class BaseWorld implements WorldInterface {
     this.fungus = new Unit(this.game, "fun", "真菌", "真菌是食物的来源。")
     this.listMaterial.push(this.fungus)
 
-    this.wood = new Unit(this.game, "wood", "木头", "木材用来制作更好的巢和机械。")
+    this.wood = new Unit(this.game, "wood", "木头", "木材用来制作更好的巢和机器。")
     this.listMaterial.push(this.wood)
 
     this.sand = new Unit(this.game, "sand", "沙子", "沙子可以用来制造水晶。")
@@ -142,6 +142,7 @@ export class BaseWorld implements WorldInterface {
     this.listJobs.push(this.farmer)
 
     this.lumberjack = new Unit(this.game, "lum", "伐木工", "伐木工人生产木材。")
+
     // this.lumberjack.types = [Type.Ant, Type.WoodG]
     this.listJobs.push(this.lumberjack)
 
