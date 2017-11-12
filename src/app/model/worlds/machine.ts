@@ -38,29 +38,29 @@ export class Machine implements WorldInterface {
 
   public declareStuff() {
     this.composterStation = new Unit(this.game, "composterStation", "堆肥站",
-      "将木头转化为土壤。")
+      "将木材转化为土壤。")
     this.refineryStation = new Unit(this.game, "refineryStation", "精炼站",
       "将土壤变成沙子。")
     this.laserStation = new Unit(this.game, "laserStation", "激光站",
       "生产水晶。")
-    this.hydroFarm = new Unit(this.game, "hydroFarm", "水培农场",
+    this.hydroFarm = new Unit(this.game, "hydroFarm", "水培场",
       "生产真菌。")
     this.plantingMachine = new Unit(this.game, "plantingMac", "种植机",
-      "生产木头。")
-    this.sandDigger = new Unit(this.game, "sandDigger", "沙挖掘机",
+      "生产木材。")
+    this.sandDigger = new Unit(this.game, "sandDigger", "挖沙机",
       "生产沙子。")
     this.loggingMachine = new Unit(this.game, "loggingMachine", "伐木机",
-      "生产木头。")
+      "生产木材。")
     this.mine = new Unit(this.game, "mine", "矿井",
       "生产水晶。")
-    this.honeyMaker = new Unit(this.game, "honeyMaker", "蜂蜜制造商",
-      "自动制作蜂蜜。只有蜜蜂知道它是如何工作的。")
-    this.iceCompacter = new Unit(this.game, "iceC", "冰压缩机",
-      "冰压缩机是将冰块压成晶体的机器。")
+    this.honeyMaker = new Unit(this.game, "honeyMaker", "蜂蜜机",
+      "自动制作蜂蜜。只有蜜蜂知道它的工作原理。")
+    this.iceCompacter = new Unit(this.game, "iceC", "压冰机",
+      "压冰机是将冰块压成水晶的机器。")
     this.iceCollector = new Unit(this.game, "iceK", "水箱",
       "一个水箱。")
-    this.burningGlass = new Unit(this.game, "burningGlass", "燃烧镜头",
-      "用于聚集太阳光线的大凸透镜。这台机器能比其他任何东西更快地融化冰块。")
+    this.burningGlass = new Unit(this.game, "burningGlass", "炽热镜头",
+      "聚集太阳光线的大凸透镜。这台机器能比其他任何东西更快地融化冰块。")
 
     this.listMachinery = new Array<Unit>()
 

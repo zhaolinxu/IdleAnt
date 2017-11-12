@@ -100,7 +100,7 @@ export class BaseWorld implements WorldInterface {
     this.fungus = new Unit(this.game, "fun", "真菌", "真菌是食物的来源。")
     this.listMaterial.push(this.fungus)
 
-    this.wood = new Unit(this.game, "wood", "木头", "木材用来制作更好的巢和机器。")
+    this.wood = new Unit(this.game, "wood", "木材", "木材用来制作更好的巢和机器。")
     this.listMaterial.push(this.wood)
 
     this.sand = new Unit(this.game, "sand", "沙子", "沙子可以用来制造水晶。")
@@ -133,7 +133,7 @@ export class BaseWorld implements WorldInterface {
     // this.geologist.types = [Type.Ant, Type.Mining]
     this.listJobs.push(this.geologist)
 
-    this.carpenter = new Unit(this.game, "car", "木匠", "木匠生产土壤。")
+    this.carpenter = new Unit(this.game, "car", "木工", "木工生产土壤。")
     // this.carpenter.types = [Type.Ant, Type.SoilG]
     this.listJobs.push(this.carpenter)
 
@@ -155,7 +155,7 @@ export class BaseWorld implements WorldInterface {
     this.hydroAnt = new Unit(this.game, "hydroFarmer", "水培蚂蚁",
       "将水晶变成真菌。")
     this.planterAnt = new Unit(this.game, "planterAnt", "播种机蚂蚁",
-      "将真菌变成木头。")
+      "将真菌变成木材。")
 
 
     this.hunter = new Unit(this.game, "hunter", "猎人",
@@ -381,12 +381,12 @@ export class BaseWorld implements WorldInterface {
   addWorld() {
 
     World.worldTypes.push(
-      new World(this.game, "Park", "",
+      new World(this.game, "公园", "",
         [],
         [],
         []
       ),
-      new World(this.game, "Mine", "一个矿井",
+      new World(this.game, "矿山", "一个矿井",
         [this.game.machines.mine, this.game.engineers.mineEnginer],
         [
           [this.game.baseWorld.crystal, Decimal(1.2)],

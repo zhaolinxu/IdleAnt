@@ -117,8 +117,8 @@ export class Prestige implements WorldInterface {
       "新世界开始时，拥有5个科学家。", true)
     this.pFarmerNext = new Unit(this.game, "pfn", "农民追随者",
       "新世界开始时，拥有5个农民。", true)
-    this.pCarpenterNext = new Unit(this.game, "pcarn", "木匠跟随者",
-      "新世界开始时，拥有5个木匠。", true)
+    this.pCarpenterNext = new Unit(this.game, "pcarn", "木工跟随者",
+      "新世界开始时，拥有5个木工。", true)
     this.pLumberjackNext = new Unit(this.game, "plumn", "伐木工追随者",
       "新世界开始时，拥有5个伐木工人。", true)
 
