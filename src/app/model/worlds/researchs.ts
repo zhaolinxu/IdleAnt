@@ -261,7 +261,7 @@ export class Researchs implements WorldInterface {
     //    Refinery
     this.refineryResearch = new Research(
       "refRes",
-      "精炼厂", "土壤可以精制成沙子。",
+      "精炼厂", "泥土可以精制成沙子。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.refineryAnt],
       this.game
@@ -270,7 +270,7 @@ export class Researchs implements WorldInterface {
     //    Compost
     this.composterResearch = new Research(
       "compRes",
-      "堆肥", "木材可以降解成肥沃的土壤。",
+      "堆肥", "木材可以降解成肥沃的泥土。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.composterAnt],
       this.game
@@ -401,7 +401,7 @@ export class Researchs implements WorldInterface {
     //    Soil
     this.rDirt = new Research(
       "RDirt",
-      "土壤", "允许您收集土壤以备将来使用。",
+      "泥土", "允许您收集泥土以备将来使用。",
       [new Cost(this.game.baseWorld.science, Decimal(50))],
       [this.game.baseWorld.soil, this.game.baseWorld.carpenter, r1, this.up1], this.game
     )

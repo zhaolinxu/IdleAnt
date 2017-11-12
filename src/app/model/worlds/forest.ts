@@ -63,8 +63,8 @@ export class Forest implements WorldInterface {
       [this.beetleWoodProduction],
       this.game
     )
-    const beetleSoil = new Research("beetleSoil", "土壤训练",
-      "甲虫也生产土壤",
+    const beetleSoil = new Research("beetleSoil", "泥土训练",
+      "甲虫也生产泥土",
       [new Cost(this.game.baseWorld.science, Decimal(5E4))],
       [this.beetleSoilProduction],
       this.game

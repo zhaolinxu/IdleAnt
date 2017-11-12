@@ -38,9 +38,9 @@ export class Machine implements WorldInterface {
 
   public declareStuff() {
     this.composterStation = new Unit(this.game, "composterStation", "堆肥站",
-      "将木材转化为土壤。")
+      "将木材转化为泥土。")
     this.refineryStation = new Unit(this.game, "refineryStation", "精炼站",
-      "将土壤变成沙子。")
+      "将泥土变成沙子。")
     this.laserStation = new Unit(this.game, "laserStation", "激光站",
       "生产水晶。")
     this.hydroFarm = new Unit(this.game, "hydroFarm", "水培场",

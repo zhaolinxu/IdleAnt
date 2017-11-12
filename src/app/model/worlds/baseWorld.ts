@@ -91,7 +91,7 @@ export class BaseWorld implements WorldInterface {
     this.crystal = new Unit(this.game, "cri", "水晶", "水晶用来生产科学。")
     this.listMaterial.push(this.crystal)
 
-    this.soil = new Unit(this.game, "soil", "土壤", "土壤用来做巢。")
+    this.soil = new Unit(this.game, "soil", "泥土", "泥土用来做巢。")
     this.listMaterial.push(this.soil)
 
     this.science = new Unit(this.game, "sci", "科学", "科学用来改进和解锁很多东西。")
@@ -133,7 +133,7 @@ export class BaseWorld implements WorldInterface {
     // this.geologist.types = [Type.Ant, Type.Mining]
     this.listJobs.push(this.geologist)
 
-    this.carpenter = new Unit(this.game, "car", "木工", "木工生产土壤。")
+    this.carpenter = new Unit(this.game, "car", "木工", "木工生产泥土。")
     // this.carpenter.types = [Type.Ant, Type.SoilG]
     this.listJobs.push(this.carpenter)
 
@@ -147,9 +147,9 @@ export class BaseWorld implements WorldInterface {
 
 
     this.composterAnt = new Unit(this.game, "com", "堆肥蚂蚁",
-      "将木材变成土壤。")
+      "将木材变成泥土。")
     this.refineryAnt = new Unit(this.game, "ref", "精炼蚂蚁",
-      "将土壤变成沙子。")
+      "将泥土变成沙子。")
     this.laserAnt = new Unit(this.game, "las", "激光蚂蚁",
       "将沙子变成水晶。")
     this.hydroAnt = new Unit(this.game, "hydroFarmer", "水培蚂蚁",
