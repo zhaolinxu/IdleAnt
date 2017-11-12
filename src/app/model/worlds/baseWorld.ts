@@ -103,7 +103,7 @@ export class BaseWorld implements WorldInterface {
     this.wood = new Unit(this.game, "wood", "木材", "木材用来制作更好的巢和机器。")
     this.listMaterial.push(this.wood)
 
-    this.sand = new Unit(this.game, "sand", "沙子", "沙子可以用来制造水晶。")
+    this.sand = new Unit(this.game, "sand", "沙砾", "沙砾可以用来制造水晶。")
     this.listMaterial.push(this.sand)
 
     this.nectar = new Unit(this.game, "nectar", "花蜜", "花蜜用来制作蜂蜜。")
@@ -149,9 +149,9 @@ export class BaseWorld implements WorldInterface {
     this.composterAnt = new Unit(this.game, "com", "堆肥蚂蚁",
       "将木材变成泥土。")
     this.refineryAnt = new Unit(this.game, "ref", "精炼蚂蚁",
-      "将泥土变成沙子。")
+      "将泥土变成沙砾。")
     this.laserAnt = new Unit(this.game, "las", "激光蚂蚁",
-      "将沙子变成水晶。")
+      "将沙砾变成水晶。")
     this.hydroAnt = new Unit(this.game, "hydroFarmer", "水培蚂蚁",
       "将水晶变成真菌。")
     this.planterAnt = new Unit(this.game, "planterAnt", "播种机蚂蚁",

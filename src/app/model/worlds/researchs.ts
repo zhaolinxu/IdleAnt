@@ -252,7 +252,7 @@ export class Researchs implements WorldInterface {
     //    Laser
     this.laserResearch = new Research(
       "lasRes",
-      "激光", "沙子可以融合成水晶。",
+      "激光", "沙砾可以融合成水晶。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.laserAnt],
       this.game
@@ -261,7 +261,7 @@ export class Researchs implements WorldInterface {
     //    Refinery
     this.refineryResearch = new Research(
       "refRes",
-      "精炼厂", "泥土可以精制成沙子。",
+      "精炼厂", "泥土可以精制成沙砾。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.refineryAnt],
       this.game

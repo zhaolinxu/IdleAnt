@@ -40,7 +40,7 @@ export class Machine implements WorldInterface {
     this.composterStation = new Unit(this.game, "composterStation", "堆肥站",
       "将木材转化为泥土。")
     this.refineryStation = new Unit(this.game, "refineryStation", "精炼站",
-      "将泥土变成沙子。")
+      "将泥土变成沙砾。")
     this.laserStation = new Unit(this.game, "laserStation", "激光站",
       "生产水晶。")
     this.hydroFarm = new Unit(this.game, "hydroFarm", "水培场",
@@ -48,7 +48,7 @@ export class Machine implements WorldInterface {
     this.plantingMachine = new Unit(this.game, "plantingMac", "种植机",
       "生产木材。")
     this.sandDigger = new Unit(this.game, "sandDigger", "挖沙机",
-      "生产沙子。")
+      "生产沙砾。")
     this.loggingMachine = new Unit(this.game, "loggingMachine", "伐木机",
       "生产木材。")
     this.mine = new Unit(this.game, "mine", "矿井",
