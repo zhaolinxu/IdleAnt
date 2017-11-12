@@ -37,7 +37,7 @@ export class Frozen implements WorldInterface {
 
     const iceResearch2 = new Research(
       "iceRes2", "喷火器",
-      "用火融化冰。",
+      "用火焰融化冰。",
       [new Cost(this.game.baseWorld.science, Decimal(800))],
       [this.iceMelter],
       this.game

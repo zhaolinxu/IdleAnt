@@ -28,16 +28,16 @@ export class Beach implements WorldInterface {
 
   declareStuff() {
     const beachList = new Array<Unit>()
-    this.crab = new Unit(this.game, "crab", "螃蟹", "螃蟹生产沙子。")
-    this.crabFarmer = new Unit(this.game, "crabF", "农民蟹", "农民螃蟹产生真菌。")
+    this.crab = new Unit(this.game, "crab", "螃蟹", "螃蟹生产沙砾。")
+    this.crabFarmer = new Unit(this.game, "crabF", "农民蟹", "农民螃蟹生产真菌。")
     this.crabQueen = new Unit(this.game, "CrabQ", "皇后蟹", "皇后蟹生产螃蟹。")
     this.crabNest = new Unit(this.game, "CrabN", "螃蟹巢", "螃蟹巢产量皇后蟹。")
     this.shrimp = new Unit(this.game, "shrimp", "虾",
       "虾生产砂和水晶。")
     this.lobster = new Unit(this.game, "lobster", "龙虾",
-      "龙虾生产沙子，以水晶为食。")
+      "龙虾生产沙砾，以水晶为食。")
     this.crabScientist = new Unit(this.game, "crabScientist", "科学家蟹",
-      "科学家蟹将从沙子里面获得科学。")
+      "科学家蟹将从沙砾里面获得科学。")
 
     beachList.push(this.crabNest)
     beachList.push(this.crabQueen)
@@ -59,7 +59,7 @@ export class Beach implements WorldInterface {
     //    shrimp
     this.shrimpRes = new Research(
       "shrimpRes",
-      " 虾", "解锁虾。",
+      "虾", "解锁虾。",
       [new Cost(this.game.baseWorld.science, Decimal(2E3))],
       [this.shrimp],
       this.game

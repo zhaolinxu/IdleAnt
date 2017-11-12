@@ -46,30 +46,30 @@ export class Engineers implements WorldInterface {
     this.listEnginer = new Array<Unit>()
 
     this.composterEnginer = new Unit(this.game, "engCo", "堆肥工程师",
-      "慢慢地建立堆肥站。")
+      "缓慢建造堆肥站。")
     this.laserEnginer = new Unit(this.game, "engLa", "激光工程师",
-      "慢慢地建立激光站。")
+      "缓慢建造激光站。")
     this.hydroEnginer = new Unit(this.game, "engHy", "水培工程师",
-      "慢慢地建立水培农场。")
+      "缓慢建造水培场。")
     this.plantingEnginer = new Unit(this.game, "engSo", "种植工程师",
-      "慢慢地建立种植机。")
+      "缓慢建造种植机。")
     this.refineryEnginery = new Unit(this.game, "engRef", "精炼工程师",
-      "慢慢地建立精炼站。")
+      "缓慢建造精炼站。")
 
     this.mineEnginer = new Unit(this.game, "engMi", "采矿工程师",
       "慢慢建立矿井。")
     this.sandEnginer = new Unit(this.game, 'engSa', "挖沙工程师",
-      '慢慢地建立沙挖掘机。')
+      '缓慢建造挖沙机。')
     this.woodEnginer = new Unit(this.game, "engWo", "伐木工程师",
-      "慢慢地建立伐木机。")
+      "缓慢建造伐木机。")
     this.beeEnginer = new Unit(this.game, "engBee", "蜜蜂工程师",
-      "慢慢地建立蜂蜜制造商。")
-    this.iceEngineer = new Unit(this.game, "engIce", "冰块工程师",
-      "慢慢地建立水箱。")
+      "缓慢建造蜂蜜制造机。")
+    this.iceEngineer = new Unit(this.game, "engIce", "制冰工程师",
+      "缓慢建造水箱。")
     this.iceCompEngineer = new Unit(this.game, "engIceComp", "压冰工程师",
-      "慢慢地建立冰压实机。")
-    this.lensEnginer = new Unit(this.game, "lensEnginer", "燃烧镜头工程师",
-      "慢慢地建立燃烧镜头。")
+      "缓慢建造冰压实机。")
+    this.lensEnginer = new Unit(this.game, "lensEnginer", "炽热镜头工程师",
+      "缓慢建造炽热镜头。")
 
     this.sandEnginer.avabileBaseWorld = false
     this.mineEnginer.avabileBaseWorld = false
@@ -95,30 +95,30 @@ export class Engineers implements WorldInterface {
     this.game.lists.push(new TypeList("工程师", this.listEnginer))
 
     this.composterDep = new Unit(this.game, "depaCo", "堆肥部门",
-      "产生工程师。")
+      "生产工程师。")
     this.laserDep = new Unit(this.game, "depaLa", "激光部门",
-      "产生工程师。")
+      "生产工程师。")
     this.hydroDep = new Unit(this.game, "depaHy", "水培部门",
-      "产生工程师。")
+      "生产工程师。")
     this.plantingDep = new Unit(this.game, "depaSo", "种植部门",
-      "产生工程师。")
+      "生产工程师。")
     this.refineryDep = new Unit(this.game, "depaRef", "精炼部门",
-      "产生工程师。")
+      "生产工程师。")
 
     this.mineDep = new Unit(this.game, "depaMi", "采矿部门",
-      "产生工程师。")
+      "生产工程师。")
     this.sandDep = new Unit(this.game, 'depaSa', "挖沙部门",
-      '产生工程师。')
+      '生产工程师。')
     this.woodDep = new Unit(this.game, "depaWo", "伐木部门",
-      "产生工程师。")
+      "生产工程师。")
     this.beeDep = new Unit(this.game, "depaBee", "蜜蜂部门",
-      "产生工程师。")
-    this.iceDep = new Unit(this.game, "depaIce", "采冰部门",
-      "产生工程师。")
+      "生产工程师。")
+    this.iceDep = new Unit(this.game, "depaIce", "制冰部门",
+      "生产工程师。")
     this.iceCompDep = new Unit(this.game, "depaIceComp", "压缩部门",
-      "产生工程师。")
-    this.lensDep = new Unit(this.game, "depaEnginer", "燃烧镜头部门",
-      "产生工程师。")
+      "生产工程师。")
+    this.lensDep = new Unit(this.game, "depaEnginer", "炽热镜头部门",
+      "生产工程师。")
 
     this.sandDep.avabileBaseWorld = false
     this.mineDep.avabileBaseWorld = false

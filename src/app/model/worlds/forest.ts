@@ -29,7 +29,7 @@ export class Forest implements WorldInterface {
     this.listForest = new Array<Unit>()
 
     this.larva = new Unit(this.game, "larva", "幼虫",
-      "幼虫是许多昆虫的少年形式。")
+      "幼虫是未成熟的昆虫。")
     this.beetle = new Unit(this.game, "beetle", "甲虫",
       "甲虫生产各种资源。")
     this.ambrosiaBeetle = new Unit(this.game, "ambrosiaBeetle", "豚草甲虫",
@@ -63,14 +63,14 @@ export class Forest implements WorldInterface {
       [this.beetleWoodProduction],
       this.game
     )
-    const beetleSoil = new Research("beetleSoil", "土壤训练",
-      "甲虫也生产土壤",
+    const beetleSoil = new Research("beetleSoil", "泥土训练",
+      "甲虫也生产泥土",
       [new Cost(this.game.baseWorld.science, Decimal(5E4))],
       [this.beetleSoilProduction],
       this.game
     )
     const beetleCrystal = new Research("beetleCrystal", "采矿培训",
-      "甲虫也产生水晶",
+      "甲虫也生产水晶",
       [new Cost(this.game.baseWorld.science, Decimal(1E6))],
       [this.beetleCrystalProduction],
       this.game

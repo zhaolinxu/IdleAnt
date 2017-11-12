@@ -133,7 +133,7 @@ export class Researchs implements WorldInterface {
     //  Time Warp
     this.timeWarp = new Research(
       "timeWarp",
-      "时间扭曲", "4小时更新。 明智地使用它。",
+      "时间扭曲", "4小时更新。明智地使用它。",
       [new Cost(this.game.baseWorld.science, Decimal(1))],
       [],
       this.game,
@@ -214,7 +214,7 @@ export class Researchs implements WorldInterface {
     const deps: Array<Unlocable> = this.game.engineers.listDep
     this.departmentRes = new Research(
       "departementsRes",
-      "部门", "部门产生工程师。",
+      "部门", "部门生产工程师。",
       [new Cost(this.game.baseWorld.science, Decimal(1E11))],
       deps,
       this.game
@@ -252,7 +252,7 @@ export class Researchs implements WorldInterface {
     //    Laser
     this.laserResearch = new Research(
       "lasRes",
-      "激光", "沙子可以融合成水晶。",
+      "激光", "沙砾可以融合成水晶。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.laserAnt],
       this.game
@@ -261,7 +261,7 @@ export class Researchs implements WorldInterface {
     //    Refinery
     this.refineryResearch = new Research(
       "refRes",
-      "精炼厂", "土壤可以精制成沙子。",
+      "精炼厂", "泥土可以精制成沙砾。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.refineryAnt],
       this.game
@@ -270,7 +270,7 @@ export class Researchs implements WorldInterface {
     //    Compost
     this.composterResearch = new Research(
       "compRes",
-      "堆肥", "木材可以降解成肥沃的土壤。",
+      "堆肥", "木材可以降解成肥沃的泥土。",
       [new Cost(this.game.baseWorld.science, Decimal(1E4))],
       [this.game.baseWorld.composterAnt],
       this.game
@@ -393,7 +393,7 @@ export class Researchs implements WorldInterface {
     //    Farming
     const r1 = new Research(
       "R1",
-      "蚂蚁的真菌共生", "让你培养真菌。 真菌是食物的来源。",
+      "蚂蚁的真菌共生", "让你培养真菌。真菌是食物的来源。",
       [new Cost(this.game.baseWorld.science, Decimal(100))],
       [this.game.baseWorld.farmer, r3, woodcutting], this.game
     )
@@ -401,7 +401,7 @@ export class Researchs implements WorldInterface {
     //    Soil
     this.rDirt = new Research(
       "RDirt",
-      "土壤", "允许您收集土壤以备将来使用。",
+      "泥土", "允许您收集泥土以备将来使用。",
       [new Cost(this.game.baseWorld.science, Decimal(50))],
       [this.game.baseWorld.soil, this.game.baseWorld.carpenter, r1, this.up1], this.game
     )

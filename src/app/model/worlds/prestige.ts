@@ -69,21 +69,21 @@ export class Prestige implements WorldInterface {
     const expIncrement = Decimal(1.3)
 
     this.experience = new Unit(this.game, "exp", "经验",
-      "经验。 改变世界的时候体验升级不复位。", true)
+      "经验。改变世界时经验升级不复位。", true)
     this.expLists = new Array<TypeList>()
     this.expAnt = new Array<Unit>()
 
     //#region Ants Power
     this.pAntPower = new Unit(this.game, "pap", "蚂蚁能力",
-      "蚂蚁产生更多的30％的食物。", true)
+      "蚂蚁生产的食物增加30％。", true)
     this.pAntGeo = new Unit(this.game, "pAntGeo", "地质学家能力",
-      "地质学家生产加成30％的水晶。", true)
+      "地质学家生产的水晶增加30％。", true)
     this.pAntHunter1 = new Unit(this.game, "phunt1", "猎人能力",
-      "猎人产生并消耗30％的资源。", true)
+      "猎人生产和消耗的资源增加30％。", true)
     this.pAntHunter2 = new Unit(this.game, "phunt2", "高级猎人能力",
-      "高级猎人的产量和消耗的资源多达30％。", true)
+      "高级猎人生产和消耗的资源增加30％。", true)
     this.pAntFungus = new Unit(this.game, "paf", "农民能力",
-      "农民产生并消耗30％更多的资源。", true)
+      "农民生产和消耗的资源增加30％。", true)
 
     this.expAnt.push(this.pAntPower)
     this.expAnt.push(this.pAntGeo)
@@ -110,17 +110,17 @@ export class Prestige implements WorldInterface {
 
     //#region Ants in next world
     this.pAntNext = new Unit(this.game, "pan", "蚂蚁跟随者",
-      "开始新的世界时，拥有5个蚂蚁。", true)
+      "新世界开始时，拥有5个蚂蚁。", true)
     this.pGeologistNext = new Unit(this.game, "pgn", "地质学家追随者",
-      "开始新的世界时，拥有5个地质学家。", true)
+      "新世界开始时，拥有5个地质学家。", true)
     this.pScientistNext = new Unit(this.game, "psn", "科学家追随者",
-      "开始新的世界时，拥有5个科学家。", true)
+      "新世界开始时，拥有5个科学家。", true)
     this.pFarmerNext = new Unit(this.game, "pfn", "农民追随者",
-      "开始新的世界时，拥有5个农民。", true)
-    this.pCarpenterNext = new Unit(this.game, "pcarn", "木匠跟随者",
-      "开始新的世界时，拥有5个木匠。", true)
+      "新世界开始时，拥有5个农民。", true)
+    this.pCarpenterNext = new Unit(this.game, "pcarn", "木工跟随者",
+      "新世界开始时，拥有5个木工。", true)
     this.pLumberjackNext = new Unit(this.game, "plumn", "伐木工追随者",
-      "开始新的世界时，拥有5个伐木工人。", true)
+      "新世界开始时，拥有5个伐木工人。", true)
 
     this.expFollower = [this.pAntNext, this.pGeologistNext, this.pScientistNext,
     this.pFarmerNext, this.pCarpenterNext, this.pLumberjackNext]
@@ -144,7 +144,7 @@ export class Prestige implements WorldInterface {
     //#region  Machinery
     this.expMachinery = new Array<Unit>()
     this.pMachineryPower = new Unit(this.game, "pMach", "机器能力",
-      "机器的产量和消耗更多的30％的资源。", true)
+      "机器生产和消耗的资源增加30％。", true)
     this.pMachineryPower.actions.push(new BuyAction(this.game, this.pMachineryPower,
       [new Cost(this.experience, Decimal(20), expIncrement)]))
     this.expMachinery.push(this.pMachineryPower)
@@ -157,15 +157,15 @@ export class Prestige implements WorldInterface {
     //#region Technology
     this.expTech = new Array<Unit>()
     this.pComposter = new Unit(this.game, "pComposter", "堆肥",
-      "堆肥单元产生并消耗30％更多的资源。", true)
+      "堆肥单元生产和消耗的资源增加30％。", true)
     this.pRefinery = new Unit(this.game, "pRefinery", "精炼",
-      "精炼单元产生并消耗30％更多的资源。", true)
+      "精炼单元生产和消耗的资源增加30％。", true)
     this.pLaser = new Unit(this.game, "pLaser", "激光",
-      "激光单元产生并消耗30％更多的资源。", true)
+      "激光单元生产和消耗的资源增加30％。", true)
     this.pHydro = new Unit(this.game, "pHydro", "水培",
-      "水培单元产生并消耗30％更多的资源。", true)
+      "水培单元生产和消耗的资源增加30％。", true)
     this.pPlanter = new Unit(this.game, "pPlanter", "种植",
-      "种植单元产生并消耗30％更多的资源。", true)
+      "种植单元生产和消耗的资源增加30％。", true)
 
     this.expTech.push(this.pComposter)
     this.expTech.push(this.pRefinery)
@@ -248,7 +248,7 @@ export class Prestige implements WorldInterface {
     for (let i = 0; i < 5; i++) {
 
       const eff = new Unit(this.game, "eff" + names[i], names[i],
-        names[i] + " 单位消耗的资源减少5％。 最大-50％。", true)
+        names[i] + " 单位消耗的资源减少5％。最多减少50％。", true)
 
       const ba = new BuyAction(this.game, eff,
         [new Cost(this.experience, Decimal(50), expIncrement)])
@@ -280,7 +280,7 @@ export class Prestige implements WorldInterface {
     this.game.engineers.listEnginer.forEach(eng => {
 
       const eff = new Unit(this.game, "effEng" + eng.id, eng.name,
-        eng.name + " 资源消耗减少5％。 最多减少50％。", true)
+        eng.name + " 资源消耗减少5％。最多减少50％。", true)
 
       const ba = new BuyAction(this.game, eff,
         [new Cost(this.experience, Decimal(50), expIncrement)])
@@ -302,16 +302,16 @@ export class Prestige implements WorldInterface {
     //#endregion
 
     //#region Time
-    this.time = new Unit(this.game, "ptime", "时间",
-      "时间可以用来去未来。 一个时间单位对应于一秒钟。", true)
+    this.time = new Unit(this.game, "ptime", "秒",
+      "花费时间可以去往未来。一时间单位对应一秒钟。", true)
 
     this.timeMaker = new Unit(this.game, "ptimeMaker", "时间发生器",
-      "时间发生器以现实生活速度的1/10生成时间。 它不受暂停和时间扭曲的影响。", true)
+      "时间发生器以现实速度的1/10生产时间。它不受暂停和时间扭曲的影响。", true)
     this.timeMaker.percentage = 100
     this.timeMaker.alwaysOn = true
 
     this.timeBank = new Unit(this.game, "ptimeBank", "时间银行",
-      "时间银行将最长存储时间增加1小时。 基地储存4小时。", true)
+      "时间银行将最长存储时间增加1小时。基地储存4小时。", true)
 
     this.timeMaker.actions.push(new BuyAction(this.game, this.timeMaker,
       [new Cost(this.experience, Decimal(25), expIncrement)]))
