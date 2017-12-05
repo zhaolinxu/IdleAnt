@@ -1,6 +1,6 @@
 webpackJsonp([4],{
 
-/***/ "../../../../clarity-angular/clarity-angular/clarity-angular.es5.js":
+/***/ "../../../../clarity-angular/clarity-angular.es5.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42,6 +42,8 @@ webpackJsonp([4],{
 /* unused harmony export ALERT_DIRECTIVES */
 /* unused harmony export Alert */
 /* unused harmony export AlertItem */
+/* unused harmony export Alerts */
+/* unused harmony export AlertsPager */
 /* unused harmony export BUTTON_GROUP_DIRECTIVES */
 /* unused harmony export LOADING_BUTTON_DIRECTIVES */
 /* unused harmony export CHECKBOX_DIRECTIVES */
@@ -158,6 +160,7 @@ webpackJsonp([4],{
 /* unused harmony export ɵci */
 /* unused harmony export ɵck */
 /* unused harmony export ɵcj */
+/* unused harmony export ɵs */
 /* unused harmony export ɵt */
 /* unused harmony export ɵa */
 /* unused harmony export ɵcx */
@@ -180,15 +183,14 @@ webpackJsonp([4],{
 /* unused harmony export ɵdk */
 /* unused harmony export ɵdg */
 /* unused harmony export ɵcp */
-/* unused harmony export ɵk */
-/* unused harmony export ɵc */
 /* unused harmony export ɵj */
-/* unused harmony export ɵd */
-/* unused harmony export ɵe */
-/* unused harmony export ɵb */
+/* unused harmony export ɵc */
 /* unused harmony export ɵi */
-/* unused harmony export ɵg */
+/* unused harmony export ɵd */
+/* unused harmony export ɵb */
 /* unused harmony export ɵh */
+/* unused harmony export ɵf */
+/* unused harmony export ɵg */
 /* unused harmony export ɵds */
 /* unused harmony export ɵbm */
 /* unused harmony export ɵdt */
@@ -196,15 +198,15 @@ webpackJsonp([4],{
 /* unused harmony export ɵdr */
 /* unused harmony export ɵcb */
 /* unused harmony export ɵbz */
-/* unused harmony export ɵl */
-/* unused harmony export ɵn */
-/* unused harmony export ɵp */
-/* unused harmony export ɵr */
-/* unused harmony export ɵs */
-/* unused harmony export ɵq */
-/* unused harmony export ɵo */
-/* unused harmony export ɵf */
+/* unused harmony export ɵk */
 /* unused harmony export ɵm */
+/* unused harmony export ɵo */
+/* unused harmony export ɵq */
+/* unused harmony export ɵr */
+/* unused harmony export ɵp */
+/* unused harmony export ɵn */
+/* unused harmony export ɵe */
+/* unused harmony export ɵl */
 /* unused harmony export ɵce */
 /* unused harmony export ɵcg */
 /* unused harmony export ɵcf */
@@ -700,191 +702,11 @@ PopoverDirectiveOld.propDecorators = {
     'clrPopoverOld': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
 };
 /*
- * Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.
- * This software is released under MIT license.
- * The full license information can be found in LICENSE in the root directory of this project.
- */
-/**
- * ******
- * \@class IfOpenService
- *
- * \@description
- * An injectable service used by IfOpen structural directives and the components that implemnt IfOpen in their
- * templates. It holds the value of the open state and provides an Observable that both the directive and the
- * implementing component can subscribe to in order to take action on open value changes.
- *
- */
-var IfOpenService = (function () {
-    function IfOpenService() {
-        /**
-         * *****
-         * \@property _openChange
-         *
-         * \@description
-         * A RXJS Subject that updates and provides subscriptions to for the current open state of a component template
-         * implemting the IfOpen structural directive.
-         *
-         */
-        this._openChange = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["Subject"]();
-    }
-    Object.defineProperty(IfOpenService.prototype, "openChange", {
-        /**
-         * ******
-         * \@function openChange
-         *
-         * \@description
-         * A getter function that provides an observable for the _opened Subject.
-         *
-         * @return {?}
-         */
-        get: function () {
-            return this._openChange.asObservable();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(IfOpenService.prototype, "open", {
-        /**
-         * ******
-         *
-         * \@function open
-         *
-         * \@description
-         * A getter that returns the current value of this IfOpen instance.
-         * @return {?}
-         */
-        get: function () {
-            return this._open;
-        },
-        /**
-         * ******
-         * \@function open
-         *
-         * \@description
-         * A setter function that updates the current state of _open for this instance of IfOpen structural directive. And,
-         * broadcasts the new value to all subscribers.
-         *
-         * @param {?} value
-         * @return {?}
-         */
-        set: function (value) {
-            value = !!value;
-            if (this._open !== value) {
-                this._open = value;
-                this._openChange.next(value);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    IfOpenService.prototype.toggleWithEvent = function (event) {
-        this.originalEvent = event;
-        this.open = !this.open;
-        delete this.originalEvent;
-    };
-    return IfOpenService;
-}());
-IfOpenService.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
-];
-/**
- * @nocollapse
- */
-IfOpenService.ctorParameters = function () { return []; };
-/*
- * Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.
- * This software is released under MIT license.
- * The full license information can be found in LICENSE in the root directory of this project.
- */
-var PopoverDirective = (function () {
-    /**
-     * @param {?} el
-     * @param {?} ifOpenService
-     */
-    function PopoverDirective(el, ifOpenService) {
-        this.el = el;
-        this.ifOpenService = ifOpenService;
-        this.popoverOptions = {};
-    }
-    /**
-     * @return {?}
-     */
-    PopoverDirective.prototype.ngOnInit = function () {
-        var _this = this;
-        this.ifOpenService.openChange.subscribe(function (change) {
-            _this.updateView(change);
-        });
-    };
-    /**
-     * @param {?} open
-     * @return {?}
-     */
-    PopoverDirective.prototype.updateView = function (open) {
-        if (open) {
-            this.createPopover();
-        }
-        else {
-            this.destroyPopover();
-        }
-    };
-    /**
-     * @return {?}
-     */
-    PopoverDirective.prototype.createPopover = function () {
-        var _this = this;
-        // we take the first child element; usually there should only be one anyways
-        this._popoverInstance = new Popover(this.el.nativeElement);
-        this._subscription =
-            this._popoverInstance.anchor(this.anchorElem, this.anchorPoint, this.popoverPoint, this.popoverOptions)
-                .subscribe(function () {
-                // if a scroll event is detected, close the popover
-                _this.ifOpenService.open = false;
-            });
-    };
-    /**
-     * @return {?}
-     */
-    PopoverDirective.prototype.destroyPopover = function () {
-        if (this._popoverInstance) {
-            this._subscription.unsubscribe();
-            this._popoverInstance.release();
-            delete this._popoverInstance;
-        }
-    };
-    /**
-     * @return {?}
-     */
-    PopoverDirective.prototype.ngOnDestroy = function () {
-        this.destroyPopover();
-    };
-    return PopoverDirective;
-}());
-PopoverDirective.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: "[clrPopoverAnchor]" },] },
-];
-/**
- * @nocollapse
- */
-PopoverDirective.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
-    { type: IfOpenService, },
-]; };
-PopoverDirective.propDecorators = {
-    'anchorElem': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrPopoverAnchor",] },],
-    'anchorPoint': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrPopoverAnchorPoint",] },],
-    'popoverPoint': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrPopoverPopoverPoint",] },],
-    'popoverOptions': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrPopoverOptions",] },],
-};
-/*
  * Copyright (c) 2017 VMware, Inc. All Rights Reserved.
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
  */
-var POPOVER_DIRECTIVES = [PopoverDirectiveOld, PopoverDirective];
+var POPOVER_DIRECTIVES = [PopoverDirectiveOld];
 /**
  * Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.
  * This software is released under MIT license.
@@ -4535,6 +4357,102 @@ DatagridPlaceholder.ctorParameters = function () { return [
     { type: Page, },
 ]; };
 /*
+ * Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.
+ * This software is released under MIT license.
+ * The full license information can be found in LICENSE in the root directory of this project.
+ */
+/**
+ * ******
+ * \@class IfOpenService
+ *
+ * \@description
+ * An injectable service used by IfOpen structural directives and the components that implemnt IfOpen in their
+ * templates. It holds the value of the open state and provides an Observable that both the directive and the
+ * implementing component can subscribe to in order to take action on open value changes.
+ *
+ */
+var IfOpenService = (function () {
+    function IfOpenService() {
+        /**
+         * *****
+         * \@property _openChange
+         *
+         * \@description
+         * A RXJS Subject that updates and provides subscriptions to for the current open state of a component template
+         * implemting the IfOpen structural directive.
+         *
+         */
+        this._openChange = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["Subject"]();
+    }
+    Object.defineProperty(IfOpenService.prototype, "openChange", {
+        /**
+         * ******
+         * \@function openChange
+         *
+         * \@description
+         * A getter function that provides an observable for the _opened Subject.
+         *
+         * @return {?}
+         */
+        get: function () {
+            return this._openChange.asObservable();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(IfOpenService.prototype, "open", {
+        /**
+         * ******
+         *
+         * \@function open
+         *
+         * \@description
+         * A getter that returns the current value of this IfOpen instance.
+         * @return {?}
+         */
+        get: function () {
+            return this._open;
+        },
+        /**
+         * ******
+         * \@function open
+         *
+         * \@description
+         * A setter function that updates the current state of _open for this instance of IfOpen structural directive. And,
+         * broadcasts the new value to all subscribers.
+         *
+         * @param {?} value
+         * @return {?}
+         */
+        set: function (value) {
+            value = !!value;
+            if (this._open !== value) {
+                this._open = value;
+                this._openChange.next(value);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    IfOpenService.prototype.toggleWithEvent = function (event) {
+        this.originalEvent = event;
+        this.open = !this.open;
+        delete this.originalEvent;
+    };
+    return IfOpenService;
+}());
+IfOpenService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
+];
+/**
+ * @nocollapse
+ */
+IfOpenService.ctorParameters = function () { return []; };
+/*
  * Copyright (c) 2017 VMware, Inc. All Rights Reserved.
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
@@ -5181,11 +5099,13 @@ var Selection = (function () {
             return;
         }
         /*
-         * If everything is already selected, we clear.
-         * If at least one row isn't selected, we select everything.
+         * If every currently displayed item is already selected, we clear them.
+         * If at least one item isn't selected, we select every currently displayed item.
          */
         if (this.isAllSelected()) {
-            this.current.length = 0;
+            this.current = this.current.filter(function (item) {
+                return _this._items.displayed.indexOf(item) < 0;
+            });
         }
         else {
             this._items.displayed.forEach(function (item) {
@@ -5193,8 +5113,8 @@ var Selection = (function () {
                     _this.current.push(item);
                 }
             });
+            this.emitChange();
         }
-        this.emitChange();
     };
     return Selection;
 }());
@@ -5392,7 +5312,7 @@ var DatagridRow = (function () {
 DatagridRow.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
                 selector: "clr-dg-row",
-                template: "\n        <div class=\"datagrid-row-master datagrid-row-flex\">\n            <clr-dg-cell *ngIf=\"selection.selectionType === SELECTION_TYPE.Multi\"\n                         class=\"datagrid-select datagrid-fixed-column\">\n                <clr-checkbox [ngModel]=\"selected\" (ngModelChange)=\"toggle($event)\"></clr-checkbox>\n            </clr-dg-cell>\n            <clr-dg-cell *ngIf=\"selection.selectionType === SELECTION_TYPE.Single\"\n                         class=\"datagrid-select datagrid-fixed-column\">\n                <div class=\"radio\">\n                    <input type=\"radio\" [id]=\"id\" [name]=\"selection.id + '-radio'\" [value]=\"item\"\n                           [(ngModel)]=\"selection.currentSingle\">\n                    <label for=\"{{id}}\"></label>\n                </div>\n            </clr-dg-cell>\n            <clr-dg-cell *ngIf=\"rowActionService.hasActionableRow\"\n                         class=\"datagrid-row-actions datagrid-fixed-column\">\n                <ng-content select=\"clr-dg-action-overflow\"></ng-content>\n            </clr-dg-cell>\n            <clr-dg-cell *ngIf=\"globalExpandable.hasExpandableRow\"\n                         class=\"datagrid-expandable-caret datagrid-fixed-column\">\n                <ng-container *ngIf=\"expand.expandable\">\n                    <button (click)=\"toggleExpand()\" *ngIf=\"!expand.loading\" type=\"button\">\n                        <clr-icon shape=\"caret\" [attr.dir]=\"expand.expanded?'down':'right'\"></clr-icon>\n                    </button>\n                    <div class=\"spinner spinner-sm\" *ngIf=\"expand.loading\"></div>\n                </ng-container>\n            </clr-dg-cell>\n            <ng-content *ngIf=\"!expand.replace || !expand.expanded || expand.loading\"></ng-content>\n\n            <ng-template *ngIf=\"expand.replace && expand.expanded && !expand.loading\"\n                         [ngTemplateOutlet]=\"detail\"></ng-template>\n        </div>\n\n        <ng-template *ngIf=\"!expand.replace && expand.expanded && !expand.loading\"\n                     [ngTemplateOutlet]=\"detail\"></ng-template>\n\n        <!-- \n            We need the \"project into template\" hack because we need this in 2 different places\n            depending on whether the details replace the row or not.\n        -->\n        <ng-template #detail>\n            <ng-content select=\"clr-dg-row-detail\"></ng-content>\n        </ng-template>\n    ",
+                template: "\n        <div class=\"datagrid-row-master datagrid-row-flex\">\n            <clr-dg-cell *ngIf=\"selection.selectionType === SELECTION_TYPE.Multi\"\n                         class=\"datagrid-select datagrid-fixed-column\">\n                <clr-checkbox [clrChecked]=\"selected\" (clrCheckedChange)=\"toggle($event)\"></clr-checkbox>\n            </clr-dg-cell>\n            <clr-dg-cell *ngIf=\"selection.selectionType === SELECTION_TYPE.Single\"\n                         class=\"datagrid-select datagrid-fixed-column\">\n                <div class=\"radio\">\n                    <input type=\"radio\" [id]=\"id\" [name]=\"selection.id + '-radio'\" [value]=\"item\"\n                           [(ngModel)]=\"selection.currentSingle\">\n                    <label for=\"{{id}}\"></label>\n                </div>\n            </clr-dg-cell>\n            <clr-dg-cell *ngIf=\"rowActionService.hasActionableRow\"\n                         class=\"datagrid-row-actions datagrid-fixed-column\">\n                <ng-content select=\"clr-dg-action-overflow\"></ng-content>\n            </clr-dg-cell>\n            <clr-dg-cell *ngIf=\"globalExpandable.hasExpandableRow\"\n                         class=\"datagrid-expandable-caret datagrid-fixed-column\">\n                <ng-container *ngIf=\"expand.expandable\">\n                    <button (click)=\"toggleExpand()\" *ngIf=\"!expand.loading\" type=\"button\">\n                        <clr-icon shape=\"caret\" [attr.dir]=\"expand.expanded?'down':'right'\"></clr-icon>\n                    </button>\n                    <div class=\"spinner spinner-sm\" *ngIf=\"expand.loading\"></div>\n                </ng-container>\n            </clr-dg-cell>\n            <ng-content *ngIf=\"!expand.replace || !expand.expanded || expand.loading\"></ng-content>\n\n            <ng-template *ngIf=\"expand.replace && expand.expanded && !expand.loading\"\n                         [ngTemplateOutlet]=\"detail\"></ng-template>\n        </div>\n\n        <ng-template *ngIf=\"!expand.replace && expand.expanded && !expand.loading\"\n                     [ngTemplateOutlet]=\"detail\"></ng-template>\n\n        <!-- \n            We need the \"project into template\" hack because we need this in 2 different places\n            depending on whether the details replace the row or not.\n        -->\n        <ng-template #detail>\n            <ng-content select=\"clr-dg-row-detail\"></ng-content>\n        </ng-template>\n    ",
                 host: {
                     "[class.datagrid-row]": "true",
                     "[class.datagrid-selected]": "selected",
@@ -5934,7 +5854,7 @@ DatagridColumnToggle.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
                 selector: "clr-dg-column-toggle",
                 template: "\n        <button\n                #anchor\n                (click)=\"toggleUI()\"\n                class=\"btn btn-sm btn-link column-toggle--action\"\n                type=\"button\">\n            <clr-icon shape=\"view-columns\"></clr-icon>\n        </button>\n        <div class=\"column-switch\"\n             *clrPopoverOld=\"open; anchor: anchor; anchorPoint: anchorPoint; popoverPoint: popoverPoint\">\n            <div class=\"switch-header\">\n                Show Columns\n                <button\n                    class=\"btn btn-sm btn-link\"\n                    (click)=\"toggleUI()\"\n                    type=\"button\">\n                    <clr-icon\n                            shape=\"close\"></clr-icon>\n                </button>\n            </div>\n            <ul class=\"switch-content list-unstyled\">\n                <li *ngFor=\"let column of columns\">\n                    <clr-checkbox [clrChecked]=\"!column.hidden\"\n                                  [clrDisabled]=\"column.lastVisibleColumn\"\n                                  (clrCheckedChange)=\"toggleColumn($event, column)\">\n                        <ng-template [ngTemplateOutlet]=\"column.template\"></ng-template>\n                    </clr-checkbox>\n                </li>\n            </ul>\n            <div class=\"switch-footer\">\n                <div>\n                    <button\n                            class=\"btn btn-sm btn-link p6 text-uppercase\"\n                            [disabled]=\"allColumnsVisible\"\n                            (click)=\"selectAll()\"\n                            type=\"button\">Select All\n                    </button>\n                </div>\n                <div class=\"action-right\">\n                    <button\n                            (click)=\"toggleUI()\"\n                            class=\"btn btn-primary\"\n                            type=\"button\">\n                        Ok\n                    </button>\n                </div>\n            </div>\n        </div>\n    ",
-                host: { "[class.column-switch-wrapper]": "true", "[class.column-switch-wrapper--active]": "open" }
+                host: { "[class.column-switch-wrapper]": "true", "[class.active]": "open" }
             },] },
 ];
 /**
@@ -6697,7 +6617,6 @@ var DatagridColumnResizer = (function () {
      */
     DatagridColumnResizer.prototype.ngAfterViewInit = function () {
         var _this = this;
-        this.columnMinWidth = this.domAdapter.minWidth(this.columnEl);
         this.handleTrackerEl = this.dragDispatcher.handleTrackerRef.nativeElement;
         this.dragDispatcher.addDragListener();
         this.subscriptions.push(this.dragDispatcher.onDragStart.subscribe(function () { return _this.dragStartHandler(); }));
@@ -6708,6 +6627,10 @@ var DatagridColumnResizer = (function () {
      * @return {?}
      */
     DatagridColumnResizer.prototype.dragStartHandler = function () {
+        if (!this.columnMinWidth) {
+            // sets the min width only on the very first drag attempt
+            this.columnMinWidth = this.domAdapter.minWidth(this.columnEl);
+        }
         this.renderer.setStyle(this.handleTrackerEl, "display", "block");
         this.renderer.setStyle(document.body, "cursor", "col-resize");
         this.dragDistancePositionX = 0;
@@ -8616,12 +8539,12 @@ var AbstractPopover = (function () {
         this.release();
         this.subscription.unsubscribe();
     };
-    Object.defineProperty(AbstractPopover.prototype, "hidden", {
+    Object.defineProperty(AbstractPopover.prototype, "isOffScreen", {
         /**
          * @return {?}
          */
         get: function () {
-            return this.ifOpenService.open ? "visible" : "hidden";
+            return this.ifOpenService.open ? false : true;
         },
         enumerable: true,
         configurable: true
@@ -8671,7 +8594,7 @@ AbstractPopover.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["SkipSelf"] },] },
 ]; };
 AbstractPopover.propDecorators = {
-    'hidden': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["HostBinding"], args: ["style.visibility",] },],
+    'isOffScreen': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["HostBinding"], args: ["class.is-off-screen",] },],
 };
 /*
  * Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.
@@ -8970,6 +8893,121 @@ AlertIconAndTypesService.decorators = [
  */
 AlertIconAndTypesService.ctorParameters = function () { return []; };
 /*
+ * Copyright (c) 2017 VMware, Inc. All Rights Reserved.
+ * This software is released under MIT license.
+ * The full license information can be found in LICENSE in the root directory of this project.
+ */
+var MultiAlertService = (function () {
+    function MultiAlertService() {
+        this.allAlerts = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]();
+        this._current = 0;
+        /**
+         * The Observable that lets other classes subscribe to changes
+         */
+        this._change = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["Subject"]();
+    }
+    Object.defineProperty(MultiAlertService.prototype, "changes", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this._change.asObservable();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MultiAlertService.prototype, "current", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this._current;
+        },
+        /**
+         * @param {?} index
+         * @return {?}
+         */
+        set: function (index) {
+            if (index !== this._current) {
+                this._current = index;
+                this._change.next(index);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MultiAlertService.prototype, "activeAlerts", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this.allAlerts.filter(function (alert) { return !alert._closed; });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MultiAlertService.prototype, "currentAlert", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this.activeAlerts[this.current];
+        },
+        /**
+         * @param {?} alert
+         * @return {?}
+         */
+        set: function (alert) {
+            this.current = this.activeAlerts.indexOf(alert);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MultiAlertService.prototype, "count", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this.activeAlerts.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @param {?} alerts
+     * @return {?}
+     */
+    MultiAlertService.prototype.manage = function (alerts) {
+        this.allAlerts = alerts;
+    };
+    /**
+     * @return {?}
+     */
+    MultiAlertService.prototype.next = function () {
+        this.current = (this.current === this.activeAlerts.length - 1) ? 0 : this.current + 1;
+    };
+    /**
+     * @return {?}
+     */
+    MultiAlertService.prototype.previous = function () {
+        this.current = (this.current === 0) ? this.activeAlerts.length - 1 : this.current - 1;
+    };
+    /**
+     * @return {?}
+     */
+    MultiAlertService.prototype.close = function () {
+        this.previous();
+    };
+    return MultiAlertService;
+}());
+MultiAlertService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
+];
+/**
+ * @nocollapse
+ */
+MultiAlertService.ctorParameters = function () { return []; };
+/*
  * Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
@@ -8978,14 +9016,20 @@ AlertIconAndTypesService.ctorParameters = function () { return []; };
 var Alert = (function () {
     /**
      * @param {?} iconService
+     * @param {?} cdr
+     * @param {?} multiAlertService
      */
-    function Alert(iconService) {
+    function Alert(iconService, cdr, multiAlertService) {
         this.iconService = iconService;
+        this.cdr = cdr;
+        this.multiAlertService = multiAlertService;
         this.isSmall = false;
         this.closable = true;
         this.isAppLevel = false;
         this._closed = false;
         this._closedChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](false);
+        this.previouslyHidden = false;
+        this.hidden = false;
     }
     Object.defineProperty(Alert.prototype, "alertType", {
         /**
@@ -9028,11 +9072,46 @@ var Alert = (function () {
     /**
      * @return {?}
      */
+    Alert.prototype.detectChangesIfNeeded = function () {
+        if (this.previouslyHidden !== this.hidden) {
+            this.previouslyHidden = this.hidden;
+            this.cdr.detectChanges();
+        }
+    };
+    Object.defineProperty(Alert.prototype, "isHidden", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            if (this.multiAlertService) {
+                if (this.multiAlertService.currentAlert === this) {
+                    if (this.hidden === true) {
+                        this.previouslyHidden = true;
+                        this.hidden = false;
+                    }
+                }
+                else if (this.hidden === false) {
+                    this.previouslyHidden = false;
+                    this.hidden = true;
+                }
+                this.detectChangesIfNeeded();
+            }
+            return this.hidden;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
     Alert.prototype.close = function () {
         if (!this.closable) {
             return;
         }
         this._closed = true;
+        if (this.multiAlertService) {
+            this.multiAlertService.close();
+        }
         this._closedChanged.emit(true);
     };
     /**
@@ -9045,13 +9124,15 @@ var Alert = (function () {
     return Alert;
 }());
 Alert.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{ selector: "clr-alert", providers: [AlertIconAndTypesService], template: "\n  <!--\n    ~ Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.\n    ~ This software is released under MIT license.\n    ~ The full license information can be found in LICENSE in the root directory of this project.\n    -->\n\n  <div\n      *ngIf=\"!_closed\"\n      class=\"alert\"\n      [ngClass]=\"alertClass\"\n      [class.alert-sm]=\"isSmall\"\n      [class.alert-app-level]=\"isAppLevel\">\n      <div class=\"alert-items\">\n          <ng-content></ng-content>\n      </div>\n      <button type=\"button\" class=\"close\" aria-label=\"Close\" *ngIf=\"closable\" (click)=\"close()\">\n          <clr-icon aria-hidden=\"true\" shape=\"close\"></clr-icon>\n      </button>\n  </div>\n" },] },
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{ selector: "clr-alert", providers: [AlertIconAndTypesService], template: "\n  <!--\n    ~ Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.\n    ~ This software is released under MIT license.\n    ~ The full license information can be found in LICENSE in the root directory of this project.\n    -->\n\n  <div\n      *ngIf=\"!_closed\"\n      class=\"alert\"\n      [ngClass]=\"alertClass\"\n      [class.alert-hidden]=\"isHidden\"\n      [class.alert-sm]=\"isSmall\"\n      [class.alert-app-level]=\"isAppLevel\">\n      <div class=\"alert-items\">\n          <ng-content></ng-content>\n      </div>\n      <button type=\"button\" class=\"close\" aria-label=\"Close\" *ngIf=\"closable\" (click)=\"close()\">\n          <clr-icon aria-hidden=\"true\" shape=\"close\"></clr-icon>\n      </button>\n  </div>\n" },] },
 ];
 /**
  * @nocollapse
  */
 Alert.ctorParameters = function () { return [
     { type: AlertIconAndTypesService, },
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"], },
+    { type: MultiAlertService, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] },] },
 ]; };
 Alert.propDecorators = {
     'isSmall': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrAlertSizeSmall",] },],
@@ -9092,11 +9173,240 @@ AlertItem.ctorParameters = function () { return [
     { type: AlertIconAndTypesService, },
 ]; };
 /*
+ * Copyright (c) 2017 VMware, Inc. All Rights Reserved.
+ * This software is released under MIT license.
+ * The full license information can be found in LICENSE in the root directory of this project.
+ */
+var Alerts = (function () {
+    /**
+     * @param {?} multiAlertService
+     */
+    function Alerts(multiAlertService) {
+        this.multiAlertService = multiAlertService;
+        this.currentAlertIndexChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](false);
+        this.currentAlertChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](false);
+    }
+    Object.defineProperty(Alerts.prototype, "_inputCurrentIndex", {
+        /**
+         * Input/Output to support two way binding on current alert index
+         * @param {?} index
+         * @return {?}
+         */
+        set: function (index) {
+            if (index) {
+                this.multiAlertService.current = index;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Alerts.prototype, "currentAlertIndex", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this.multiAlertService.current;
+        },
+        /**
+         * @param {?} index
+         * @return {?}
+         */
+        set: function (index) {
+            this.multiAlertService.current = index;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Alerts.prototype, "currentAlert", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this.multiAlertService.currentAlert;
+        },
+        /**
+         * Input/Output to support two way binding on current alert instance
+         * @param {?} alert
+         * @return {?}
+         */
+        set: function (alert) {
+            if (alert) {
+                this.multiAlertService.currentAlert = alert;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Alerts.prototype, "alerts", {
+        /**
+         * Ensure we are only dealing with alerts that have not been closed yet
+         * @return {?}
+         */
+        get: function () {
+            return this.allAlerts.filter(function (alert) {
+                return alert.isHidden === false;
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Alerts.prototype, "currentAlertType", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            if (this.multiAlertService.currentAlert) {
+                return this.multiAlertService.currentAlert.alertType;
+            }
+            return "";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    Alerts.prototype.ngAfterContentInit = function () {
+        var _this = this;
+        this.multiAlertService.manage(this.allAlerts);
+        this.multiAlertService.changes.subscribe(function (index) {
+            _this.currentAlertIndexChange.next(index);
+            _this.currentAlertChange.next(_this.multiAlertService.currentAlert);
+        });
+    };
+    return Alerts;
+}());
+Alerts.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
+                selector: "clr-alerts",
+                template: "\n      <clr-alerts-pager\n              *ngIf=\"multiAlertService.count > 1\"\n              [clrCurrentAlertIndex]=\"currentAlertIndex\">\n      </clr-alerts-pager>\n      <ng-content select=\"clr-alert\"></ng-content>\n    ",
+                providers: [MultiAlertService],
+                host: {
+                    "[class.alerts]": "true",
+                    "[class.alert-danger]": "this.currentAlertType == 'danger'",
+                    "[class.alert-info]": "this.currentAlertType == 'info'",
+                    "[class.alert-success]": "this.currentAlertType == 'success'",
+                    "[class.alert-warning]": "this.currentAlertType == 'warning'"
+                },
+                styles: [":host { display: block }"]
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Alerts.ctorParameters = function () { return [
+    { type: MultiAlertService, },
+]; };
+Alerts.propDecorators = {
+    'allAlerts': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ContentChildren"], args: [Alert,] },],
+    '_inputCurrentIndex': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrCurrentAlertIndex",] },],
+    'currentAlertIndexChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"], args: ["clrCurrentAlertIndexChange",] },],
+    'currentAlert': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrCurrentAlert",] },],
+    'currentAlertChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"], args: ["clrCurrentAlertChange",] },],
+};
+/*
+ * Copyright (c) 2017 VMware, Inc. All Rights Reserved.
+ * This software is released under MIT license.
+ * The full license information can be found in LICENSE in the root directory of this project.
+ */
+var AlertsPager = (function () {
+    /**
+     * @param {?} multiAlertService
+     */
+    function AlertsPager(multiAlertService) {
+        this.multiAlertService = multiAlertService;
+        this.currentAlertChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](false);
+        this.currentAlertIndexChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    Object.defineProperty(AlertsPager.prototype, "currentAlert", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this.multiAlertService.currentAlert;
+        },
+        /**
+         * Input/Output to support two way binding on current alert instance
+         * @param {?} alert
+         * @return {?}
+         */
+        set: function (alert) {
+            if (alert) {
+                this.multiAlertService.currentAlert = alert;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AlertsPager.prototype, "currentAlertIndex", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            return this.multiAlertService.current;
+        },
+        /**
+         * Input/Output to support two way binding on current alert index
+         * @param {?} index
+         * @return {?}
+         */
+        set: function (index) {
+            this.multiAlertService.current = index;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    AlertsPager.prototype.ngOnInit = function () {
+        var _this = this;
+        this.multiAlertServiceChanges = this.multiAlertService.changes.subscribe(function (index) {
+            _this.currentAlertIndexChange.emit(index);
+            _this.currentAlertChange.emit(_this.multiAlertService.activeAlerts[index]);
+        });
+    };
+    /**
+     * @return {?}
+     */
+    AlertsPager.prototype.pageUp = function () {
+        this.multiAlertService.next();
+    };
+    /**
+     * @return {?}
+     */
+    AlertsPager.prototype.pageDown = function () {
+        this.multiAlertService.previous();
+    };
+    /**
+     * @return {?}
+     */
+    AlertsPager.prototype.ngOnDestroy = function () {
+        this.multiAlertServiceChanges.unsubscribe();
+    };
+    return AlertsPager;
+}());
+AlertsPager.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{ selector: "clr-alerts-pager", template: "\n  <div class=\"alerts-pager-control\">\n      <div class=\"alerts-page-down\">\n          <button class=\"alerts-pager-button\" (click)=\"pageDown()\">\n              <clr-icon shape=\"caret left\"></clr-icon>\n          </button>\n      </div>\n      <div class=\"alerts-pager-text\">\n          {{this.multiAlertService.current+1}} / {{this.multiAlertService.count}}\n      </div>\n      <div class=\"alerts-page-up\">\n          <button class=\"alerts-pager-button\" (click)=\"pageUp()\">\n              <clr-icon shape=\"caret right\"></clr-icon>\n          </button>\n      </div>\n  </div>\n", host: { "[class.alerts-pager]": "true" } },] },
+];
+/**
+ * @nocollapse
+ */
+AlertsPager.ctorParameters = function () { return [
+    { type: MultiAlertService, },
+]; };
+AlertsPager.propDecorators = {
+    'currentAlert': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrCurrentAlert",] },],
+    'currentAlertChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"], args: ["clrCurrentAlertChange",] },],
+    'currentAlertIndex': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrCurrentAlertIndex",] },],
+    'currentAlertIndexChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"], args: ["clrCurrentAlertIndexChange",] },],
+};
+/*
  * Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
  */
-var ALERT_DIRECTIVES = [Alert, AlertItem];
+var ALERT_DIRECTIVES = [Alert, AlertItem, Alerts, AlertsPager];
 /**
  * Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.
  * This software is released under MIT license.
@@ -11194,7 +11504,7 @@ Modal.decorators = [
                 selector: "clr-modal",
                 viewProviders: [ScrollingService],
                 template: "\n\n      <!--\n        ~ Copyright (c) 2016-2017 VMware, Inc. All Rights Reserved.\n        ~ This software is released under MIT license.\n        ~ The full license information can be found in LICENSE in the root directory of this project.\n        -->\n\n      <div clrFocusTrap class=\"modal\" *ngIf=\"_open\">\n          <!--fixme: revisit when ngClass works with exit animation-->\n          <div [@fadeDown]=\"skipAnimation\" (@fadeDown.done)=\"fadeDone($event)\"\n               class=\"modal-dialog\"\n               [class.modal-sm]=\"size == 'sm'\"\n               [class.modal-lg]=\"size == 'lg'\"\n               [class.modal-xl]=\"size == 'xl'\"\n               role=\"dialog\" aria-hidden=\"true\">\n\n              <div class=\"modal-outer-wrapper\">\n                  <div class=\"modal-content-wrapper\">\n                      <!-- only used in wizards -->\n                      <ng-content select=\".modal-nav\"></ng-content>\n\n                      <div class=\"modal-content\">\n                          <div class=\"modal-header\">\n                              <button type=\"button\" class=\"close\" aria-label=\"Close\"\n                                      *ngIf=\"closable\" (click)=\"close()\">\n                                  <clr-icon aria-hidden=\"true\" shape=\"close\"></clr-icon>\n                              </button>\n                              <ng-content select=\".modal-title\"></ng-content>\n                          </div>\n                          <ng-content select=\".modal-body\"></ng-content>\n                          <ng-content select=\".modal-footer\"></ng-content>\n                      </div>\n                  </div>\n                  <div class=\"modal-ghost-wrapper\">\n                      <div [@ghostPageOneState]=\"ghostPageState\" class=\"modal-ghost modal-ghost-1\"></div>\n                      <div [@ghostPageTwoState]=\"ghostPageState\" class=\"modal-ghost modal-ghost-2\"></div>\n                  </div>\n              </div>\n          </div>\n\n          <div [@fade] class=\"modal-backdrop\"\n               aria-hidden=\"true\"\n               (click)=\"staticBackdrop || close()\"></div>\n      </div>\n    ",
-                styles: ["\n        :host { display: inline-block; }\n    "],
+                styles: ["\n        :host { display: none; }\n        :host.open { display: inline; }\n    "],
                 animations: [
                     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__angular_animations__["i" /* trigger */])("fadeDown", [
                         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__angular_animations__["k" /* transition */])("* => false", [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__angular_animations__["h" /* style */])({ opacity: 0, transform: "translate(0, -25%)" }), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__angular_animations__["l" /* animate */])("0.2s ease-in-out")]),
@@ -11236,7 +11546,7 @@ Modal.ctorParameters = function () { return [
 ]; };
 Modal.propDecorators = {
     'focusTrap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"], args: [FocusTrapDirective,] },],
-    '_open': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrModalOpen",] },],
+    '_open': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["HostBinding"], args: ["class.open",] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrModalOpen",] },],
     '_openChanged': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"], args: ["clrModalOpenChange",] },],
     'closable': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrModalClosable",] },],
     'size': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ["clrModalSize",] },],
@@ -14899,6 +15209,19 @@ var WizardButton = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(WizardButton.prototype, "_disabledAttribute", {
+        /**
+         * @return {?}
+         */
+        get: function () {
+            if (this.isDisabled) {
+                return "";
+            }
+            return null;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(WizardButton.prototype, "isDisabled", {
         /**
          * @return {?}
@@ -14982,7 +15305,7 @@ var WizardButton = (function () {
 WizardButton.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
                 selector: "clr-wizard-button",
-                template: "\n        <button\n            type=\"button\"\n            class=\"btn clr-wizard-btn\"\n            [class.btn-link]=\"isCancel\"\n            [class.clr-wizard-btn--tertiary]=\"isCancel\"\n            [class.btn-outline]=\"isPrevious\"\n            [class.clr-wizard-btn--secondary]=\"isPrevious\"\n            [class.btn-primary]=\"isPrimaryAction\"\n            [class.clr-wizard-btn--primary]=\"isPrimaryAction\"\n            [class.btn-success]=\"isFinish\"\n            [class.btn-danger]=\"isDanger\"\n            [class.disabled]=\"isDisabled\"\n            (click)=\"click()\">\n            <ng-content></ng-content>\n        </button>\n    ",
+                template: "\n        <button\n            type=\"button\"\n            class=\"btn clr-wizard-btn\"\n            [class.btn-link]=\"isCancel\"\n            [class.clr-wizard-btn--tertiary]=\"isCancel\"\n            [class.btn-outline]=\"isPrevious\"\n            [class.clr-wizard-btn--secondary]=\"isPrevious\"\n            [class.btn-primary]=\"isPrimaryAction\"\n            [class.clr-wizard-btn--primary]=\"isPrimaryAction\"\n            [class.btn-success]=\"isFinish\"\n            [class.btn-danger]=\"isDanger\"\n            [class.disabled]=\"isDisabled\"\n            [attr.disabled]=\"_disabledAttribute\"\n            (click)=\"click()\">\n            <ng-content></ng-content>\n        </button>\n    ",
                 host: { "class": "clr-wizard-btn-wrapper", "[attr.aria-hidden]": "isHidden" },
                 styles: ["[aria-hidden=\"true\"] { display: none; }"]
             },] },
@@ -32752,7 +33075,7 @@ function ordinal (number) {
 var defaultRelativeTime = {
     future : 'in %s',
     past   : '%s ago',
-    s  : 'a few seconds',
+    s  : '几秒钟',
     ss : '%d seconds',
     m  : 'a minute',
     mm : '%d minutes',

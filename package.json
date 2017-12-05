@@ -1,0 +1,113 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "clarity-ui@^0.10.16",
+        "scope": null,
+        "escapedName": "clarity-ui",
+        "name": "clarity-ui",
+        "rawSpec": "^0.10.16",
+        "spec": ">=0.10.16 <0.11.0",
+        "type": "range"
+      },
+      "/Users/zhaolinxu/GitHub/IdleAnt"
+    ]
+  ],
+  "_cnpm_publish_time": 1512075796458,
+  "_from": "clarity-ui@>=0.10.16 <0.11.0",
+  "_id": "clarity-ui@0.10.16",
+  "_inCache": true,
+  "_location": "/clarity-ui",
+  "_nodeVersion": "8.4.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/clarity-ui-0.10.16.tgz_1512075796264_0.1320531344972551"
+  },
+  "_npmUser": {
+    "name": "gnomeontherun",
+    "email": "gnomation@gnomeontherun.com"
+  },
+  "_npmVersion": "5.5.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "clarity-ui@^0.10.16",
+    "scope": null,
+    "escapedName": "clarity-ui",
+    "name": "clarity-ui",
+    "rawSpec": "^0.10.16",
+    "spec": ">=0.10.16 <0.11.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/clarity-ui/download/clarity-ui-0.10.16.tgz",
+  "_shasum": "6a1926c0e197251c6bdeebab55faebbed6c6072f",
+  "_shrinkwrap": null,
+  "_spec": "clarity-ui@^0.10.16",
+  "_where": "/Users/zhaolinxu/GitHub/IdleAnt",
+  "author": {
+    "name": "clarity"
+  },
+  "bugs": {
+    "url": "https://github.com/vmware/clarity/issues"
+  },
+  "dependencies": {},
+  "description": "CSS for Clarity",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "6a1926c0e197251c6bdeebab55faebbed6c6072f",
+    "size": 697111,
+    "noattachment": false,
+    "tarball": "http://registry.npm.taobao.org/clarity-ui/download/clarity-ui-0.10.16.tgz"
+  },
+  "homepage": "https://vmware.github.io/clarity/",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "adityarb88",
+      "email": "adityarb88@gmail.com"
+    },
+    {
+      "name": "gnomeontherun",
+      "email": "gnomation@gnomeontherun.com"
+    },
+    {
+      "name": "hippeelee",
+      "email": "hippely@gmail.com"
+    },
+    {
+      "name": "jaffoneh",
+      "email": "jaffoneh@gmail.com"
+    },
+    {
+      "name": "jeeyun",
+      "email": "jeeyun.lim@gmail.com"
+    },
+    {
+      "name": "mathisscott",
+      "email": "mathisscott@yahoo.com"
+    },
+    {
+      "name": "shijir",
+      "email": "shijir99@gmail.com"
+    },
+    {
+      "name": "youdz",
+      "email": "petonnet.eudes@gmail.com"
+    }
+  ],
+  "name": "clarity-ui",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "clarity-icons": "0.10.16"
+  },
+  "publish_time": 1512075796458,
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vmware/clarity.git"
+  },
+  "version": "0.10.16"
+}
