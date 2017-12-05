@@ -191,7 +191,7 @@ export class Bee implements WorldInterface {
 
     this.game.engineers.beeEnginer.addProductor(this.engineersProd)
 
-    this.universityBee.togableProductions = [new TogableProduction("Generate engineers", [this.engineersProd])]
+    this.universityBee.togableProductions = [new TogableProduction("产生蜜蜂工程师", [this.engineersProd])]
 
     //  Research
     this.universityResBee2 = new Research(
