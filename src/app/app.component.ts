@@ -1,3 +1,4 @@
+import { TypeList } from './model/typeList';
 import { Action } from './model/units/action';
 import { GameService } from './game.service';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
@@ -46,5 +47,11 @@ export class AppComponent {
     return this.gameService.game.actMin.maxBuy.greaterThanOrEqualTo(Decimal(minute))
   }
 
+  getListId(index, list: TypeList) {
+    return list.getId()
+  }
+  getClass() {
+    return "header-" + this.gameService.game.options.header
+  }
 }
 

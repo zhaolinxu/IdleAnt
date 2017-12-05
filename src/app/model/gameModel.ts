@@ -28,6 +28,7 @@ import { Researchs } from './worlds/researchs';
 import { Prestige } from './worlds/prestige';
 import { Infestation } from './worlds/inferstation';
 import { Science } from './worlds/science';
+import { Options } from './options';
 
 export class GameModel {
 
@@ -35,6 +36,9 @@ export class GameModel {
   timeToEnd = Number.POSITIVE_INFINITY
   gameVersion = "0.1.3"
   hideSaveNotification = false
+
+  options: Options = new Options()
+  buyMulti = 1
 
   //#region
   //    Cost
@@ -69,8 +73,10 @@ export class GameModel {
 
   unitMap: Map<string, Unit> = new Map()
   all: Array<Unit>
+  unl: Array<Unit>
   allBase: Array<Base>
   lists = new Array<TypeList>()
+  uiLists = new Array<TypeList>()
   unitWithUp = new Array<Unit>()
 
   //    Prestige
@@ -99,6 +105,7 @@ export class GameModel {
   timeModalOpened = false
 
   unitLists = new Array<TypeList>()
+
 
   //#endregion
 
@@ -160,6 +167,7 @@ export class GameModel {
     this.generateRandomWorld()
 
     this.setInitialStat()
+    this.prestige.expLists.forEach(v => v.reload())
 
     // console.log("prefix: " + World.worldPrefix.length)
     // console.log("type: " + World.worldTypes.length)
@@ -183,7 +191,9 @@ export class GameModel {
     this.baseWorld.food.quantity = this.baseWorld.food.quantity.plus(100)
 
     this.unlockUnits(this.all.filter(u => u.quantity.greaterThan(0)))()
+    this.unl = this.all.filter(u => u.unlocked)
     this.reloadProduction()
+    this.reloadLists()
     //  this.reloadList()
 
   }
@@ -235,7 +245,6 @@ export class GameModel {
 
     let maxTime = dif
     let unitZero: Unit = null
-    const unl = this.all.filter(u => u.unlocked)
 
     //  Infestation fix 2
     if (this.infestation.poisonousPlant.unlocked && this.infestation.poisonousPlant.quantity.lessThan(1))
@@ -256,38 +265,37 @@ export class GameModel {
 
       this.all.forEach(a => a.endIn = Number.POSITIVE_INFINITY)
 
-      for (const res of unl.filter(u =>
-        u.producedBy.filter(p => p.efficiency.lessThan(0)).length > 0)) {
+      for (const res of this.unl) {
 
-        let a = Decimal(0)
-        let b = Decimal(0)
-        let c = Decimal(0)
+        res.a = Decimal(0)
+        res.b = Decimal(0)
+        res.c = Decimal(0)
         const d = res.quantity
 
         for (const prod1 of res.producedBy.filter(r => r.isActive() && r.unit.unlocked)) {
           // x
           const prodX = prod1.getprodPerSec()
-          c = c.plus(prodX.times(prod1.unit.quantity))
+          res.c = res.c.plus(prodX.times(prod1.unit.quantity))
           for (const prod2 of prod1.unit.producedBy.filter(r2 => r2.isActive() && r2.unit.unlocked)) {
             // x^2
             const prodX2 = prod2.getprodPerSec().times(prodX)
-            b = b.plus(prodX2.times(prod2.unit.quantity))
+            res.b = res.b.plus(prodX2.times(prod2.unit.quantity))
             for (const prod3 of prod2.unit.producedBy.filter(r3 => r3.isActive() && r3.unit.unlocked)) {
               // x^3
               const prodX3 = prod3.getprodPerSec().times(prodX2)
-              a = a.plus(prodX3.times(prod3.unit.quantity))
+              res.a = res.a.plus(prodX3.times(prod3.unit.quantity))
             }
           }
         }
-        a = a.div(6)
-        b = b.div(2)
+        res.a = res.a.div(6)
+        res.b = res.b.div(2)
 
-        if (a.lessThan(0)
-          || b.lessThan(0)
-          || c.lessThan(0)
+        if (res.a.lessThan(0)
+          || res.b.lessThan(0)
+          || res.c.lessThan(0)
           || d.lessThan(0)) {
 
-          const solution = Utils.solveCubic(a, b, c, d).filter(s => s.greaterThan(0))
+          const solution = Utils.solveCubic(res.a, res.b, res.c, d).filter(s => s.greaterThan(0))
 
           if (d.lessThan(Number.EPSILON)) {
             res.quantity = Decimal(0)
@@ -312,12 +320,12 @@ export class GameModel {
       this.timeToEnd = this.timeToEnd - dif
     }
 
-    unl.filter(u => u.endIn > 0).forEach(u => u.endIn = u.endIn - dif)
+    this.unl.filter(u => u.endIn > 0).forEach(u => u.endIn = u.endIn - dif)
 
     //  Update resource
     if (!this.pause || forceUp) {
       if (maxTime > Number.EPSILON)
-        this.update(maxTime)
+        this.update2(Decimal(maxTime).div(1000))
       if (unitZero) {
         unitZero.producedBy.filter(p => p.efficiency.lessThan(0)).forEach(p => p.unit.percentage = 0)
 
@@ -363,22 +371,31 @@ export class GameModel {
    *
    * @param dif time elapsed in millisecond
    */
-  update(dif: number) {
-    const fraction = Decimal(dif / 1000)
-    const all = Array.from(this.unitMap.values())
-    for (const res of all)
-      for (const prod of res.producedBy.filter(p => p.isActive() && p.unit.unlocked))
-        res.toAdd = res.toAdd.plus(this.getProduction(prod, Decimal(1), Decimal(1), fraction))
+  // update(dif: number) {
+  //   const fraction = Decimal(dif / 1000)
+  //   const all = Array.from(this.unitMap.values())
+  //   for (const res of all)
+  //     for (const prod of res.producedBy.filter(p => p.isActive() && p.unit.unlocked))
+  //       res.toAdd = res.toAdd.plus(this.getProduction(prod, Decimal(1), Decimal(1), fraction))
 
-    // all.forEach(u => {
-    //   u.quantity = u.quantity.plus(u.toAdd)
-    //   u.toAdd = Decimal(0)
-    // })
+  //   // all.forEach(u => {
+  //   //   u.quantity = u.quantity.plus(u.toAdd)
+  //   //   u.toAdd = Decimal(0)
+  //   // })
 
-    for (const u of all) {
-      u.quantity = u.quantity.plus(u.toAdd)
-      u.toAdd = Decimal(0)
-    }
+  //   for (const u of all) {
+  //     u.quantity = u.quantity.plus(u.toAdd)
+  //     u.toAdd = Decimal(0)
+  //   }
+  // }
+
+  update2(dif: decimal.Decimal) {
+    this.unl.forEach(u => {
+      u.quantity = u.quantity
+        .plus(u.a.times(Decimal.pow(dif, 3)))
+        .plus(u.b.times(Decimal.pow(dif, 2)))
+        .plus(u.c.times(dif))
+    })
   }
 
   /**
@@ -398,7 +415,11 @@ export class GameModel {
       this.all.filter(u => u.unlocked).forEach(u2 => u2.produces.forEach(p =>
         p.product.unlocked = p.product.avabileThisWorld))
 
-      this.unitWithUp = this.all.filter(u => u.unlocked && (u.upHire || u.upSpecial || u.upAction))
+      if (ok) {
+        this.unitWithUp = this.all.filter(u => u.unlocked && (u.upHire || u.upSpecial || u.upAction))
+        this.unl = this.all.filter(u => u.unlocked)
+        this.reloadLists()
+      }
 
       // if (ok)
       //   this.reloadList()
@@ -450,6 +471,8 @@ export class GameModel {
     save.pause = this.pause
     save.hsn = this.hideSaveNotification
     save.gameVers = this.gameVersion
+    save.opti = this.options
+
     return LZString.compressToBase64(JSON.stringify(save))
 
   }
@@ -479,12 +502,6 @@ export class GameModel {
       this.nextWorlds[0].restore(save.nw[0])
       this.nextWorlds[1].restore(save.nw[1])
       this.nextWorlds[2].restore(save.nw[2])
-
-      // for (const s of save.pre) {
-      //   const up = this.prestige.allPrestigeUp.find(p => p.id === s.id)
-      //   if (up)
-      //     up.restore(s)
-      // }
 
       for (const s of save.res) {
         const res = this.resList.find(p => p.id === s.id)
@@ -544,9 +561,14 @@ export class GameModel {
       if (save.hsn)
         this.hideSaveNotification = save.hsn
 
+      if (save.opti) {
+        this.options.load(save.opti)
+        this.options.apply()
+      }
+
       this.reloadProduction()
       this.unitLists.splice(0, this.unitLists.length)
-      //  this.reloadList()
+      this.reloadLists()
 
       return save.last
     }
@@ -577,6 +599,11 @@ export class GameModel {
   checkResearch() {
     this.resList.filter(r => r.unlocked && r.avabileThisWorld)
       .forEach(res => res.setMaxBuy())
+  }
+
+  reloadLists() {
+    this.lists.forEach(v => v.reload())
+    this.uiLists = this.lists.filter(u => u.uiList && u.uiList.length > 0)
   }
 
 }
