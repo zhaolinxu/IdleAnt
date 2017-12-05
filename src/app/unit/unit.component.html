@@ -7,23 +7,23 @@
       <clr-alert [clrAlertType]="'alert-warning'">
         <div class="alert-item">
           <span class="alert-text">
-            Will end in {{endTime()}}
+            将在 {{endTime()}} 结束
           </span>
         </div>
       </clr-alert>
     </div>
 
     <p>{{gen.description}}</p>
-    <span>Owned: {{gen.quantity | format}}</span>
+    <span>拥有: {{gen.quantity | format}}</span>
 
 
     <div *ngIf="gen.produces.length >0">
-      <p *ngIf="gen.buyAction">You bought {{gen.buyAction.quantity | format}} times
-        <span *ngIf="gameService.game.research.up1.owned()"> earning a bonus of +{{gen.getBoost().times(100) | format}}% production</span>
+      <p *ngIf="gen.buyAction">你购买了 {{gen.buyAction.quantity | format}} 次
+        <span *ngIf="gameService.game.research.up1.owned()"> 获得奖励 +{{gen.getBoost().times(100) | format}}% 生产</span>
       </p>
       <div *ngIf="!gen.alwaysOn">
         <input type="range" min="0" max="100" [(ngModel)]="gen.percentage" (change)="onChange($event.target.value)">
-        <span>{{gen.percentage}} % operative</span>
+        <span>{{gen.percentage}} % 操作</span>
       </div>
     </div>
 
@@ -50,13 +50,13 @@
       <div class="row">
         <div *ngIf="gen.produces.length >0" class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
           <h5>
-            <span class="text-capitalize">{{gen.name}}</span> produces:</h5>
+            <span class="text-capitalize">{{gen.name}}</span> 产生:</h5>
           <table class="table table-compact">
             <thead>
               <tr>
-                <th class="w-33">Product</th>
-                <th class="w-33">One</th>
-                <th class="w-33">All</th>
+                <th class="w-33">产物</th>
+                <th class="w-33">1个</th>
+                <th class="w-33">全部</th>
               </tr>
             </thead>
             <tbody>
@@ -75,19 +75,19 @@
         <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12" *ngIf="gameService.game.research.bi.owned()">
           <div *ngIf="showProducers()">
             <h5>
-              <span class="text-capitalize">{{gen.name}}</span> is made by:</h5>
+              <span class="text-capitalize">{{gen.name}}</span> 是由:</h5>
             <table class="table  table-compact">
               <thead>
                 <tr>
-                  <th class="w-33">Unit</th>
-                  <th class="w-33">Quantity</th>
-                  <th class="w-33">Total</th>
+                  <th class="w-33">个体</th>
+                  <th class="w-33">数量</th>
+                  <th class="w-33">总计</th>
                 </tr>
               </thead>
               <tfoot>
                   <!-- class="bg-info text-white" -->
                 <tr class="alert alert-info no-alert">
-                  <td>Total</td>
+                  <td>总计</td>
                   <td>{{gen.totalProducers | format}}</td>
                   <td>{{gen.totalPerSec | format}}</td>
                 </tr>
