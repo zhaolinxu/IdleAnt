@@ -14,21 +14,20 @@ declare let preventScroll
 export class PrestigeComponent implements OnInit {
   @HostBinding('class.content-container') className = 'content-container';
 
-  skip = false
-
   constructor(
     public gameService: GameService,
     private router: Router) {
+    this.gameService.game.skip = false
     gameService.game.setMaxLevel()
   }
 
   ngOnInit() {
     preventScroll()
   }
-  skipWorld() { this.skip = true }
+  skipWorld() { this.gameService.game.skip = true }
   getTitle() {
-    if (this.skip)
-      return "你正在跳过这个世界！"
+    if (this.gameService.game.skip)
+      return "你正在跳过这个世界!"
     else {
       if (!this.travelAv())
         return "你还不能去到一个新的世界"
@@ -38,7 +37,7 @@ export class PrestigeComponent implements OnInit {
   }
   travelAv(): boolean {
 
-    if (this.skip)
+    if (this.gameService.game.skip)
       return true
 
     if (!this.gameService.game.research.prestigeResearch.owned())
@@ -64,7 +63,8 @@ export class PrestigeComponent implements OnInit {
     return true
   }
   goTo(world: World) {
-    world.goTo(this.skip)
+    world.goTo(this.gameService.game.skip)
+    this.gameService.game.skip = false
     this.router.navigateByUrl('/')
   }
   change() {

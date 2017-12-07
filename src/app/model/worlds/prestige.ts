@@ -2,7 +2,7 @@ import { Production } from '../production';
 import { WorldInterface } from './worldInterface';
 import { Unit } from '../units/unit';
 import { GameModel } from '../gameModel';
-import { BuyAction, BuyAndUnlockAction, Research, TimeWarp, UpAction, UpHire, UpSpecial } from '../units/action';
+import { BuyAction, BuyAndUnlockAction, Research, TimeWarp, UpAction, UpHire, UpSpecial, Resupply } from '../units/action';
 import { Base } from '../units/base';
 import { Cost } from '../cost';
 import { TypeList } from '../typeList';
@@ -51,6 +51,7 @@ export class Prestige implements WorldInterface {
   //  Efficiency
   effList = new Array<Unit>()
   effListEng = new Array<Unit>()
+  effListDep = new Array<Unit>()
 
   //  Time
   timeList = new Array<Unit>()
@@ -66,7 +67,7 @@ export class Prestige implements WorldInterface {
   }
 
   public initStuff() {
-    const expIncrement = Decimal(1.3)
+    const expIncrement = new Decimal(1.3)
 
     this.experience = new Unit(this.game, "exp", "经验",
       "经验。 改变世界的时候体验升级不复位。", true)
@@ -94,7 +95,7 @@ export class Prestige implements WorldInterface {
     this.expAnt.forEach(p => {
       this.allPrestigeUp.push(p)
       p.actions.push(new BuyAction(this.game, p,
-        [new Cost(this.experience, Decimal(15), expIncrement)]))
+        [new Cost(this.experience, new Decimal(15), expIncrement)]))
       p.unlocked = true
     })
 
@@ -127,7 +128,7 @@ export class Prestige implements WorldInterface {
     this.expFollower.forEach(n => {
       this.allPrestigeUp.push(n)
       n.actions.push(new BuyAction(this.game, n,
-        [new Cost(this.experience, Decimal(10), expIncrement)]))
+        [new Cost(this.experience, new Decimal(10), expIncrement)]))
     })
 
     this.game.baseWorld.littleAnt.prestigeBonusStart = this.pAntNext
@@ -141,12 +142,12 @@ export class Prestige implements WorldInterface {
 
     //#endregion
 
-    //#region  Machinery
+    //#region Machinery
     this.expMachinery = new Array<Unit>()
     this.pMachineryPower = new Unit(this.game, "pMach", "机器能力",
       "机器的产量和消耗更多的30％的资源。", true)
     this.pMachineryPower.actions.push(new BuyAction(this.game, this.pMachineryPower,
-      [new Cost(this.experience, Decimal(20), expIncrement)]))
+      [new Cost(this.experience, new Decimal(20), expIncrement)]))
     this.expMachinery.push(this.pMachineryPower)
     this.game.machines.listMachinery.forEach(m => m.prestigeBonusProduction.push(this.pMachineryPower))
 
@@ -175,7 +176,7 @@ export class Prestige implements WorldInterface {
 
     this.expTech.forEach(p => {
       p.actions.push(new BuyAction(this.game, p,
-        [new Cost(this.experience, Decimal(30), expIncrement)]))
+        [new Cost(this.experience, new Decimal(30), expIncrement)]))
     })
     this.expLists.push(new TypeList("技术", this.expTech))
 
@@ -204,19 +205,23 @@ export class Prestige implements WorldInterface {
       this.game.baseWorld.wood,
       this.game.baseWorld.sand
     ]
-    supplyMaterials.forEach(sm => sm.prestigeBonusQuantityValue = Decimal(100))
+    supplyMaterials.forEach(sm => sm.prestigeBonusQuantityValue = new Decimal(1000))
     this.supplyList = supplyMaterials.map(sm =>
-      new Unit(this.game, "supp_" + sm.id, sm.name + "供给",
-        "开始新的世界时，有100 " + sm.name + "。", true))
+      new Unit(this.game, "supp_" + sm.id, sm.name + " 供给",
+        "开始新的世界时有1000 " + sm.name + "。", true))
 
-    this.supplyList.forEach(n => {
+    for (let i = 0; i < supplyMaterials.length; i++) {
+      const n = this.supplyList[i]
+      const resup = new Resupply(this.game, supplyMaterials[i], n)
+
       this.allPrestigeUp.push(n)
-      n.actions.push(new BuyAction(this.game, n,
-        [new Cost(this.experience, Decimal(12), expIncrement)]))
-    })
+      n.actions.push(new BuyAndUnlockAction(this.game, n,
+        [new Cost(this.experience, new Decimal(12), expIncrement)],
+        [resup]))
 
-    for (let i = 0; i < supplyMaterials.length; i++)
       supplyMaterials[i].prestigeBonusStart = this.supplyList[i]
+      supplyMaterials[i].actions.push(resup)
+    }
 
 
     this.expLists.push(new TypeList("供给", this.supplyList))
@@ -251,9 +256,9 @@ export class Prestige implements WorldInterface {
         names[i] + " 单位消耗的资源减少5％。 最大-50％。", true)
 
       const ba = new BuyAction(this.game, eff,
-        [new Cost(this.experience, Decimal(50), expIncrement)])
+        [new Cost(this.experience, new Decimal(50), expIncrement)])
 
-      ba.limit = Decimal(10)
+      ba.limit = new Decimal(10)
 
       eff.actions.push(ba)
 
@@ -263,7 +268,7 @@ export class Prestige implements WorldInterface {
           if (!prod.bonusList)
             prod.bonusList = new Array<[Base, decimal.Decimal]>()
 
-          prod.bonusList.push([eff, Decimal(-0.05)])
+          prod.bonusList.push([eff, new Decimal(-0.05)])
 
         })
       ))
@@ -283,9 +288,9 @@ export class Prestige implements WorldInterface {
         eng.name + " 资源消耗减少5％。 最多减少50％。", true)
 
       const ba = new BuyAction(this.game, eff,
-        [new Cost(this.experience, Decimal(50), expIncrement)])
+        [new Cost(this.experience, new Decimal(50), expIncrement)])
 
-      ba.limit = Decimal(10)
+      ba.limit = new Decimal(10)
 
       eff.actions.push(ba)
 
@@ -293,12 +298,39 @@ export class Prestige implements WorldInterface {
         .forEach(prod => {
           if (!prod.bonusList)
             prod.bonusList = new Array<[Base, decimal.Decimal]>()
-          prod.bonusList.push([eff, Decimal(-0.05)])
+          prod.bonusList.push([eff, new Decimal(-0.05)])
         })
       this.effListEng.push(eff)
     })
 
     this.expLists.push(new TypeList("工程", this.effListEng))
+    //#endregion
+
+    //#region Efficiency 3
+    this.effListDep = new Array<Unit>()
+
+    this.game.engineers.listDep.forEach(dep => {
+
+      const eff = new Unit(this.game, "effDep" + dep.id, dep.name,
+        dep.name + " consume 5% less resources. Max -50%.", true)
+
+      const ba = new BuyAction(this.game, eff,
+        [new Cost(this.experience, new Decimal(60), expIncrement)])
+
+      ba.limit = new Decimal(10)
+
+      eff.actions.push(ba)
+
+      dep.produces.filter(p => p.efficiency.lessThanOrEqualTo(0))
+        .forEach(prod => {
+          if (!prod.bonusList)
+            prod.bonusList = new Array<[Base, decimal.Decimal]>()
+          prod.bonusList.push([eff, new Decimal(-0.05)])
+        })
+      this.effListDep.push(eff)
+    })
+
+    this.expLists.push(new TypeList("部门", this.effListDep))
     //#endregion
 
     //#region Time
@@ -314,19 +346,19 @@ export class Prestige implements WorldInterface {
       "时间银行将最长存储时间增加1小时。 基地储存4小时。", true)
 
     this.timeMaker.actions.push(new BuyAction(this.game, this.timeMaker,
-      [new Cost(this.experience, Decimal(25), expIncrement)]))
+      [new Cost(this.experience, new Decimal(25), expIncrement)]))
 
     this.timeBank.actions.push(new BuyAction(this.game, this.timeBank,
-      [new Cost(this.experience, Decimal(100), expIncrement)]))
+      [new Cost(this.experience, new Decimal(100), expIncrement)]))
 
-    this.game.actMin = new TimeWarp(this.game, Decimal(60), "Minutes")
-    this.game.actHour = new TimeWarp(this.game, Decimal(3600), "Hours")
+    this.game.actMin = new TimeWarp(this.game, new Decimal(60), "分钟")
+    this.game.actHour = new TimeWarp(this.game, new Decimal(3600), "小时")
 
     this.time.actions.push(this.game.actMin)
     this.time.actions.push(this.game.actHour)
-    this.time.actions.push(new TimeWarp(this.game, Decimal(3600 * 24), "Days"))
+    this.time.actions.push(new TimeWarp(this.game, new Decimal(3600 * 24), "天"))
 
-    // this.time.addProductor(new Production(this.timeMaker, Decimal(0.1)))
+    // this.time.addProductor(new Production(this.timeMaker, new Decimal(0.1)))
 
     this.timeList = [this.time, this.timeMaker, this.timeBank]
     this.expLists.push(new TypeList("时间管理", this.timeList))

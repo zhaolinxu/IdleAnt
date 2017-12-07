@@ -63,13 +63,16 @@
   </div>
 
   <ng-template #av_content>
-    <div *ngIf="!skip">
-      <p>离开你将获得 {{gameService.game.getExperience() | format}} 个经验。 高层次的世界将会产生更多的经验，但需要更多的资源。 </p>
+    <div *ngIf="!gameService.game.skip; else skip_content">
+      <p> 离开你将获得 {{gameService.game.getExperience() | format}} 经验。 高层次的世界将会产生更多的经验，但需要更多的资源。 </p>
     </div>
-    <div *ngIf="skip">
-      <p> 如果选择跳过这个世界，你将不会获得任何经验！ 如果你想改变主意，请切换到 “旅行” 之外的另一个选项卡。
-      </p>
-    </div>
+    <ng-template #skip_content>
+      <div *ngIf="gameService.game.skip">
+        <p>
+          如果选择跳过这个世界，你将不会获得任何经验！ 如果你想改变主意，请切换到 “旅行” 之外的另一个选项卡。
+        </p>
+      </div>
+    </ng-template>
     <div>
        旅行需要的资源:
       <span *ngFor="let cost of gameService.game.world.toUnlock">
@@ -92,46 +95,19 @@
       <input type="number" placeholder="0" [(ngModel)]="gameService.game.minUser" class="numIn" min="1" [max]="gameService.game.maxUser">
       <label>最大等级 ({{gameService.game.maxMax}}):</label>
       <input type="number" [placeholder]="gameService.game.maxMax" [(ngModel)]="gameService.game.maxUser" class="numIn"
-        [min]="gameService.game.minUser" [max]="gameService.game.maxMax">
+        [min]="gameService.game.minUser" [max]="gameService.game.maxMax" >
+
+      <a class="btn btn-success-outline" routerLink="/world-build">
+        <clr-icon shape="world"></clr-icon>
+        生成
+      </a>
+
     </div>
     <div class="card-columns card-columns-2">
-      <div class="card" *ngFor="let world of gameService.game.nextWorlds ">
-        <div class="card-header text-capitalize"> {{world.name}} </div>
-        <div class="card-block">
-          <div class="card-title"> 等级: {{world.level}}
-            <br/> {{world.experience}} 经验 </div>
-          <div class="card-text">
-            {{world.description}}
-            <ul class="list">
-              <li *ngFor="let p of world.avaiableUnits"> {{p.name}}: {{p.description }} </li>
-              <li *ngFor="let p of world.unlockedUnits">
-                <span *ngIf="!p[1].greaterThan(0)">
-                  {{p[0].name}}: {{p[0].description }}
-                </span>
-                <span *ngIf="p[1].greaterThan(0)">
-                  开局拥有 {{p[1] | format }} {{p[0].name}}
-                </span>
-              </li>
-              <li *ngFor="let p of world.prodMod">
-               生产加成 {{p[0].name}} x {{p[1] }}
-              </li>
-              <li *ngFor="let p of world.unitMod">
-                {{p[0].name}} 生产和消耗 x{{p[1]}} 的资源
-                <!-- {{p[0].name}} production x {{p[1] }} -->
-              </li>
-              <li *ngFor="let p of world.unitPrice"> {{p[0].name}} price x {{p[1] }} </li>
-            </ul>
-          </div>
-          <div class="card-footer">
-            <button class="btn btn-primary" (click)="goTo(world)">前往</button>
-            <div class="toggle-switch">
-              <input type="checkbox" [id]="world.id" [(ngModel)]="world.keep">
-              <label [for]="world.id">保留</label>
-            </div>
 
-          </div>
-        </div>
-      </div>
+
+      <app-world *ngFor="let world of gameService.game.nextWorlds " [world]="world"></app-world>
+
     </div>
   </ng-template>
 </div>
