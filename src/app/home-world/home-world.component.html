@@ -14,10 +14,10 @@
       </span>
     </li>
     <li *ngFor="let p of gameService.game.world.prodMod">
-      生产加成 {{p[0].name}} x {{p[1] }}
+      生产加成 {{p[0].name}} x {{p[1] | format }}
     </li>
     <li *ngFor="let p of gameService.game.world.unitMod">
-      {{p[0].name}} 产量和消耗 x{{p[1]}} 的资源
+      {{p[0].name}} 产量和消耗 x{{p[1] | format}} 的资源
       <!-- {{p[0].name}} production x {{p[1] }} -->
     </li>
     <li *ngFor="let p of gameService.game.world.unitPrice">

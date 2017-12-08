@@ -15,19 +15,19 @@
         </span>
       </li>
       <li *ngFor="let p of world.prodMod">
-        生产加成 {{p[0].name}} x {{p[1] }}
+        生产加成 {{p[0].name}} x {{p[1] | format }}
       </li>
       <li *ngFor="let p of world.unitMod">
         {{p[0].name}} 生产和消耗 x{{p[1]}} 的资源
         <!-- {{p[0].name}} production x {{p[1] }} -->
       </li>
-      <li *ngFor="let p of world.unitPrice"> {{p[0].name}} price x {{p[1] }} </li>
+      <li *ngFor="let p of world.unitPrice"> {{p[0].name}} price x {{p[1] | format }} </li>
     </ul>
   </div>
   <div class="card-footer">
     <button class="btn btn-primary" (click)="goTo(world)">前往</button>
 
-    <div class="toggle-switch">
+    <div class="toggle-switch" *ngIf="showKeep">
       <input type="checkbox" [id]="world.id" [(ngModel)]="world.keep">
       <label [for]="world.id">保留</label>
     </div>

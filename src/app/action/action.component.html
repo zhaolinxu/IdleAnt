@@ -10,8 +10,7 @@
 
   <div class="card-text">
     <span>{{action.description}} &nbsp;</span>
-    <br/>
-    <p *ngIf="!(action.oneTime && action.owned()) && !action.limit?.greaterThanOrEqualTo(action.maxBuy)">
+    <p class="no-margin" *ngIf="!(action.oneTime && action.owned()) && !action.limit?.greaterThanOrEqualTo(action.maxBuy)">
       <span *ngIf="!action.oneTime; else costs">获取1个会花费:</span>
       <ng-template #costs>
         <span *ngIf="action.oneTime">花费:</span>
