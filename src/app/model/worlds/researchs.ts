@@ -20,7 +20,6 @@ export class Researchs implements WorldInterface {
   engineerRes: Research
   machineryRes: Research
   departmentRes: Research
-  // stageRes: Research
 
   experimentResearch: Research
   composterResearch: Research
@@ -36,12 +35,14 @@ export class Researchs implements WorldInterface {
   depEduRes: Research
 
   hereAndNow: Research
+  hereAndNow2: Research
   adaptation: Research
   evolution: Research
-  // devolution: Research
   escape: Research
   timeWarp: Research
-  // missing: Research
+
+  r2: Research
+  r4: Research
 
   bi: Research
 
@@ -60,20 +61,6 @@ export class Researchs implements WorldInterface {
       [],
       this.game
     )
-
-    // //   Devolution
-    // this.devolution = new Research(
-    //   "devoluti",
-    //   "反进化",
-    //   "还原进化的影响。",
-    //   [new Cost(this.game.baseWorld.science, new Decimal(1))],
-    //   [],
-    //   this.game,
-    //   () => {
-    //     this.game.world.toUnlock.forEach(t => t.basePrice = t.basePrice.div(5))
-    //     this.game.world.experience = this.game.world.experience.div(3)
-    //   }
-    // )
 
     //    Evolution
     this.evolution = new Research(
@@ -127,12 +114,27 @@ export class Researchs implements WorldInterface {
       }
     )
 
+    //    Here and Now 2
+    this.hereAndNow2 = new Research(
+      "han2Res",
+      "此时此地2", "获得50％的世界经验。",
+      [new Cost(this.game.baseWorld.science, new Decimal(1E10))],
+      [],
+      this.game,
+      () => {
+        const expToAdd = this.game.world.experience.div(2)
+        this.game.prestige.experience.quantity = this.game.prestige.experience.quantity.plus(expToAdd)
+        this.game.maxLevel = this.game.maxLevel.plus(expToAdd)
+        this.game.expTabAv = true
+      }
+    )
+
     //    Here and Now
     this.hereAndNow = new Research(
       "hereAndNow",
       "此时此地", "获得10经验。",
       [new Cost(this.game.baseWorld.science, new Decimal(1E9))],
-      [this.timeWarp],
+      [this.timeWarp, this.hereAndNow2],
       this.game,
       () => {
         this.game.prestige.experience.quantity = this.game.prestige.experience.quantity.plus(10)
@@ -199,7 +201,6 @@ export class Researchs implements WorldInterface {
 
     //    Engineer
     const eng: Array<Unlocable> = this.game.engineers.listEnginer
-    // //eng.push(this.stageRes)
     this.engineerRes = new Research(
       "engineerRes",
       "工程师", "工程师将慢慢建造机器。",
@@ -307,7 +308,7 @@ export class Researchs implements WorldInterface {
     //    Up Hire
     const allUpH = Array.from(this.game.unitMap.values()).filter(u => u.upHire).map(u => u.upHire)
     allUpH.push(this.upCombined)
-    const r4 = new Research(
+    this.r4 = new Research(
       "R4",
       "双胞胎", "允许您以相同的价格获得更多的单位。",
       [new Cost(this.game.baseWorld.science, new Decimal(7E3))],
@@ -317,8 +318,8 @@ export class Researchs implements WorldInterface {
 
     //    Up 2
     const allUp = Array.from(this.game.unitMap.values()).filter(u => u.upAction).map(u => u.upAction)
-    allUp.push(r4)
-    const r2 = new Research(
+    allUp.push(this.r4)
+    this.r2 = new Research(
       "R2",
       "团队合作2", "升级您的单位生产加成。",
       [new Cost(this.game.baseWorld.science, new Decimal(500))],
@@ -331,7 +332,7 @@ export class Researchs implements WorldInterface {
       "RUp1",
       "团队合作", "根据您购买单位的次数提供生产加成。",
       [new Cost(this.game.baseWorld.science, new Decimal(50))],
-      [r2],
+      [this.r2],
       this.game
     )
 

@@ -23,6 +23,11 @@ export class Forest implements WorldInterface {
   beetleSoilProduction: Production
   beetleWoodProduction: Production
 
+  mole: Unit
+  moleNest: Unit
+
+  moleScienceProduction: Production
+
   constructor(public game: GameModel) { }
 
   declareStuff() {
@@ -42,6 +47,11 @@ export class Forest implements WorldInterface {
       "甲壳虫殖民地生产虫巢。")
     this.powderpostBeetle = new Unit(this.game, "powder", "粉虱甲虫",
       "粉虱甲虫是一群木材甲虫。")
+    this.mole = new Unit(this.game, "mole", "鼹鼠",
+      "鼹鼠产生土壤。")
+    this.moleNest = new Unit(this.game, "moleN", "鼹鼠巢",
+      "鼹鼠巢产生鼹鼠。")
+>>>>>>> master
 
     this.listForest.push(this.beetleColony)
     this.listForest.push(this.beetleNest)
@@ -50,13 +60,34 @@ export class Forest implements WorldInterface {
     this.listForest.push(this.powderpostBeetle)
     this.listForest.push(this.ambrosiaBeetle)
     this.listForest.push(this.ladybird)
+    this.listForest.push(this.moleNest)
+    this.listForest.push(this.mole)
 
     this.game.lists.push(new TypeList("甲虫", this.listForest))
 
     this.beetleWoodProduction = new Production(this.beetle, new Decimal(0.4), false)
     this.beetleSoilProduction = new Production(this.beetle, new Decimal(0.2), false)
     this.beetleCrystalProduction = new Production(this.beetle, new Decimal(0.1), false)
+    this.moleScienceProduction = new Production(this.mole, this.game.machines.machineryProd.times(45), false)
 
+    const moleRes2 = new Research("mo2Res", "鼹鼠巢",
+      "解锁鼹鼠巢",
+      [new Cost(this.game.baseWorld.science, new Decimal(1E7))],
+      [this.moleNest],
+      this.game
+    )
+    const moleSciRes = new Research("moleRes", "科学家鼹鼠",
+      "鼹鼠也产生科学",
+      [new Cost(this.game.baseWorld.science, new Decimal(5E6))],
+      [this.moleScienceProduction],
+      this.game
+    )
+    const moleRes = new Research("moleRes", "鼹鼠",
+      "解锁鼹鼠",
+      [new Cost(this.game.baseWorld.science, new Decimal(1E5))],
+      [this.mole, moleSciRes, moleRes2],
+      this.game
+    )
     const beetleWood = new Research("beetleWood", "伐木训练",
       "甲虫也生产木材",
       [new Cost(this.game.baseWorld.science, new Decimal(500))],
@@ -79,7 +110,7 @@ export class Forest implements WorldInterface {
     const advancedBeetle = new Research("advBeetle",
       "高级甲虫作业", "更多的甲虫工作",
       [new Cost(this.game.baseWorld.science, new Decimal(3E3))],
-      [this.ambrosiaBeetle, this.ladybird],
+      [this.ambrosiaBeetle, this.ladybird, moleRes],
       this.game
     )
     this.beetleResearch = new Research("beetleRes",
@@ -111,6 +142,8 @@ export class Forest implements WorldInterface {
 
     this.game.baseWorld.food.addProductor(new Production(this.powderpostBeetle))
     this.game.baseWorld.wood.addProductor(new Production(this.powderpostBeetle))
+
+    this.game.baseWorld.science.addProductor(this.moleScienceProduction)
 
     //    Larva
     this.larva.actions.push(new BuyAndUnlockAction(this.game,
@@ -212,6 +245,34 @@ export class Forest implements WorldInterface {
       [new Cost(this.game.baseWorld.science, this.game.scienceCost2, this.game.upgradeScienceExp)]))
     this.powderpostBeetle.actions.push(new UpHire(this.game, this.powderpostBeetle,
       [new Cost(this.game.baseWorld.science, this.game.scienceCost2, this.game.upgradeScienceExp)]))
+
+    //    Mole
+    this.mole.actions.push(new BuyAction(this.game,
+      this.mole,
+      [
+        new Cost(this.game.baseWorld.food, this.game.machines.price1.times(1000), this.game.buyExp),
+        new Cost(this.game.baseWorld.soil, this.game.machines.price1.times(2), this.game.buyExp)
+      ]
+    ))
+    this.mole.actions.push(new UpAction(this.game, this.mole,
+      [new Cost(this.game.baseWorld.science, this.game.scienceCost3.div(10), this.game.upgradeScienceExp)]))
+    this.mole.actions.push(new UpHire(this.game, this.mole,
+      [new Cost(this.game.baseWorld.science, this.game.scienceCost3.div(10), this.game.upgradeScienceExp)]))
+    this.game.baseWorld.soil.addProductor(new Production(this.mole, this.game.machines.machineryProd.times(50)))
+
+    //    Mole Nest
+    this.moleNest.actions.push(new BuyAction(this.game,
+      this.moleNest,
+      [
+        new Cost(this.game.baseWorld.soil, this.game.machines.price1.times(500), this.game.buyExp),
+        new Cost(this.mole, new Decimal(100), this.game.buyExpUnit)
+      ]
+    ))
+    this.moleNest.actions.push(new UpAction(this.game, this.moleNest,
+      [new Cost(this.game.baseWorld.science, this.game.scienceCost4.div(10), this.game.upgradeScienceExp)]))
+    this.moleNest.actions.push(new UpHire(this.game, this.moleNest,
+      [new Cost(this.game.baseWorld.science, this.game.scienceCost4.div(10), this.game.upgradeScienceExp)]))
+    this.mole.addProductor(new Production(this.moleNest))
   }
 
   addWorld() {
@@ -227,7 +288,7 @@ export class Forest implements WorldInterface {
         [],
         [],
         [[this.beetleResearch, new Decimal(0)]],
-        new Decimal(3.5)
+        new Decimal(3)
       )
     )
 
@@ -244,7 +305,22 @@ export class Forest implements WorldInterface {
         [],
         [],
         [[this.beetleResearch, new Decimal(0)]],
-        new Decimal(4)
+        new Decimal(3)
+      ),
+      new World(this.game, "鼹鼠", "",
+        [
+          this.game.infestation.disinfestationBeetle, this.game.infestation.flametrowerBeetle
+        ],
+        [
+          [this.mole, new Decimal(3)],
+          [this.moleNest, new Decimal(2)]
+        ]
+        ,
+        [new Cost(this.moleNest, new Decimal(50))],
+        [],
+        [],
+        [[this.beetleResearch, new Decimal(0)]],
+        new Decimal(3)
       )
     )
 

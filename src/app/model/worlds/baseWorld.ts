@@ -410,13 +410,13 @@ export class BaseWorld implements WorldInterface {
         [],
         [[this.game.baseWorld.fungus, new Decimal(0.5)]],
         [], [], [], [],
-        new Decimal(3)
+        new Decimal(3.2)
       ),
       new World(this.game, "树木繁茂", "",
         [this.game.engineers.woodEnginer, this.game.machines.loggingMachine],
         [[this.game.baseWorld.wood, new Decimal(2)]],
         [], [], [], [],
-        new Decimal(1.5)
+        new Decimal(2.5)
       ),
       new World(this.game, "结晶", "",
         [this.game.machines.mine, this.game.engineers.mineEnginer],
@@ -437,7 +437,7 @@ export class BaseWorld implements WorldInterface {
           [this.nectar, new Decimal(0.5)]
         ],
         [], [], [], [],
-        new Decimal(4.5)
+        new Decimal(3.2)
       ),
       new World(this.game, "多雨的", "",
         [],
@@ -445,7 +445,7 @@ export class BaseWorld implements WorldInterface {
           [this.wood, new Decimal(1.5)],
           [this.fungus, new Decimal(1.5)]
         ], [], [], [], [],
-        new Decimal(1.5)
+        new Decimal(2.5)
       ),
       new World(this.game, "有雾", "",
         [],
@@ -453,21 +453,21 @@ export class BaseWorld implements WorldInterface {
           [this.wood, new Decimal(0.7)],
           [this.fungus, new Decimal(0.7)]
         ], [], [], [], [],
-        new Decimal(3)
+        new Decimal(3.2)
       ),
       new World(this.game, "技术", "",
         [],
         [
           [this.science, new Decimal(1.5)]
         ], [], [], [], [],
-        new Decimal(1.5)
+        new Decimal(2.5)
       ),
       new World(this.game, "饥饿", "",
         [],
         [
           [this.food, new Decimal(0.3)]
         ], [], [], [], [],
-        new Decimal(3.5)
+        new Decimal(3.2)
       ),
     )
 
@@ -479,7 +479,7 @@ export class BaseWorld implements WorldInterface {
         [[this.game.baseWorld.fungus, new Decimal(2)]],
         [new Cost(this.game.baseWorld.fungus, new Decimal(1E7))],
         [], [], [],
-        new Decimal(3.5)
+        new Decimal(3)
       ),
 
       new World(this.game, "的蚂蚁", "",

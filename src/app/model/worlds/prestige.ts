@@ -388,7 +388,7 @@ export class Prestige implements WorldInterface {
       ul.forEach(unit => {
         unit.produces.filter(p => p.efficiency.greaterThan(0))
           .forEach(prod => {
-            prod.bonusList.push([u, new Decimal(100)])
+            prod.bonusList.push([u, new Decimal(1)])
           })
       });
       u.actions.push(new BuyAction(this.game, u,
@@ -405,7 +405,8 @@ export class Prestige implements WorldInterface {
       "Unlock the world builder ! (one time purchase)")
     this.worldBuilder.actions.push(new BuyAction(this.game, this.worldBuilder,
       [new Cost(this.experience, new Decimal(1E3), expIncrement)]))
-    this.worldBuilder.buyAction.oneTime = true
+    // this.worldBuilder.buyAction.oneTime = true
+    this.worldBuilder.buyAction.limit = new Decimal(1)
 
     this.worldBetter = new Unit(this.game, "worldBetter", "World Adaption",
       "Increase positive effects of new worlds. +50% 'production of.. ' and 'yields and consume'")

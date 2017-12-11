@@ -33,7 +33,7 @@ export class GameModel {
 
   isChanged = true
   timeToEnd = Number.POSITIVE_INFINITY
-  gameVersion = "0.2.0"
+  gameVersion = "0.2.1"
   hideSaveNotification = false
 
   options: Options = new Options()
@@ -250,7 +250,7 @@ export class GameModel {
       this.infestation.poisonousPlant2.quantity = new Decimal(0)
 
     this.all.forEach(u => u.produces.forEach(p => p.reload()))
-
+    this.isChanged = true
     // console.log(this.timeToEnd + " " + dif)
     if (this.isChanged || dif > this.timeToEnd || dif > 1000) {
       //  reload max time
@@ -276,6 +276,7 @@ export class GameModel {
         for (const prod1 of res.producedBy.filter(r => r.isActive() && r.unit.unlocked)) {
           // x
           const prodX = prod1.prodPerSec
+
           res.c = res.c.plus(prodX.times(prod1.unit.quantity))
           for (const prod2 of prod1.unit.producedBy.filter(r2 => r2.isActive() && r2.unit.unlocked)) {
             // x^2
@@ -572,6 +573,15 @@ export class GameModel {
       this.unitLists.splice(0, this.unitLists.length)
       this.reloadLists()
       this.unl = this.all.filter(u => u.unlocked)
+
+      if (this.research.r2.owned())
+        this.unlockUnits(this.research.r2.toUnlock)()
+      if (this.research.r4.owned()) {
+        this.unlockUnits(this.research.r4.toUnlock)()
+        this.research.r4.unlocked = false
+        if (this.research.upCombined.quantity.greaterThan(0))
+          this.research.upCombined.unlocked = false
+      }
 
       return save.last
     }
