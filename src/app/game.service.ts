@@ -50,7 +50,7 @@ export class GameService {
         this.kongregate = kongregateAPI.getAPI();
         console.log("KongregateAPI Loaded");
 
-      //  this.kongregate.services.resizeGame(1920, 1080)
+        //  this.kongregate.services.resizeGame(1920, 1080)
 
         setTimeout(() => {
           try {
@@ -78,7 +78,7 @@ export class GameService {
       if (delta > 1000)
         this.game.isChanged = true
 
-      this.game.longUpdate(delta)
+      this.game.longUpdate(delta )
 
       this.game.prestige.time.quantity = Decimal.min(
         this.game.prestige.time.quantity.plus(
@@ -97,17 +97,20 @@ export class GameService {
   }
 
   clear() {
+    this.game = null
     localStorage.clear()
     this.game = new GameModel()
+    window.location.reload()
   }
 
-  save() {
+  save(timer = true) {
     try {
       if (typeof (Storage) !== 'undefined') {
         const save = this.game.getSave()
         localStorage.setItem('save', save)
         console.log("Saved")
-        this.toastr.success("", 'Game Saved')
+        if (!timer || !this.game.hideSaveNotification)
+          this.toastr.success("", 'Game Saved')
       } else {
         this.toastr.warning("Canot access local storage", "Not saved")
       }

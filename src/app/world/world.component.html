@@ -1,0 +1,36 @@
+<div class="card-header text-capitalize"> {{world.name}} </div>
+<div class="card-block">
+  <div class="card-title"> 等级: {{world.level}}
+    <br/> {{world.experience | format}} 经验 </div>
+  <div class="card-text">
+    {{world.description}}
+    <ul class="list">
+      <li *ngFor="let p of world.avaiableUnits"> {{p.name}}: {{p.description }} </li>
+      <li *ngFor="let p of world.unlockedUnits">
+        <span *ngIf="!p[1].greaterThan(0)">
+          {{p[0].name}}: {{p[0].description }}
+        </span>
+        <span *ngIf="p[1].greaterThan(0)">
+          开局拥有 {{p[1] | format }} {{p[0].name}}
+        </span>
+      </li>
+      <li *ngFor="let p of world.prodMod">
+        生产加成 {{p[0].name}} x {{p[1] | format }}
+      </li>
+      <li *ngFor="let p of world.unitMod">
+        {{p[0].name}} 生产和消耗 x{{p[1]}} 的资源
+        <!-- {{p[0].name}} production x {{p[1] }} -->
+      </li>
+      <li *ngFor="let p of world.unitPrice"> {{p[0].name}} price x {{p[1] | format }} </li>
+    </ul>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-primary" (click)="goTo(world)">前往</button>
+
+    <div class="toggle-switch" *ngIf="showKeep">
+      <input type="checkbox" [id]="world.id" [(ngModel)]="world.keep">
+      <label [for]="world.id">保留</label>
+    </div>
+
+  </div>
+</div>

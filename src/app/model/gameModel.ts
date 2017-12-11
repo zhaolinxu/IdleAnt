@@ -13,7 +13,6 @@ import { Data } from '@angular/router';
 import { forEach } from '@angular/router/src/utils/collection';
 import { isAsciiLetter } from 'codelyzer/angular/styles/chars';
 import { Logger } from 'protractor/built/logger'
-import * as decimal from 'decimal.js';
 import { Unit } from './units/unit';
 import { Component, Injectable, Input } from '@angular/core'
 import * as LZString from 'lz-string';
@@ -28,22 +27,28 @@ import { Researchs } from './worlds/researchs';
 import { Prestige } from './worlds/prestige';
 import { Infestation } from './worlds/inferstation';
 import { Science } from './worlds/science';
+import { Options } from './options';
 
 export class GameModel {
 
   isChanged = true
   timeToEnd = Number.POSITIVE_INFINITY
+  gameVersion = "0.2.1"
+  hideSaveNotification = false
+
+  options: Options = new Options()
+  buyMulti = 1
 
   //#region
   //    Cost
-  buyExp = Decimal(1.1)
-  buyExpUnit = Decimal(1)
-  scienceCost1 = Decimal(100)
-  scienceCost2 = Decimal(1E3)
-  scienceCost3 = Decimal(1E4)
-  scienceCost4 = Decimal(1E5)
-  upgradeScienceExp = Decimal(4)
-  upgradeScienceHireExp = Decimal(6)
+  buyExp = new Decimal(1.1)
+  buyExpUnit = new Decimal(1)
+  scienceCost1 = new Decimal(100)
+  scienceCost2 = new Decimal(1E3)
+  scienceCost3 = new Decimal(1E4)
+  scienceCost4 = new Decimal(1E5)
+  upgradeScienceExp = new Decimal(4)
+  upgradeScienceHireExp = new Decimal(6)
 
   actionList = new Array<Action>()
 
@@ -67,25 +72,27 @@ export class GameModel {
 
   unitMap: Map<string, Unit> = new Map()
   all: Array<Unit>
+  unl: Array<Unit>
   allBase: Array<Base>
   lists = new Array<TypeList>()
+  uiLists = new Array<TypeList>()
   unitWithUp = new Array<Unit>()
 
   //    Prestige
-  currentEarning = Decimal(0)
-  lifeEarning = Decimal(0)
+  currentEarning = new Decimal(0)
+  lifeEarning = new Decimal(0)
   world: World
   nextWorlds: World[]
-  prestigeDone = Decimal(0)
-  maxLevel = Decimal(0)
+  prestigeDone = new Decimal(0)
+  maxLevel = new Decimal(0)
 
   worldTabAv = false
   expTabAv = false
   homeTabAv = false
 
   minUser = 0
-  maxUser = 100
-  maxMax = 100
+  maxUser = 1000
+  maxMax = 1000
 
   // ui stuff
   isLab = false
@@ -98,13 +105,14 @@ export class GameModel {
 
   unitLists = new Array<TypeList>()
 
+  skip = false
   //#endregion
 
   constructor() { this.initialize() }
 
   initialize() {
 
-    this.currentEarning = Decimal(0)
+    this.currentEarning = new Decimal(0)
     this.allBase = []
     this.unitMap = new Map()
     this.lists = new Array<TypeList>()
@@ -158,6 +166,7 @@ export class GameModel {
     this.generateRandomWorld()
 
     this.setInitialStat()
+    this.prestige.expLists.forEach(v => v.reload())
 
     // console.log("prefix: " + World.worldPrefix.length)
     // console.log("type: " + World.worldTypes.length)
@@ -181,13 +190,15 @@ export class GameModel {
     this.baseWorld.food.quantity = this.baseWorld.food.quantity.plus(100)
 
     this.unlockUnits(this.all.filter(u => u.quantity.greaterThan(0)))()
+    this.unl = this.all.filter(u => u.unlocked)
     this.reloadProduction()
+    this.reloadLists()
     //  this.reloadList()
 
   }
 
   setMaxLevel() {
-    this.maxMax = Decimal.min(this.maxLevel.div(12), 1000).floor().toNumber()
+    this.maxMax = Decimal.min(this.maxLevel.div(12), 10000).floor().toNumber()
     this.maxUser = Decimal.min(this.maxUser, this.maxMax).floor().toNumber()
   }
 
@@ -195,12 +206,12 @@ export class GameModel {
     level: decimal.Decimal,
     factorial: decimal.Decimal,
     fraction: decimal.Decimal,
-    previous = Decimal(1)
+    previous = new Decimal(1)
   ): decimal.Decimal {
 
-    let ret = Decimal(0)
+    let ret = new Decimal(0)
 
-    const production = prod.getprodPerSec()
+    const production = prod.prodPerSec
 
     if (prod.isActive())
       ret = Decimal.pow(fraction, level)                    //    exponential
@@ -233,12 +244,13 @@ export class GameModel {
 
     let maxTime = dif
     let unitZero: Unit = null
-    const unl = this.all.filter(u => u.unlocked)
 
     //  Infestation fix 2
     if (this.infestation.poisonousPlant.unlocked && this.infestation.poisonousPlant.quantity.lessThan(1))
-      this.infestation.poisonousPlant2.quantity = Decimal(0)
+      this.infestation.poisonousPlant2.quantity = new Decimal(0)
 
+    this.all.forEach(u => u.produces.forEach(p => p.reload()))
+    this.isChanged = true
     // console.log(this.timeToEnd + " " + dif)
     if (this.isChanged || dif > this.timeToEnd || dif > 1000) {
       //  reload max time
@@ -254,41 +266,41 @@ export class GameModel {
 
       this.all.forEach(a => a.endIn = Number.POSITIVE_INFINITY)
 
-      for (const res of unl.filter(u =>
-        u.producedBy.filter(p => p.efficiency.lessThan(0)).length > 0)) {
+      for (const res of this.unl) {
 
-        let a = Decimal(0)
-        let b = Decimal(0)
-        let c = Decimal(0)
+        res.a = new Decimal(0)
+        res.b = new Decimal(0)
+        res.c = new Decimal(0)
         const d = res.quantity
 
         for (const prod1 of res.producedBy.filter(r => r.isActive() && r.unit.unlocked)) {
           // x
-          const prodX = prod1.getprodPerSec()
-          c = c.plus(prodX.times(prod1.unit.quantity))
+          const prodX = prod1.prodPerSec
+
+          res.c = res.c.plus(prodX.times(prod1.unit.quantity))
           for (const prod2 of prod1.unit.producedBy.filter(r2 => r2.isActive() && r2.unit.unlocked)) {
             // x^2
-            const prodX2 = prod2.getprodPerSec().times(prodX)
-            b = b.plus(prodX2.times(prod2.unit.quantity))
+            const prodX2 = prod2.prodPerSec.times(prodX)
+            res.b = res.b.plus(prodX2.times(prod2.unit.quantity))
             for (const prod3 of prod2.unit.producedBy.filter(r3 => r3.isActive() && r3.unit.unlocked)) {
               // x^3
-              const prodX3 = prod3.getprodPerSec().times(prodX2)
-              a = a.plus(prodX3.times(prod3.unit.quantity))
+              const prodX3 = prod3.prodPerSec.times(prodX2)
+              res.a = res.a.plus(prodX3.times(prod3.unit.quantity))
             }
           }
         }
-        a = a.div(6)
-        b = b.div(2)
+        res.a = res.a.div(6)
+        res.b = res.b.div(2)
 
-        if (a.lessThan(0)
-          || b.lessThan(0)
-          || c.lessThan(0)
+        if (res.a.lessThan(0)
+          || res.b.lessThan(0)
+          || res.c.lessThan(0)
           || d.lessThan(0)) {
 
-          const solution = Utils.solveCubic(a, b, c, d).filter(s => s.greaterThan(0))
+          const solution = Utils.solveCubic(res.a, res.b, res.c, d).filter(s => s.greaterThan(0))
 
           if (d.lessThan(Number.EPSILON)) {
-            res.quantity = Decimal(0)
+            res.quantity = new Decimal(0)
           }
 
           for (const s of solution) {
@@ -310,18 +322,18 @@ export class GameModel {
       this.timeToEnd = this.timeToEnd - dif
     }
 
-    unl.filter(u => u.endIn > 0).forEach(u => u.endIn = u.endIn - dif)
+    this.unl.filter(u => u.endIn > 0).forEach(u => u.endIn = u.endIn - dif)
 
     //  Update resource
     if (!this.pause || forceUp) {
       if (maxTime > Number.EPSILON)
-        this.update(maxTime)
+        this.update2(new Decimal(maxTime).div(1000))
       if (unitZero) {
         unitZero.producedBy.filter(p => p.efficiency.lessThan(0)).forEach(p => p.unit.percentage = 0)
 
         // fix for infestatiion world
         if (unitZero === this.infestation.poisonousPlant) {
-          this.infestation.poisonousPlant2.quantity = Decimal(0)
+          this.infestation.poisonousPlant2.quantity = new Decimal(0)
         }
       }
       const remaning = dif - maxTime
@@ -338,9 +350,9 @@ export class GameModel {
    * Called when update end, adjust some values.
    */
   postUpdate() {
-    this.all.filter(u => u.quantity.lessThan(Number.EPSILON)).forEach(u => u.quantity = Decimal(0))
+    this.all.filter(u => u.quantity.lessThan(Number.EPSILON)).forEach(u => u.quantity = new Decimal(0))
 
-    this.lists.forEach(l => l.isEnding = !!l.list.find(u => u.isEnding()))
+    this.lists.forEach(l => l.isEnding = !!l.uiList.find(u => u.isEnding()))
 
     this.all.filter(un => un.unlocked).forEach(u => {
       u.reloadUiPerSec()
@@ -351,9 +363,9 @@ export class GameModel {
     if (this.activeUnit)
       this.activeUnit.reloadAtcMaxBuy()
 
-    if (this.timeModalOpened) {
-      this.prestige.time.reloadAtcMaxBuy()
-    }
+    // if (this.timeModalOpened) {
+    this.prestige.time.reloadAtcMaxBuy()
+    // }
   }
 
   /**
@@ -361,22 +373,32 @@ export class GameModel {
    *
    * @param dif time elapsed in millisecond
    */
-  update(dif: number) {
-    const fraction = Decimal(dif / 1000)
-    const all = Array.from(this.unitMap.values())
-    for (const res of all)
-      for (const prod of res.producedBy.filter(p => p.isActive() && p.unit.unlocked))
-        res.toAdd = res.toAdd.plus(this.getProduction(prod, Decimal(1), Decimal(1), fraction))
+  // update(dif: number) {
+  //   const fraction = new Decimal(dif / 1000)
+  //   const all = Array.from(this.unitMap.values())
+  //   for (const res of all)
+  //     for (const prod of res.producedBy.filter(p => p.isActive() && p.unit.unlocked))
+  //       res.toAdd = res.toAdd.plus(this.getProduction(prod, new Decimal(1), new Decimal(1), fraction))
 
-    // all.forEach(u => {
-    //   u.quantity = u.quantity.plus(u.toAdd)
-    //   u.toAdd = Decimal(0)
-    // })
+  //   // all.forEach(u => {
+  //   //   u.quantity = u.quantity.plus(u.toAdd)
+  //   //   u.toAdd = new Decimal(0)
+  //   // })
 
-    for (const u of all) {
-      u.quantity = u.quantity.plus(u.toAdd)
-      u.toAdd = Decimal(0)
-    }
+  //   for (const u of all) {
+  //     u.quantity = u.quantity.plus(u.toAdd)
+  //     u.toAdd = new Decimal(0)
+  //   }
+  // }
+
+  update2(dif: decimal.Decimal) {
+    this.unl.forEach(u => {
+
+      u.quantity = u.quantity
+        .plus(u.a.times(Decimal.pow(dif, 3)))
+        .plus(u.b.times(Decimal.pow(dif, 2)))
+        .plus(u.c.times(dif))
+    })
   }
 
   /**
@@ -396,7 +418,11 @@ export class GameModel {
       this.all.filter(u => u.unlocked).forEach(u2 => u2.produces.forEach(p =>
         p.product.unlocked = p.product.avabileThisWorld))
 
-      this.unitWithUp = this.all.filter(u => u.unlocked && (u.upHire || u.upSpecial || u.upAction))
+      if (ok) {
+        this.unitWithUp = this.all.filter(u => u.unlocked && (u.upHire || u.upSpecial || u.upAction))
+        this.unl = this.all.filter(u => u.unlocked)
+        this.reloadLists()
+      }
 
       // if (ok)
       //   this.reloadList()
@@ -446,9 +472,10 @@ export class GameModel {
     save.ml = this.maxLevel
     save.htv = this.homeTabAv
     save.pause = this.pause
+    save.hsn = this.hideSaveNotification
+    save.gameVers = this.gameVersion
+    save.opti = this.options
 
-    // save.gameVers = "0.0.1"
-    save.gameVers = "0.1.0"
     return LZString.compressToBase64(JSON.stringify(save))
 
   }
@@ -464,10 +491,10 @@ export class GameModel {
       saveRaw = LZString.decompressFromBase64(saveRaw)
       const save = JSON.parse(saveRaw)
       // console.log(saveRaw)
-      this.currentEarning = Decimal(save.cur)
-      this.lifeEarning = Decimal(save.life)
+      this.currentEarning = new Decimal(save.cur)
+      this.lifeEarning = new Decimal(save.life)
       this.world.restore(save.w, true)
-      this.maxLevel = Decimal(save.ml)
+      this.maxLevel = new Decimal(save.ml)
 
       for (const s of save.list) {
         const unit = this.unitMap.get(s.id)
@@ -479,12 +506,6 @@ export class GameModel {
       this.nextWorlds[1].restore(save.nw[1])
       this.nextWorlds[2].restore(save.nw[2])
 
-      // for (const s of save.pre) {
-      //   const up = this.prestige.allPrestigeUp.find(p => p.id === s.id)
-      //   if (up)
-      //     up.restore(s)
-      // }
-
       for (const s of save.res) {
         const res = this.resList.find(p => p.id === s.id)
         if (res)
@@ -492,7 +513,7 @@ export class GameModel {
       }
 
       if (save.pd)
-        this.prestigeDone = Decimal(save.pd)
+        this.prestigeDone = new Decimal(save.pd)
 
       if (save.worldTabAv)
         this.worldTabAv = save.worldTabAv
@@ -527,7 +548,7 @@ export class GameModel {
           if (tu.unit === this.baseWorld.nestAnt ||
             tu.unit === this.bee.hiveBee ||
             tu.unit === this.forest.beetleNest) {
-            tu.basePrice = Decimal(30).times(toUnlockMultiplier).floor()
+            tu.basePrice = new Decimal(30).times(toUnlockMultiplier).floor()
           }
 
           if (tu.unit === this.bee.hiveBee) {
@@ -540,9 +561,27 @@ export class GameModel {
       if (save.pause)
         this.pause = true
 
+      if (save.hsn)
+        this.hideSaveNotification = save.hsn
+
+      if (save.opti) {
+        this.options.load(save.opti)
+        this.options.apply()
+      }
+
       this.reloadProduction()
       this.unitLists.splice(0, this.unitLists.length)
-      //  this.reloadList()
+      this.reloadLists()
+      this.unl = this.all.filter(u => u.unlocked)
+
+      if (this.research.r2.owned())
+        this.unlockUnits(this.research.r2.toUnlock)()
+      if (this.research.r4.owned()) {
+        this.unlockUnits(this.research.r4.toUnlock)()
+        this.research.r4.unlocked = false
+        if (this.research.upCombined.quantity.greaterThan(0))
+          this.research.upCombined.unlocked = false
+      }
 
       return save.last
     }
@@ -559,11 +598,11 @@ export class GameModel {
   }
 
   getCost(data: any): Cost {
-    return new Cost(this.all.find(u => u.id === data.u), Decimal(data.b), Decimal(data.g))
+    return new Cost(this.all.find(u => u.id === data.u), new Decimal(data.b), new Decimal(data.g))
   }
 
   getExperience(): decimal.Decimal {
-    return Decimal(this.world.experience)
+    return new Decimal(this.world.experience)
   }
 
   reloadUpIcons() {
@@ -573,6 +612,11 @@ export class GameModel {
   checkResearch() {
     this.resList.filter(r => r.unlocked && r.avabileThisWorld)
       .forEach(res => res.setMaxBuy())
+  }
+
+  reloadLists() {
+    this.lists.forEach(v => v.reload())
+    this.uiLists = this.lists.filter(u => u.uiList && u.uiList.length > 0)
   }
 
 }

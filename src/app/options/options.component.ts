@@ -11,7 +11,7 @@ declare let preventScroll
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OptionsComponent implements OnInit {
-  @HostBinding('class.content-container') className = 'content-container';
+  @HostBinding('class.content-area') className = 'content-area'
 
   stringSave = ""
 
@@ -21,7 +21,7 @@ export class OptionsComponent implements OnInit {
     preventScroll()
   }
 
-  save(event: Event) { this.gameService.save() }
+  save(event: Event) { this.gameService.save(false) }
   load(event: Event) { this.gameService.load() }
   clear(event: Event) { this.gameService.clear() }
 
@@ -30,7 +30,7 @@ export class OptionsComponent implements OnInit {
   }
 
   import(event: Event) {
-    this.gameService.game.load(this.stringSave)
+    this.gameService.game.load(this.stringSave.trim())
   }
 
 }

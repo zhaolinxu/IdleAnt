@@ -1,4 +1,5 @@
-<div class="content-area">
+<h1>Save</h1>
+<div>
   <p>
     游戏每3分钟自动保存。 您还可以手动保存，加载和导出保存游戏。 游戏存档存储在本地存储中，如果你没有备份存档，请不要清除浏览器缓存。
   </p>
@@ -17,5 +18,11 @@
     <button class="btn btn-primary" (click)="import($event)">导入</button>
   </div>
 
-  <a href="https://zhaolinxu.github.io/IdleAnt/changelog.txt" target="_blank">更新日志</a>
+  <div class="toggle-switch">
+    <input type="checkbox" id="toggle_1" [(ngModel)]="gameService.game.hideSaveNotification">
+    <label for="toggle_1">隐藏成功保存通知</label>
+  </div>
+  <br/>
+  <span>版本号: {{gameService.game.gameVersion}}</span>
+  <a href="http://likexia.gitee.io/idleant/changelog.html" target="_blank">更新日志</a>
 </div>

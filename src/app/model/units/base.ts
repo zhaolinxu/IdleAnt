@@ -2,28 +2,6 @@ import { Unlocable } from '../utils';
 import { GameModel } from '../gameModel';
 import { Action } from './action';
 
-// export enum Type {
-//   Material,
-//   Generator,
-//   Ant,
-//   Bee,
-//   Food,
-//   Crystal,
-//   Soil,
-//   Fungus,
-//   Wood,
-//   Sand,
-//   Machinery,
-//   Engineer,
-//   Other,
-//   Scientist,
-//   Laser,
-//   Farmer,
-//   Mining,
-//   SoilG,
-//   WoodG
-// }
-
 export class Base extends Unlocable {
 
   endIn = 0
@@ -36,7 +14,7 @@ export class Base extends Unlocable {
     public description = "",
     // public types: Type[] = [],
     unlocked = false,
-    public quantity = Decimal(0),
+    public quantity = new Decimal(0),
     public avabileBaseWorld = true,
     public avabileThisWorld = true
   ) {
@@ -59,7 +37,7 @@ export class Base extends Unlocable {
     if (data.q)
       this.quantity = new Decimal(data.q)
     else
-      this.quantity = Decimal(0)
+      this.quantity = new Decimal(0)
     if (data.u)
       this.unlocked = data.u
     else
@@ -70,7 +48,7 @@ export class Base extends Unlocable {
 
   initialize() {
     this.unlocked = false
-    this.quantity = Decimal(0)
+    this.quantity = new Decimal(0)
     this.avabileThisWorld = this.avabileBaseWorld
   }
   isEnding(): boolean {

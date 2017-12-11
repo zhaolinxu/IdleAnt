@@ -21,13 +21,28 @@ import { PricePipePipe } from './price-pipe.pipe';
 import { ProdToglePipePipe } from './prod-togle-pipe.pipe';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ToastOptions } from 'ng2-toastr/src/toast-options';
+import { OptNavComponent } from './opt-nav/opt-nav.component';
+import { UiComponent } from './ui/ui.component';
+import { CreditComponent } from './credit/credit.component';
+import { Action } from './model/units/action';
+import { WorldComponent } from './world/world.component';
+import { WorldBuilderComponent } from './world-builder/world-builder.component';
+import { PrestigeNavComponent } from './prestige-nav/prestige-nav.component';
+import { SliderModule } from 'primeng/components/slider/slider';
 
 const appRoutes: Routes = [
   {
     path: '', redirectTo: "main/unit", pathMatch: 'full'
   },
   {
-    path: 'main/:type', component: MainNavComponent,
+    path: 'main/unit', component: MainNavComponent,
+    children: [
+      { path: 'unit', component: UnitComponent },
+      { path: 'unit/:id', component: UnitComponent }
+    ]
+  },
+  {
+    path: 'main/exp', component: PrestigeNavComponent,
     children: [
       { path: 'unit', component: UnitComponent },
       { path: 'unit/:id', component: UnitComponent }
@@ -37,13 +52,21 @@ const appRoutes: Routes = [
     path: 'lab', component: LabComponent
   },
   {
-    path: 'options', component: OptionsComponent
+    path: 'options', component: OptNavComponent,
+    children: [
+      { path: 'save', component: OptionsComponent },
+      { path: 'ui', component: UiComponent },
+      { path: 'credit', component: CreditComponent },
+    ]
   },
   {
     path: 'prestige', component: PrestigeComponent
   },
   {
     path: 'world', component: HomeWorldComponent
+  },
+  {
+    path: 'world-build', component: WorldBuilderComponent
   }
 ];
 
@@ -99,7 +122,13 @@ export class CustomOptions extends ToastOptions {
     HomeWorldComponent,
     FilterActive,
     PricePipePipe,
-    ProdToglePipePipe
+    ProdToglePipePipe,
+    OptNavComponent,
+    UiComponent,
+    CreditComponent,
+    WorldComponent,
+    WorldBuilderComponent,
+    PrestigeNavComponent
   ],
   imports: [
     BrowserModule,
@@ -107,15 +136,18 @@ export class CustomOptions extends ToastOptions {
     ClarityModule.forRoot(),
     [RouterModule],
     RouterModule.forRoot(
-      appRoutes
+      appRoutes, { useHash: true }
     ),
     BrowserModule,
     BrowserAnimationsModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    SliderModule
   ],
   providers: [{ provide: ToastOptions, useClass: CustomOptions }],
   bootstrap: [AppComponent],
-  exports: [ActionComponent]
+  exports: [
+    ActionComponent,
+  ]
 })
 export class AppModule { }
 

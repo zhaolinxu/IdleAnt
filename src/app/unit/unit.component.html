@@ -1,110 +1,133 @@
-<h1 class="text-capitalize no-mg-top">{{gen.name}}</h1>
-
-<div *ngIf="gen.isEnding()">
-  <clr-alert [clrAlertType]="'alert-warning'">
-    <div class="alert-item">
-      <span class="alert-text">
-        结束时间： {{endTime()}} 
-      </span>
-    </div>
-  </clr-alert>
-</div>
-
-<p>{{gen.description}}</p>
-<span>拥有: {{gen.quantity | format}}</span>
-
-
-<div *ngIf="gen.produces.length >0">
-  <p *ngIf="gen.buyAction">你已购买 {{gen.buyAction.quantity | format}} 次
-    <span *ngIf="gameService.game.research.up1.owned()"> 获得 +{{gen.getBoost().times(100) | format}}% 生产加成</span>
-  </p>
-  <div *ngIf="!gen.alwaysOn">
-    <input type="range" min="0" max="100" [(ngModel)]="gen.percentage" (change)="onChange($event.target.value)">
-    <span>让 {{gen.percentage}} % 进行工作</span>
-  </div>
-</div>
-
-<div *ngIf="gen.showTables">
-
-  <div class="row">
-    <div *ngIf="gen.produces.length >0" class="col-xs-12 col-md-12 col-lg-6 col-xl-6">
-      <h5>
-        <span class="text-capitalize">{{gen.name}}</span>生产：</h5>
-      <table class="table table-compact">
-        <thead>
-          <tr>
-            <th class="w-33">生产</th>
-            <th class="w-33">1个</th>
-            <th class="w-33">全部</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of gen.produces | filterActive" [ngClass]="{'bg-warning': item.efficiency.lessThan(0)}">
-            <td class="w-33 text-capitalize">
-              <a [routerLink]="['/main/unit/unit/'+item.product.id]">{{item.product.name}}</a>
-            </td>
-            <td class="w-33">{{item.getprodPerSec(false) | format}}</td>
-            <td class="w-33">{{item.getprodPerSec().times(gen.quantity) | format}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6" *ngIf="gameService.game.research.bi.owned()">
-      <div *ngIf="showProducers()">
-        <h5>
-          <span class="text-capitalize">{{gen.name}}</span>产量来自：</h5>
-        <table class="table  table-compact">
-          <thead>
-            <tr>
-              <th class="w-33">单位</th>
-              <th class="w-33">数量</th>
-              <th class="w-33">总共</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr class="bg-info text-white">
-              <td>总共</td>
-              <td>{{gen.totalProducers | format}}</td>
-              <td>{{gen.totalPerSec | format}}</td>
-            </tr>
-          </tfoot>
-          <tbody>
-            <tr *ngFor="let item of gen.producedBy | filterActive; trackBy:getUnitId" [ngClass]="{'bg-warning': item.efficiency.lessThan(0)}">
-              <td class="text-capitalize">
-                <a [routerLink]="['/main/unit/unit/'+item.unit.id]">{{item.unit.name}}</a>
-              </td>
-              <td>{{item.unit.quantity | format}}</td>
-              <td>{{item.getprodPerSec().times(item.unit.quantity) | format}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="row" *ngIf="gen.togableProductions">
-  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
-    <section class="form-block">
-      <div class="form-group">
-        <ul class="list-unstyled">
-          <li *ngFor="let tp of gen.togableProductions | prodToglePipe">
-            <div class="toggle-switch">
-              <input type="checkbox" [(ngModel)]="tp.uiModel" [id]="tp.description" (ngModelChange)="tp.turnOnOff()"
-                (change)="onChange($event.target.value)">
-              <label [for]="tp.description">{{tp.description}}</label>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-  </div>
-</div>
-
 <div class="row">
-  <div class="card-columns card-columns-2">
-    <app-action [action]="act" *ngFor="let act of gen.actions| filterMax; trackBy:getUnitId"></app-action>
+
+  <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6">
+    <h1 class="text-capitalize no-mg-top">{{gen.name}}
+      <small> {{gen.quantity | format}}</small>
+    </h1>
+
+    <div *ngIf="gen.isEnding()">
+      <clr-alert [clrAlertType]="'alert-warning'">
+        <div class="alert-item">
+          <span class="alert-text">
+            将在 {{endTime()}} 结束
+          </span>
+        </div>
+      </clr-alert>
+    </div>
+
+    <p>{{gen.description}}</p>
+    <!-- <span>拥有: {{gen.quantity | format}}</span> -->
+
+
+    <div *ngIf="gen.produces.length >0">
+      <p *ngIf="gen.buyAction">你购买了 {{gen.buyAction.quantity | format}} 次
+        <span *ngIf="gameService.game.research.up1.owned()"> 获得奖励 +{{gen.getBoost().times(100) | format}}% 生产</span>
+      </p>
+      <div *ngIf="!gen.alwaysOn">
+
+        <p-slider [(ngModel)]="gen.percentage" [step]="0.1" [min]="0" [max]="100" (change)="onChange($event.target.value)"></p-slider>
+
+        <!-- <input type="range" min="0" max="100" [(ngModel)]="gen.percentage" (change)="onChange($event.target.value)"> -->
+        <span>{{gen.percentage}} % 操作</span>
+
+      </div>
+    </div>
+
+    <div class="row" *ngIf="gen.togableProductions">
+      <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+        <section class="form-block">
+          <div class="form-group">
+            <ul class="list-unstyled">
+              <li *ngFor="let tp of gen.togableProductions | prodToglePipe">
+                <div class="toggle-switch">
+                  <input type="checkbox" [(ngModel)]="tp.uiModel" [id]="tp.description" (ngModelChange)="tp.turnOnOff()"
+                    (change)="onChange($event.target.value)">
+                  <label [for]="tp.description">{{tp.description}}</label>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div *ngIf="gen.showTables">
+
+      <div class="row">
+        <div *ngIf="gen.produces.length >0" class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+          <h5>
+            <span class="text-capitalize">{{gen.name}}</span> 产生:</h5>
+          <table class="table table-compact">
+            <thead>
+              <tr>
+                <th class="w-33">产物</th>
+                <th class="w-33">1个</th>
+                <th class="w-33">全部</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of gen.produces | filterActive" [ngClass]="{'alert alert-warning no-alert': item.efficiency.lessThan(0)}">
+                <td class="w-33 text-capitalize">
+                  <a [routerLink]="['/main/unit/unit/'+item.product.id]">{{item.product.name}}</a>
+                </td>
+                <td class="w-33">{{item.prodPerSecNoEff | format}}</td>
+                <td class="w-33">{{item.prodPerSec.times(gen.quantity) | format}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12" *ngIf="gameService.game.research.bi.owned()">
+          <div *ngIf="showProducers()">
+            <h5>
+              <span class="text-capitalize">{{gen.name}}</span> 是由:</h5>
+            <table class="table  table-compact">
+              <thead>
+                <tr>
+                  <th class="w-25">个体</th>
+                  <th class="w-25">数量</th>
+                  <th class="w-25">总计</th>
+                  <th class="w-25">%</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <!-- class="bg-info text-white" -->
+                <tr class="alert alert-info no-alert">
+                  <td>总计</td>
+                  <td>{{gen.totalProducers | format}}</td>
+                  <td>{{gen.totalPerSec | format}}</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr *ngFor="let item of gen.producedBy | filterActive; trackBy:getUnitId" [ngClass]="{'alert alert-warning no-alert': item.efficiency.lessThan(0)}">
+                  <td class="text-capitalize">
+                    <a [routerLink]="['/main/unit/unit/'+item.unit.id]">{{item.unit.name}}</a>
+                  </td>
+                  <td>{{item.unit.quantity | format}}</td>
+                  <td>{{item.prodPerSec.times(item.unit.quantity) | format}}</td>
+                  <td>
+                    <span *ngIf="gen.totalPerSec.abs().greaterThan(0)">
+                      {{item.prodPerSec.times(item.unit.quantity).div(gen.totalPerSec).times(100) | format}}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
+  <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6 no-card-top">
+    <div class="row">
+      <!-- <div class="card-columns"> -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <app-action [action]="act" *ngFor="let act of gen.actions| filterMax; trackBy:getUnitId"></app-action>
+      </div>
+    </div>
+  </div>
+
 </div>

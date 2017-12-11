@@ -12,7 +12,9 @@
         "favicon.ico",
         "img",
         "changelog.txt",
-        "iframe.html"
+        "iframe.html",
+        { "glob": "clarity-ui-dark.min.css", "input": "../node_modules/clarity-ui/", "output": "./" },
+        { "glob": "theme.css", "input": "../node_modules/primeng/resources/themes/darkness/", "output": "./" }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -22,6 +24,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/primeng/resources/themes/start/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css",
         "../node_modules/clarity-icons/clarity-icons.min.css",
         "../node_modules/clarity-ui/clarity-ui.min.css",
         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
@@ -31,7 +35,7 @@
         "../node_modules/mutationobserver-shim/dist/mutationobserver.min.js",
         "../node_modules/@webcomponents/custom-elements/custom-elements.min.js",
         "../node_modules/clarity-icons/clarity-icons.min.js",
-        "../node_modules/decimal.js/decimal.min.js",
+        "../node_modules/break_infinity.js/break_infinity.min.js",
         "../node_modules/lz-string/libs/lz-string.min.js"
       ],
       "environmentSource": "environments/environment.ts",

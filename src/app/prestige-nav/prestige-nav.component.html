@@ -1,0 +1,29 @@
+<clr-vertical-nav [clrVerticalNavCollapsible]="false" [clr-nav-level]="2">
+
+  <a class="clr-treenode-link text-capitalize experience font-weight-bold" routerLinkActive="active" routerLink="./unit/exp">
+    经验: {{gameService.game.prestige.experience.quantity | format}}
+  </a>
+  <clr-tree-node *ngFor="let list of gameService.game.prestige.expLists; trackBy:getListId">
+    <span class="font-weight-bold">
+      <clr-icon class="alert-icon is-error" shape="exclamation-triangle" *ngIf="list.isEnding"></clr-icon>
+      {{list.type}}
+    </span>
+
+    <ng-template [(clrIfExpanded)]="list.isCollapsed">
+
+      <div class="unit-group">
+        <clr-tree-node *ngFor="let g of list.uiList; trackBy:getUnitId">
+          <a [routerLink]="['./unit/'+g.id]" class="clr-treenode-link" routerLinkActive="active">
+            <span class="resName">
+              {{g.name}}</span>
+            <span>{{g.quantity | format:true}}</span>
+
+          </a>
+        </clr-tree-node>
+      </div>
+
+    </ng-template>
+  </clr-tree-node>
+
+</clr-vertical-nav>
+<router-outlet></router-outlet>
